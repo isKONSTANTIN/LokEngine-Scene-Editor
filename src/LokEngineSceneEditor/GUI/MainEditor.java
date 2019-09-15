@@ -1,7 +1,5 @@
-package GUI;
+package LokEngineSceneEditor.GUI;
 
-import Lang.MainLang;
-import Lang.MainLang.*;
 import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.GUI.Canvases.GUIListCanvas;
 import LokEngine.GUI.GUIObjects.GUIFreeTextDrawer;
@@ -19,7 +17,7 @@ import org.newdawn.slick.TrueTypeFont;
 
 import java.awt.*;
 
-import static Lang.MainLang.coutObjectsOnScene;
+import static LokEngineSceneEditor.Lang.MainLang.coutObjectsOnScene;
 
 public class MainEditor {
 

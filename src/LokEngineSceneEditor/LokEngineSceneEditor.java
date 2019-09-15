@@ -1,10 +1,11 @@
-import GUI.MainEditor;
-import Lang.MainLang;
+package LokEngineSceneEditor;
+
 import LokEngine.Application;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
+import LokEngineSceneEditor.GUI.MainEditor;
 import org.lwjgl.util.vector.Vector3f;
 
 public class LokEngineSceneEditor extends Application {
