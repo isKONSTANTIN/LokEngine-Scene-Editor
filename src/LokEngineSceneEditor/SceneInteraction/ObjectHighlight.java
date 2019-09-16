@@ -84,13 +84,20 @@ class HighlightFramePart extends FramePart {
 public class ObjectHighlight {
 
     static SceneObject object;
-
-    public static void highlight(SceneObject sceneObject){
+    static int objectID;
+    public static void highlight(SceneObject sceneObject, int id){
         object = sceneObject;
+        objectID = id;
     }
 
     public static SceneObject getHighlightedObject(){
         return object;
+    }
+
+    public static void deleteObjectFromScene(){
+        if (object != null){
+            RuntimeFields.getScene().removeObject(objectID);
+        }
     }
 
     public static void moveObjectFromCursor(){

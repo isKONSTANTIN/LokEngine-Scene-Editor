@@ -50,6 +50,10 @@ public class LokEngineSceneEditor extends Application {
             CameraMovement.update(window.getCamera());
         }
 
+        if (Keyboard.isKeyDown(Keyboard.KEY_DELETE) && ObjectHighlight.getHighlightedObject() != null){
+            ObjectHighlight.deleteObjectFromScene();
+        }
+
         if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
             close();
     }

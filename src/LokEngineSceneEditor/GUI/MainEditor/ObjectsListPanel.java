@@ -66,7 +66,7 @@ public class ObjectsListPanel extends GUIElement {
             }
 
             if (mouseInTextField && mousePressed) {
-                ObjectHighlight.highlight(sceneObject);
+                ObjectHighlight.highlight(sceneObject, i);
                 RuntimeFields.getFrameBuilder().window.getCamera().position = new Vector2f(sceneObject.position.x,sceneObject.position.y);
                 color = standOutTextColor;
             }else if (mouseInTextField){
