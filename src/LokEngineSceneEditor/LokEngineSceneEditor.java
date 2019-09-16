@@ -1,15 +1,14 @@
 package LokEngineSceneEditor;
 
 import LokEngine.Application;
-import LokEngine.Components.ComponentsTools.ShapeCreator;
-import LokEngine.Components.RigidbodyComponent;
+import LokEngine.Components.SpriteComponent;
 import LokEngine.Loaders.SpriteLoader;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.RuntimeFields;
+import LokEngine.Tools.SaveWorker.FileWorker;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.GUI.MainEditor;
 import LokEngineSceneEditor.Misc.DefaultFields;
-import LokEngineSceneEditor.Render.FrameParts.SceneObjectHighlightFramePart;
 import LokEngineSceneEditor.SceneInteraction.CameraMovement;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
 import org.lwjgl.util.vector.Vector3f;
@@ -28,7 +27,6 @@ public class LokEngineSceneEditor extends Application {
         MainEditor.init(window, canvas);
         RuntimeFields.setSpeedEngine(0);
         RuntimeFields.getFrameBuilder().glSceneClearColor = new Vector3f(0.25f,0.25f,0.25f);
-        scene.addObject(new SceneObject());
     }
 
     @Override

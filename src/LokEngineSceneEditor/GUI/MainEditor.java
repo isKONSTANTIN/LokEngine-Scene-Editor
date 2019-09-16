@@ -72,9 +72,8 @@ public class MainEditor {
                 color = standOutTextColor;
             }else if (mouseInTextField){
                 color = standOutTextColor;
-            }else if (mousePressed && mouseInListField){
-                ObjectHighlight.highlight(null);
             }
+                //ObjectHighlight.highlight(null);
 
             drawerText.draw(sceneObject.name + " (" + i + ")", new Vector2i(0,10 + objectsSizeInList.y * i), color);
         }
