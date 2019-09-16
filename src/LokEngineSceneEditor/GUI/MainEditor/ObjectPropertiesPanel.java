@@ -1,5 +1,6 @@
 package LokEngineSceneEditor.GUI.MainEditor;
 
+import LokEngine.Components.Component;
 import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.GUI.Canvases.GUIListCanvas;
 import LokEngine.GUI.GUIObjects.*;
@@ -16,10 +17,12 @@ public class ObjectPropertiesPanel extends GUIElement {
     GUICanvas propertiesCanvas;
     GUIText headText;
 
-    GUIFreeTextDrawer textDrawer;
+    GUIFreeTextDrawer componentsListDrawer;
 
     GUIListCanvas TextFieldsListCanvas;
     GUIListCanvas TextsListCanvas;
+
+    Vector2i componentsListPos;
 
     boolean lastXGUITextFieldActive;
     boolean lastYGUITextFieldActive;
@@ -34,10 +37,12 @@ public class ObjectPropertiesPanel extends GUIElement {
         headText = new GUIText(panel.getPosition(),"", standOutTextColor,0,12);
         headText.canResize = true;
 
-        textDrawer = new GUIFreeTextDrawer("Times New Roman",0,24,true);
+        componentsListDrawer = new GUIFreeTextDrawer("Times New Roman",0,14,true);
 
         TextFieldsListCanvas = new GUIListCanvas(new Vector2i(panel.getPosition().x + 40,panel.getPosition().y + 10),new Vector2i(panel.getSize().x - 40,canvas.getSize().y / 2), new Vector2i(panel.getSize().x - 40,25));
         TextsListCanvas = new GUIListCanvas(new Vector2i(panel.getPosition().x,panel.getPosition().y + 10),new Vector2i(panel.getSize().x - 100,canvas.getSize().y / 2),new Vector2i(100,25));
+
+        componentsListPos = new Vector2i(panel.getPosition().x,canvas.getSize().y / 2 + 10);
 
         TextFieldsListCanvas.addObject(new GUITextField(new Vector2i(0,0),new Vector2i(0,0),new GUIText(new Vector2i(0,0), "X")));
         TextFieldsListCanvas.addObject(new GUITextField(new Vector2i(0,0),new Vector2i(0,0),new GUIText(new Vector2i(0,0), "Y")));
@@ -51,10 +56,9 @@ public class ObjectPropertiesPanel extends GUIElement {
         TextsListCanvas.addObject(new GUIText(new Vector2i(0,0),"R:"));
         TextsListCanvas.addObject(new GUIText(new Vector2i(0,0),"RP:"));
 
-
         propertiesCanvas.addObject(panel);
         propertiesCanvas.addObject(headText);
-        propertiesCanvas.addObject(textDrawer);
+        propertiesCanvas.addObject(componentsListDrawer);
         propertiesCanvas.addObject(TextFieldsListCanvas);
         propertiesCanvas.addObject(TextsListCanvas);
 
@@ -102,6 +106,12 @@ public class ObjectPropertiesPanel extends GUIElement {
             lastRPGUITextFieldActive = rPTextField.getActive();
 
             propertiesCanvas.hidden = false;
+
+            for (int i = 0; i < highlightedObject.components.getSize(); i++){
+                Component component = highlightedObject.components.get(i);
+                componentsListDrawer.draw(component.getName(),new Vector2i(componentsListPos.x,componentsListPos.y + 20 * i));
+            }
+
         }else{
             propertiesCanvas.hidden = true;
         }
