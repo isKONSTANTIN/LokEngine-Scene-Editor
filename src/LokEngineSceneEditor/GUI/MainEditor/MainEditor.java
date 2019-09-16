@@ -30,7 +30,7 @@ public class MainEditor {
 
     public static BlurTuning blurTuning = new BlurTuning();
     public static Color backgroundColor = new ColorRGB(61, 61, 61,128);
-    public static Color textColor = new ColorRGB(101, 214, 182);
+    public static Color textColor = new ColorRGB(182, 182, 182);
     public static Color standOutTextColor = new ColorRGB(209, 149, 0);
 
     static ObjectsListPanel objectsListPanel = new ObjectsListPanel();

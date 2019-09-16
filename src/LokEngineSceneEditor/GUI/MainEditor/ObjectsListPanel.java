@@ -9,6 +9,7 @@ import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Color;
+import LokEngine.Tools.Utilities.ColorRGB;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.GUI.GUIElement;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
@@ -24,8 +25,10 @@ public class ObjectsListPanel extends GUIElement {
     GUIPanel panel;
     GUIText headText;
     GUIFreeTextDrawer drawerText;
+
     Vector2i objectsListSize;
     Vector2i objectSizeInList;
+    Color objectNameColor = new ColorRGB(101, 214, 182);
 
     @Override
     public void init(GUICanvas canvas) {
@@ -33,7 +36,7 @@ public class ObjectsListPanel extends GUIElement {
         objectSizeInList = new Vector2i(200,20);
 
         panel = new GUIPanel(new Vector2i(0,0), objectsListSize, backgroundColor, blurTuning);
-        headText = new GUIText(new Vector2i(0,-10),"", standOutTextColor,0,12);
+        headText = new GUIText(new Vector2i(0,0),"", standOutTextColor,0,12);
         drawerText = new GUIFreeTextDrawer(Font.SERIF,0,14,true);
         headText.canResize = true;
 
@@ -55,7 +58,12 @@ public class ObjectsListPanel extends GUIElement {
 
             SceneObject sceneObject = activeScene.getObjectByID(i);
             boolean mouseInTextField = Misc.mouseInField(new Vector2i(0,20 + objectSizeInList.y * i), objectSizeInList);
-            Color color = textColor;
+            boolean selected = sceneObject == ObjectHighlight.getHighlightedObject();
+            Color color = objectNameColor;
+
+            if (selected){
+                color = standOutTextColor;
+            }
 
             if (mouseInTextField && mousePressed) {
                 ObjectHighlight.highlight(sceneObject);
@@ -66,7 +74,7 @@ public class ObjectsListPanel extends GUIElement {
             }
             //ObjectHighlight.highlight(null);
 
-            drawerText.draw(sceneObject.name + " (" + i + ")", new Vector2i(0,10 + objectSizeInList.y * i), color);
+            drawerText.draw(sceneObject.name + " (" + i + ")", new Vector2i(selected ? 10 : 0,20 + objectSizeInList.y * i), color);
         }
     }
 }

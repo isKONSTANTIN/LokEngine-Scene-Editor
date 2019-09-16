@@ -67,7 +67,7 @@ class HighlightFramePart extends FramePart {
         glVertexAttribDivisor(1, 0);
         glUniform1f(glGetUniformLocation(highlightSprite.shader.program, "ObjectSize"), size);
 
-        MatrixCreator.PutMatrixInShader(highlightSprite.shader,"ObjectModelMatrix",MatrixCreator.CreateModelMatrix(rotation,new Vector3f(position.x,position.y,0)));
+        MatrixCreator.PutMatrixInShader(highlightSprite.shader,"ObjectModelMatrix", MatrixCreator.CreateModelMatrix(rotation, new Vector3f(position.x,position.y,0)));
 
         glBindTexture(GL_TEXTURE_2D, highlightSprite.texture.buffer);
 

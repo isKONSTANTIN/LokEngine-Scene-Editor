@@ -25,7 +25,7 @@ public class CameraMovement {
         int wheel = Mouse.getDWheel();
 
         if (wheel != 0){
-            view += wheel / 1000f * view;
+            view += -wheel / 1000f * view;
             view = Math.max(view, 0.001f);
             camera.setFieldOfView(view);
         }
