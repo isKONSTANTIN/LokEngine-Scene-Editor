@@ -89,6 +89,10 @@ public class ObjectHighlight {
         object = sceneObject;
     }
 
+    public static SceneObject getHighlightedObject(){
+        return object;
+    }
+
     public static void update(){
         float time = RuntimeFields.getEngineRunTime() / 10000000000f;
         if (object != null)
