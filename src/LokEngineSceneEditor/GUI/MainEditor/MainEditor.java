@@ -16,11 +16,13 @@ import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.ColorRGB;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.TrueTypeFont;
 
 import java.awt.*;
+import java.security.Key;
 
 import static LokEngineSceneEditor.Lang.MainLang.coutObjectsOnScene;
 

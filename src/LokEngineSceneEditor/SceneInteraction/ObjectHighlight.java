@@ -93,6 +93,12 @@ public class ObjectHighlight {
         return object;
     }
 
+    public static void moveObjectFromCursor(){
+        if (object != null){
+            object.position = RuntimeFields.getFrameBuilder().window.getCamera().screenPointToScene(RuntimeFields.getMouseStatus().getMousePosition());
+        }
+    }
+
     public static void update(){
         float time = RuntimeFields.getEngineRunTime() / 10000000000f;
         if (object != null)

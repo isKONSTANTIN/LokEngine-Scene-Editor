@@ -37,14 +37,18 @@ public class LokEngineSceneEditor extends Application {
         MainEditor.init(window, canvas);
         RuntimeFields.setSpeedEngine(0);
         RuntimeFields.getFrameBuilder().glSceneClearColor = new Vector3f(0.25f,0.25f,0.25f);
-        scene.addObject(new SceneObject());
     }
 
     @Override
     public void Update(){
         MainEditor.update();
         ObjectHighlight.update();
-        CameraMovement.update(window.getCamera());
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && ObjectHighlight.getHighlightedObject() != null){
+            ObjectHighlight.moveObjectFromCursor();
+        }else{
+            CameraMovement.update(window.getCamera());
+        }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
             close();
