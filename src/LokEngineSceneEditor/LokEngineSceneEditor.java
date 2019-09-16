@@ -1,13 +1,10 @@
 package LokEngineSceneEditor;
 
 import LokEngine.Application;
-import LokEngine.Components.SpriteComponent;
 import LokEngine.Loaders.SpriteLoader;
-import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.RuntimeFields;
-import LokEngine.Tools.SaveWorker.FileWorker;
 import LokEngine.Tools.Utilities.Vector2i;
-import LokEngineSceneEditor.GUI.MainEditor;
+import LokEngineSceneEditor.GUI.MainEditor.MainEditor;
 import LokEngineSceneEditor.Misc.DefaultFields;
 import LokEngineSceneEditor.SceneInteraction.CameraMovement;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
@@ -31,7 +28,7 @@ public class LokEngineSceneEditor extends Application {
 
     @Override
     public void Update(){
-        MainEditor.update(scene);
+        MainEditor.update();
         ObjectHighlight.update();
         CameraMovement.update(window.getCamera());
     }
