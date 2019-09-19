@@ -37,7 +37,7 @@ public class ObjectsListPanel extends GUIElement {
 
         panel = new GUIPanel(new Vector2i(0,0), objectsListSize, backgroundColor, blurTuning);
         headText = new GUIText(new Vector2i(0,0),"", standOutTextColor,0,12);
-        drawerText = new GUIFreeTextDrawer(Font.SERIF,0,14,true);
+        drawerText = new GUIFreeTextDrawer("",0,14,true);
         headText.canResize = true;
 
         canvas.addObject(panel);

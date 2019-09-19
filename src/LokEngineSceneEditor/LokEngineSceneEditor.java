@@ -5,6 +5,7 @@ import LokEngine.Loaders.SpriteLoader;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SaveWorker.FileWorker;
+import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.GUI.MainEditor.MainEditor;
 import LokEngineSceneEditor.Misc.DefaultFields;
@@ -36,7 +37,7 @@ public class LokEngineSceneEditor extends Application {
         }
         MainEditor.init(window, canvas);
         RuntimeFields.setSpeedEngine(0);
-        RuntimeFields.getFrameBuilder().glSceneClearColor = new Vector3f(0.25f,0.25f,0.25f);
+        RuntimeFields.getFrameBuilder().glSceneClearColor = new Color(0.25f,0.25f,0.25f, 1f);
     }
 
     @Override
