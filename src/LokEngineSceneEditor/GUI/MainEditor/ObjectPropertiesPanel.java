@@ -6,6 +6,8 @@ import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.GUI.Canvases.GUIListCanvas;
 import LokEngine.GUI.GUIObjects.*;
 import LokEngine.SceneEnvironment.SceneObject;
+import LokEngine.Tools.Misc;
+import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.GUI.GUIElement;
 import LokEngineSceneEditor.GUI.MainEditor.ComponentsEditors.SpriteWindow;
@@ -71,7 +73,7 @@ public class ObjectPropertiesPanel extends GUIElement {
 
         spriteWindow = new SpriteWindow(new Vector2i(canvas.getSize().x / 2 - 324 / 2,canvas.getSize().y / 2 - 612 / 2));
         spriteWindow.hidden = true;
-        CameraMovement.accepted = true;
+
         canvas.addObject(spriteWindow);
     }
 
@@ -80,7 +82,7 @@ public class ObjectPropertiesPanel extends GUIElement {
         SceneObject highlightedObject = ObjectHighlight.getHighlightedObject();
         if (highlightedObject != null){
             headText.updateText(highlightedObject.name);
-
+            spriteWindow.update((SpriteComponent)highlightedObject.components.get("Sprite Component"));
             GUITextField xTextField = (GUITextField)TextFieldsListCanvas.getObject(0);
             GUITextField yTextField = (GUITextField)TextFieldsListCanvas.getObject(1);
             GUITextField rTextField = (GUITextField)TextFieldsListCanvas.getObject(3);
@@ -119,11 +121,22 @@ public class ObjectPropertiesPanel extends GUIElement {
 
             for (int i = 0; i < highlightedObject.components.getSize(); i++){
                 Component component = highlightedObject.components.get(i);
-                componentsListDrawer.draw(component.getName(),new Vector2i(0,TextsListCanvas.getSize().y + 20 * i));
-            }
 
+                Vector2i pos = new Vector2i(0,TextsListCanvas.getSize().y + 20 * i);
+                Vector2i mPos = new Vector2i(pos.x + propertiesCanvas.getPosition().x,pos.y + propertiesCanvas.getPosition().y);
+
+                boolean mouseInField = Misc.mouseInField(mPos, new Vector2i(propertiesCanvas.getSize().x,20));
+
+                if (mouseInField && RuntimeFields.getMouseStatus().getPressedStatus()){
+                    spriteWindow.hidden = false;
+                }
+
+                componentsListDrawer.draw(component.getName(),pos, mouseInField || !spriteWindow.hidden ? standOutTextColor : textColor);
+            }
+            CameraMovement.accepted = spriteWindow.hidden;
         }else{
             propertiesCanvas.hidden = true;
+            CameraMovement.accepted = true;
         }
     }
 }

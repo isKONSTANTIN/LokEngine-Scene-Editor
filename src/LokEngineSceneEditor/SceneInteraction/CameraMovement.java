@@ -12,7 +12,7 @@ public class CameraMovement {
 
     static float view = 1;
 
-    public static boolean accepted;
+    public static boolean accepted = true;
 
     public static void update(Camera camera){
         if (accepted){

@@ -1,7 +1,9 @@
 package LokEngineSceneEditor;
 
 import LokEngine.Application;
+import LokEngine.Components.SpriteComponent;
 import LokEngine.Loaders.SpriteLoader;
+import LokEngine.SceneEnvironment.Scene;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SaveWorker.FileWorker;
@@ -25,6 +27,10 @@ public class LokEngineSceneEditor extends Application {
                 FileWorker fileWorker = new FileWorker("Scene.save");
                 fileWorker.openRead();
                 scene.load(fileWorker.read());
+            }else{
+                scene.addObject(new SceneObject());
+                scene.addObject(new SceneObject());
+                scene.getObjectByID(0).components.add(new SpriteComponent("#/resources/lol.png"));
             }
         } catch (IOException e) {
             e.printStackTrace();
