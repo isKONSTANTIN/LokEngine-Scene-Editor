@@ -23,7 +23,7 @@ public class SpriteWindow extends GUISubWindow {
     boolean lastSizeTextActive;
 
     public SpriteWindow(Vector2i position) {
-        super(position, new Vector2i(324, 612), true,
+        super(position, new Vector2i(324, 400), true,
                 new GUIText(new Vector2i(), Font.SERIF, "Sprite editor window", textColor, 0, 12, false, true),
                 new GUIPanel(new Vector2i(), new Vector2i(), new Color(backgroundColor.red - 0.2f, backgroundColor.green - 0.2f, backgroundColor.blue - 0.2f, backgroundColor.alpha), blurTuning)
         );
