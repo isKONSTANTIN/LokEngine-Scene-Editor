@@ -19,9 +19,6 @@ public class CameraMovement {
             if (RuntimeFields.getMouseStatus().getPressedStatus() && lastStatus){
                 camera.position.x -= (RuntimeFields.getMouseStatus().getMousePosition().x - lastPos.x) * 0.001f * view;
                 camera.position.y -= (RuntimeFields.getMouseStatus().getMousePosition().y - lastPos.y) * 0.001f * view;
-                lastPos = RuntimeFields.getMouseStatus().getMousePosition();
-            }else if (!lastStatus){
-                lastPos = RuntimeFields.getMouseStatus().getMousePosition();
             }
 
             int wheel = Mouse.getDWheel();
@@ -34,6 +31,7 @@ public class CameraMovement {
 
             lastStatus = RuntimeFields.getMouseStatus().getPressedStatus();
         }
+        lastPos = RuntimeFields.getMouseStatus().getMousePosition();
     }
 
 }

@@ -36,11 +36,7 @@ public class LokEngineSceneEditor extends Application {
             e.printStackTrace();
         }
 
-        try {
-            DefaultFields.highlightSprite = SpriteLoader.loadSprite("#/resources/textures/frame.png");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        DefaultFields.highlightSprite = SpriteLoader.loadSprite("#/resources/textures/frame.png");
         MainEditor.init(window, canvas);
         RuntimeFields.setSpeedEngine(0);
         RuntimeFields.getFrameBuilder().glSceneClearColor = new Color(0.25f,0.25f,0.25f, 1f);
@@ -78,6 +74,6 @@ public class LokEngineSceneEditor extends Application {
     }
 
     LokEngineSceneEditor(){
-        start(false,true, new Vector2i(1280,720), "LokEngine Scene Editor");
+        start(true,true, new Vector2i(1280,720), "LokEngine Scene Editor");
     }
 }

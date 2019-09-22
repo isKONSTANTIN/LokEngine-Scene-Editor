@@ -35,6 +35,7 @@ public class ObjectPropertiesPanel extends GUIElement {
     boolean lastYGUITextFieldActive;
     boolean lastRGUITextFieldActive;
     boolean lastRPGUITextFieldActive;
+    boolean lastMousePress;
     Component selecedComponent;
     SpriteWindow spriteWindow;
 
@@ -82,6 +83,7 @@ public class ObjectPropertiesPanel extends GUIElement {
     @Override
     public void update() {
         SceneObject highlightedObject = ObjectHighlight.getHighlightedObject();
+        boolean mousePress = RuntimeFields.getMouseStatus().getPressedStatus();
         if (highlightedObject != null){
             if (selecedComponent != null){
                 if (selecedComponent.getName().equals("Sprite Component")){
@@ -134,7 +136,7 @@ public class ObjectPropertiesPanel extends GUIElement {
 
             propertiesCanvas.hidden = false;
 
-            if (Misc.mouseInField(propertiesCanvas.getPosition(),propertiesCanvas.getSize()) && RuntimeFields.getMouseStatus().getPressedStatus()){
+            if (Misc.mouseInField(propertiesCanvas.getPosition(),propertiesCanvas.getSize()) && mousePress && !lastMousePress){
                 selecedComponent = null;
             }
 
@@ -146,9 +148,10 @@ public class ObjectPropertiesPanel extends GUIElement {
                 Vector2i pos = new Vector2i(0,TextsListCanvas.getSize().y + 20 * i);
                 Vector2i mPos = new Vector2i(pos.x + propertiesCanvas.getPosition().x,pos.y + propertiesCanvas.getPosition().y);
 
-                boolean mouseInField = Misc.mouseInField(mPos,new Vector2i(propertiesCanvas.getSize().x,20));
+                boolean mouseInFieldCN = Misc.mouseInField(mPos,new Vector2i(propertiesCanvas.getSize().x - 10,20));
+                boolean mouseInFieldDB = Misc.mouseInField(new Vector2i(propertiesCanvas.getPosition().x + propertiesCanvas.getSize().x - 10,mPos.y - 2),new Vector2i(10,20));
 
-                if (mouseInField && RuntimeFields.getMouseStatus().getPressedStatus()){
+                if (mouseInFieldCN && mousePress && !lastMousePress){
                     selecedComponent = component;
                 }
 
@@ -156,7 +159,12 @@ public class ObjectPropertiesPanel extends GUIElement {
                     seleced = component == selecedComponent;
                 }
 
-                componentsListDrawer.draw(component.getName(), pos, mouseInField || component == selecedComponent ? standOutTextColor : textColor);
+                if (mouseInFieldDB && mousePress && !lastMousePress){
+                    highlightedObject.components.remove(i);
+                }
+
+                componentsListDrawer.draw(component.getName(), pos, mouseInFieldCN || component == selecedComponent ? standOutTextColor : textColor);
+                componentsListDrawer.draw("-", new Vector2i(propertiesCanvas.getSize().x - 10,pos.y - 2), standOutTextColor);
             }
 
             if (!seleced){
@@ -167,5 +175,6 @@ public class ObjectPropertiesPanel extends GUIElement {
             CameraMovement.accepted = true;
             selecedComponent = null;
         }
+        lastMousePress = mousePress;
     }
 }
