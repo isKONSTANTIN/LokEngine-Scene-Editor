@@ -6,6 +6,7 @@ import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.GUI.Canvases.GUIListCanvas;
 import LokEngine.GUI.GUIObjects.*;
 import LokEngine.SceneEnvironment.SceneObject;
+import LokEngine.Tools.Logger;
 import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
@@ -13,6 +14,7 @@ import LokEngineSceneEditor.GUI.GUIElement;
 import LokEngineSceneEditor.GUI.MainEditor.ComponentsEditors.SpriteWindow;
 import LokEngineSceneEditor.SceneInteraction.CameraMovement;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
+import org.lwjgl.input.Keyboard;
 
 import static LokEngineSceneEditor.GUI.MainEditor.MainEditor.*;
 
@@ -33,7 +35,7 @@ public class ObjectPropertiesPanel extends GUIElement {
     boolean lastYGUITextFieldActive;
     boolean lastRGUITextFieldActive;
     boolean lastRPGUITextFieldActive;
-
+    Component selecedComponent;
     SpriteWindow spriteWindow;
 
     @Override
@@ -81,8 +83,21 @@ public class ObjectPropertiesPanel extends GUIElement {
     public void update() {
         SceneObject highlightedObject = ObjectHighlight.getHighlightedObject();
         if (highlightedObject != null){
+            if (selecedComponent != null){
+                if (selecedComponent.getName().equals("Sprite Component")){
+                    spriteWindow.hidden = false;
+                    CameraMovement.accepted = false;
+                    spriteWindow.update((SpriteComponent)selecedComponent);
+                }else{
+                    spriteWindow.hidden = true;
+                }
+            }else {
+                spriteWindow.hidden = true;
+
+                CameraMovement.accepted = true;
+            }
+
             headText.updateText(highlightedObject.name);
-            spriteWindow.update((SpriteComponent)highlightedObject.components.get("Sprite Component"));
             GUITextField xTextField = (GUITextField)TextFieldsListCanvas.getObject(0);
             GUITextField yTextField = (GUITextField)TextFieldsListCanvas.getObject(1);
             GUITextField rTextField = (GUITextField)TextFieldsListCanvas.getObject(3);
@@ -119,24 +134,38 @@ public class ObjectPropertiesPanel extends GUIElement {
 
             propertiesCanvas.hidden = false;
 
+            if (Misc.mouseInField(propertiesCanvas.getPosition(),propertiesCanvas.getSize()) && RuntimeFields.getMouseStatus().getPressedStatus()){
+                selecedComponent = null;
+            }
+
+            boolean seleced = false;
+
             for (int i = 0; i < highlightedObject.components.getSize(); i++){
                 Component component = highlightedObject.components.get(i);
 
                 Vector2i pos = new Vector2i(0,TextsListCanvas.getSize().y + 20 * i);
                 Vector2i mPos = new Vector2i(pos.x + propertiesCanvas.getPosition().x,pos.y + propertiesCanvas.getPosition().y);
 
-                boolean mouseInField = Misc.mouseInField(mPos, new Vector2i(propertiesCanvas.getSize().x,20));
+                boolean mouseInField = Misc.mouseInField(mPos,new Vector2i(propertiesCanvas.getSize().x,20));
 
                 if (mouseInField && RuntimeFields.getMouseStatus().getPressedStatus()){
-                    spriteWindow.hidden = false;
+                    selecedComponent = component;
                 }
 
-                componentsListDrawer.draw(component.getName(),pos, mouseInField || !spriteWindow.hidden ? standOutTextColor : textColor);
+                if (!seleced){
+                    seleced = component == selecedComponent;
+                }
+
+                componentsListDrawer.draw(component.getName(), pos, mouseInField || component == selecedComponent ? standOutTextColor : textColor);
             }
-            CameraMovement.accepted = spriteWindow.hidden;
+
+            if (!seleced){
+                selecedComponent = null;
+            }
         }else{
             propertiesCanvas.hidden = true;
             CameraMovement.accepted = true;
+            selecedComponent = null;
         }
     }
 }

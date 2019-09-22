@@ -18,25 +18,29 @@ public class SpriteWindow extends GUISubWindow {
     GUIListCanvas listCanvas;
     GUITextField pathText;
     GUITextField sizeText;
+
     boolean lastPathTextActive;
     boolean lastSizeTextActive;
 
     public SpriteWindow(Vector2i position) {
-        super(position, new Vector2i(324, 612), false,
-                new GUIText(new Vector2i(), Font.SERIF, "Sprite edit", textColor, 0, 12, false, true),
+        super(position, new Vector2i(324, 612), true,
+                new GUIText(new Vector2i(), Font.SERIF, "Sprite editor window", textColor, 0, 12, false, true),
                 new GUIPanel(new Vector2i(), new Vector2i(), new Color(backgroundColor.red - 0.2f, backgroundColor.green - 0.2f, backgroundColor.blue - 0.2f, backgroundColor.alpha), blurTuning)
         );
         canvas.addObject(new GUIPanel(new Vector2i(), getSize(), backgroundColor, blurTuning));
 
         listCanvas = new GUIListCanvas(new Vector2i(),canvas.getSize(), new Vector2i(canvas.getSize().x,20));
-        pathText = new GUITextField(new Vector2i(),new Vector2i(), new GUIText(new Vector2i(),"","",textColor,0,18,false,true));
-        sizeText = new GUITextField(new Vector2i(0,20),new Vector2i(), new GUIText(new Vector2i(),"","",textColor,0,18,false,true));
+        pathText = new GUITextField(new Vector2i(),new Vector2i(), new GUIText(new Vector2i(),"Times New Roman","",textColor,1,18,true,true));
+        sizeText = new GUITextField(new Vector2i(0,20),new Vector2i(), new GUIText(new Vector2i(),"Times New Roman","",textColor,1,18,true,true));
 
         listCanvas.addObject(new GUIText(new Vector2i(),"Sprite path: ",textColor,0,18));
         listCanvas.addObject(pathText);
         listCanvas.addObject(new GUISpace());
         listCanvas.addObject(new GUIText(new Vector2i(),"Sprite size: ", textColor,0,18));
         listCanvas.addObject(sizeText);
+
+        pathText.getGUIText().canResize = false;
+        sizeText.getGUIText().canResize = false;
 
         canvas.addObject(listCanvas);
     }
