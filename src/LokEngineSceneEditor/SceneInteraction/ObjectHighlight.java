@@ -102,6 +102,7 @@ public class ObjectHighlight {
         if (object != null){
             RuntimeFields.getScene().removeObject(objectID);
             objectID = -1;
+            object = null;
         }
     }
 
