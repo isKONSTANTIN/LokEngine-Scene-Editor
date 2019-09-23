@@ -8,6 +8,7 @@ import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SaveWorker.FileWorker;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
+import LokEngineSceneEditor.GUI.ComponentsWindow.AvailableComponentsListWindow;
 import LokEngineSceneEditor.GUI.ComponentsWindow.SpriteComponentWindow;
 import LokEngineSceneEditor.GUI.SceneObjectComponentsPanel;
 import LokEngineSceneEditor.GUI.SceneObjectPropertiesPanel;
@@ -20,6 +21,8 @@ import org.lwjgl.input.Keyboard;
 import java.io.IOException;
 
 public class LokEngineSceneEditor extends Application {
+
+    public static AvailableComponentsListWindow availableComponentsListWindow;
 
     @Override
     public void Init(){
@@ -45,6 +48,10 @@ public class LokEngineSceneEditor extends Application {
                 new SceneObjectComponentsPanel(new Vector2i(window.getResolution().x - 150,window.getResolution().y / 2), new Vector2i(150,window.getResolution().y / 2))
         );
         canvas.addObject(new SpriteComponentWindow(new Vector2i(window.getResolution().x / 2 - 150,window.getResolution().y / 2 - 150),new Vector2i(300,300)));
+
+        availableComponentsListWindow = new AvailableComponentsListWindow(new Vector2i(window.getResolution().x / 2 - 150,window.getResolution().y / 2 - 150),new Vector2i(300,300));
+        availableComponentsListWindow.hidden = true;
+        canvas.addObject(availableComponentsListWindow);
         RuntimeFields.setSpeedEngine(0);
         RuntimeFields.getFrameBuilder().glSceneClearColor = new Color(0.25f,0.25f,0.25f, 1f);
     }

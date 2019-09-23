@@ -31,7 +31,7 @@ public class SpriteComponentWindow extends GUIObject {
 
         subWindow.canvas.addObject(new GUIPanel(new Vector2i(),size, panelsColor, panelsBlur));
 
-        GUIButton applyButton = new GUIButton(new Vector2i(0,size.y - 35),new Vector2i(size.x,35),panelsColor,panelsColor,
+        GUIButton applyButton = new GUIButton(new Vector2i(0,size.y - 50),new Vector2i(size.x,35),panelsColor,panelsColor,
                 new GUIText(new Vector2i(),"Apply",textColor,0,14),
                 new GUIPanel(new Vector2i(),new Vector2i())
         );

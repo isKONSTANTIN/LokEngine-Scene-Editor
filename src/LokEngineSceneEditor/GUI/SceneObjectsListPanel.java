@@ -10,6 +10,7 @@ import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
+import LokEngineSceneEditor.GUI.ComponentsWindow.SpriteComponentWindow;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
 
 import static LokEngineSceneEditor.GUI.MainStyle.*;
