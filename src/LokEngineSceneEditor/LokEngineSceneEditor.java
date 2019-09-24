@@ -1,6 +1,9 @@
 package LokEngineSceneEditor;
 
 import LokEngine.Application;
+import LokEngine.Components.AdditionalObjects.Animation;
+import LokEngine.Components.AdditionalObjects.AtlasPositions;
+import LokEngine.Components.AnimationComponent;
 import LokEngine.Components.SpriteComponent;
 import LokEngine.Loaders.SpriteLoader;
 import LokEngine.SceneEnvironment.SceneObject;
@@ -8,6 +11,8 @@ import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SaveWorker.FileWorker;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
+import LokEngine.Tools.Utilities.Vector4i;
+import LokEngineSceneEditor.GUI.ComponentsWindow.AnimationComponentWindow;
 import LokEngineSceneEditor.GUI.ComponentsWindow.AvailableComponentsListWindow;
 import LokEngineSceneEditor.GUI.ComponentsWindow.SpriteComponentWindow;
 import LokEngineSceneEditor.GUI.SceneObjectComponentsPanel;
@@ -31,6 +36,7 @@ public class LokEngineSceneEditor extends Application {
                 FileWorker fileWorker = new FileWorker("Scene.save");
                 fileWorker.openRead();
                 scene.load(fileWorker.read());
+                fileWorker.close();
             }else{
                 scene.addObject(new SceneObject());
                 scene.addObject(new SceneObject());
@@ -48,12 +54,27 @@ public class LokEngineSceneEditor extends Application {
                 new SceneObjectComponentsPanel(new Vector2i(window.getResolution().x - 150,window.getResolution().y / 2), new Vector2i(150,window.getResolution().y / 2))
         );
         canvas.addObject(new SpriteComponentWindow(new Vector2i(window.getResolution().x / 2 - 150,window.getResolution().y / 2 - 150),new Vector2i(300,300)));
+        canvas.addObject(new AnimationComponentWindow(new Vector2i(window.getResolution().x / 2 - 150,window.getResolution().y / 2 - 150),new Vector2i(300,300)));
 
         availableComponentsListWindow = new AvailableComponentsListWindow(new Vector2i(window.getResolution().x / 2 - 150,window.getResolution().y / 2 - 150),new Vector2i(300,300));
         availableComponentsListWindow.hidden = true;
         canvas.addObject(availableComponentsListWindow);
+
         RuntimeFields.setSpeedEngine(0);
         RuntimeFields.getFrameBuilder().glSceneClearColor = new Color(0.25f,0.25f,0.25f, 1f);
+
+        try {
+            FileWorker fileWorker = new FileWorker("Animation.save");
+            fileWorker.openWrite();
+            fileWorker.write(
+                    new Animation("#/resources/textures/Splash.png",new AtlasPositions(new Vector4i(0,0,16,256),8)).save()
+            );
+            fileWorker.flush();
+            fileWorker.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

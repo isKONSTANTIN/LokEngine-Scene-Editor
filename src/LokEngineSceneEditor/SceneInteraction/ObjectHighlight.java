@@ -89,6 +89,7 @@ public class ObjectHighlight {
     public static void highlight(SceneObject sceneObject, int id){
         object = sceneObject;
         objectID = id;
+        RuntimeFields.getFrameBuilder().window.getCamera().position = new Vector2f(object.position.x, object.position.y);
     }
 
     public static SceneObject getHighlightedObject(){

@@ -1,5 +1,6 @@
 package LokEngineSceneEditor.GUI;
 
+import LokEngine.Components.AnimationComponent;
 import LokEngine.Components.Component;
 import LokEngine.Components.SpriteComponent;
 import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
@@ -12,6 +13,7 @@ import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.GUI.ComponentsWindow.AvailableComponentsListWindow;
+import LokEngineSceneEditor.SceneInteraction.CameraMovement;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
 import org.lwjgl.input.Mouse;
 
@@ -46,6 +48,10 @@ public class SceneObjectComponentsPanel extends GUIObject {
                 if (guiButton1.text.getText().equals("Sprite Component")){
                     if (object != null){
                         object.components.add(new SpriteComponent(""));
+                    }
+                }else if (guiButton1.text.getText().equals("Animation Component")){
+                    if (object != null){
+                        object.components.add(new AnimationComponent());
                     }
                 }
 
@@ -95,6 +101,10 @@ public class SceneObjectComponentsPanel extends GUIObject {
 
             if (selectedComponent != null && !thisIsThatObject){
                 selectedComponent = null;
+            }
+
+            if (SceneObjectComponentsPanel.selectedComponent == null){
+                CameraMovement.accepted = true;
             }
 
             canvas.update(partsBuilder,globalPos);

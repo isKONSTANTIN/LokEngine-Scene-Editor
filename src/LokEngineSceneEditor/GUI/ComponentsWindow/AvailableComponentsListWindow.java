@@ -15,6 +15,7 @@ public class AvailableComponentsListWindow extends GUIObject {
     GUIListCanvas listCanvas;
 
     GUIButton spriteComponent;
+    GUIButton animationComponent;
 
     public void setGUIButtonScript(GUIButtonScript userScript){
 
@@ -26,6 +27,7 @@ public class AvailableComponentsListWindow extends GUIObject {
         };
 
         spriteComponent.setPressScript(script);
+        animationComponent.setPressScript(script);
     }
 
     public AvailableComponentsListWindow(Vector2i position, Vector2i size) {
@@ -39,8 +41,10 @@ public class AvailableComponentsListWindow extends GUIObject {
         listCanvas = new GUIListCanvas(new Vector2i(),subWindow.canvas.getSize(),new Vector2i(size.x,25));
 
         spriteComponent = new GUIButton(new Vector2i(),new Vector2i(),panelsColor,"Sprite Component");
+        animationComponent = new GUIButton(new Vector2i(),new Vector2i(),panelsColor,"Animation Component");
 
         listCanvas.addObject(spriteComponent);
+        listCanvas.addObject(animationComponent);
 
         subWindow.canvas.addObject(listCanvas);
     }
