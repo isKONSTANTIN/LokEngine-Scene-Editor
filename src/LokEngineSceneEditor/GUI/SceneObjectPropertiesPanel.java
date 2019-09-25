@@ -8,8 +8,7 @@ import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
 
-import static LokEngineSceneEditor.GUI.MainStyle.panelsBlur;
-import static LokEngineSceneEditor.GUI.MainStyle.panelsColor;
+import static LokEngineSceneEditor.GUI.MainStyle.*;
 
 public class SceneObjectPropertiesPanel extends GUIObject {
 
@@ -18,7 +17,9 @@ public class SceneObjectPropertiesPanel extends GUIObject {
     GUIListCanvas texts;
     GUICanvas canvas;
 
-    boolean[] lastActives = new boolean[4];
+    GUITextField nameField;
+
+    boolean[] lastActives = new boolean[5];
 
     public SceneObjectPropertiesPanel(Vector2i position, Vector2i size) {
         super(position, size);
@@ -26,8 +27,10 @@ public class SceneObjectPropertiesPanel extends GUIObject {
 
         canvas = new GUICanvas(position, size);
 
-        textFields = new GUIListCanvas(new Vector2i(18, 0), new Vector2i(size.x - 18,size.y), new Vector2i(size.x - 18,25));
-        texts = new GUIListCanvas(new Vector2i(), new Vector2i(75,size.y), new Vector2i(75,25));
+        nameField = new GUITextField(new Vector2i(), new Vector2i(size.x, 20),new GUIText(new Vector2i(),"",textColor,0,14));
+        nameField.getGUIText().canResize = true;
+        textFields = new GUIListCanvas(new Vector2i(18, 15), new Vector2i(size.x - 18,size.y), new Vector2i(size.x - 18,25));
+        texts = new GUIListCanvas(new Vector2i(0,15), new Vector2i(75,size.y), new Vector2i(75,25));
 
         textFields.addObject(new GUITextField(new Vector2i(), new Vector2i()));
         textFields.addObject(new GUITextField(new Vector2i(), new Vector2i()));
@@ -44,6 +47,7 @@ public class SceneObjectPropertiesPanel extends GUIObject {
         texts.addObject(new GUIText(new Vector2i(), "RP:"));
 
         canvas.addObject(panel);
+        canvas.addObject(nameField);
         canvas.addObject(texts);
         canvas.addObject(textFields);
     }
@@ -93,6 +97,15 @@ public class SceneObjectPropertiesPanel extends GUIObject {
                 RPField.getGUIText().updateText(String.valueOf(sceneObject.renderPriority));
             }
             lastActives[3] = RPField.getActive();
+
+            if (!nameField.getActive() && lastActives[4]){
+                try {
+                    sceneObject.name = nameField.getGUIText().getText();
+                }catch (Exception e){}
+            }else if (!nameField.getActive()){
+                nameField.getGUIText().updateText(sceneObject.name);
+            }
+            lastActives[4] = nameField.getActive();
 
             canvas.update(partsBuilder, globalPos);
         }
