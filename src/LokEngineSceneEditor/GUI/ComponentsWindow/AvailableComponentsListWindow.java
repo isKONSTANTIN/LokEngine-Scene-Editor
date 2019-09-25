@@ -26,8 +26,8 @@ public class AvailableComponentsListWindow extends GUIObject {
 
         };
 
-        spriteComponent.setPressScript(script);
-        animationComponent.setPressScript(script);
+        spriteComponent.setUnpressScript(script);
+        animationComponent.setUnpressScript(script);
     }
 
     public AvailableComponentsListWindow(Vector2i position, Vector2i size) {
@@ -37,6 +37,8 @@ public class AvailableComponentsListWindow extends GUIObject {
                 new GUIText(new Vector2i(),"","Add component",textColor,0,12,false,false),
                 new GUIPanel(new Vector2i(), new Vector2i(), panelsColor, panelsBlur)
         );
+
+        subWindow.canvas.addObject(new GUIPanel(new Vector2i(),subWindow.canvas.getSize(), panelsColor, panelsBlur));
 
         listCanvas = new GUIListCanvas(new Vector2i(),subWindow.canvas.getSize(),new Vector2i(size.x,25));
 

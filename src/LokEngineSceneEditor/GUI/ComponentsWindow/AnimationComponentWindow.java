@@ -8,6 +8,7 @@ import LokEngine.GUI.GUIObjects.*;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.Logger;
+import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SaveWorker.FileWorker;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.ColorRGB;
@@ -39,7 +40,7 @@ public class AnimationComponentWindow extends GUIObject {
 
         subWindow.canvas.addObject(new GUIPanel(new Vector2i(), subWindow.canvas.getSize(), panelsColor, panelsBlur));
 
-        GUIButton applyButton = new GUIButton(new Vector2i(0, size.y - 50), new Vector2i(size.x, 35), panelsColor, panelsColor,
+        GUIButton applyButton = new GUIButton(new Vector2i(0, size.y - 50), new Vector2i(size.x / 2 - 5, 35), panelsColor, panelsColor,
                 new GUIText(new Vector2i(), "Apply", textColor, 0, 14),
                 new GUIPanel(new Vector2i(), new Vector2i())
         );
@@ -48,7 +49,7 @@ public class AnimationComponentWindow extends GUIObject {
             SceneObjectComponentsPanel.selectedComponent = null;
         });
 
-        GUIButton submitButton = new GUIButton(new Vector2i(size.x / 2 - 50, size.y - 100), new Vector2i(100, 35), panelsColor, panelsColor,
+        GUIButton submitButton = new GUIButton(new Vector2i(size.x / 2 + 5, size.y - 50), new Vector2i(size.x / 2 - 5, 35), panelsColor, panelsColor,
                 new GUIText(new Vector2i(), "Load", textColor, 0, 14),
                 new GUIPanel(new Vector2i(), new Vector2i()));
 
@@ -91,6 +92,8 @@ public class AnimationComponentWindow extends GUIObject {
         if (SceneObjectComponentsPanel.selectedComponent != null && SceneObjectComponentsPanel.selectedComponent.getName().equals("Animation Component")){
 
             AnimationComponent component = (AnimationComponent)SceneObjectComponentsPanel.selectedComponent;
+
+            component.currectFrame+=0.01f * RuntimeFields.getDeltaTime();
 
             subWindow.update(partsBuilder, globalPos);
             CameraMovement.accepted = false;

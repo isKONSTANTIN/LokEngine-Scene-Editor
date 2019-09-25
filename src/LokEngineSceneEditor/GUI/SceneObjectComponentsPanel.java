@@ -47,7 +47,7 @@ public class SceneObjectComponentsPanel extends GUIObject {
                 SceneObject object = ObjectHighlight.getHighlightedObject();
                 if (guiButton1.text.getText().equals("Sprite Component")){
                     if (object != null){
-                        object.components.add(new SpriteComponent(""));
+                        object.components.add(new SpriteComponent("<Sprite Path>"));
                     }
                 }else if (guiButton1.text.getText().equals("Animation Component")){
                     if (object != null){
