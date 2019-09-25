@@ -1,9 +1,9 @@
 package LokEngineSceneEditor.GUI;
 
+import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
 import LokEngine.GUI.Canvases.GUICanvas;
-import LokEngine.GUI.GUIObjects.GUIFreeTextDrawer;
-import LokEngine.GUI.GUIObjects.GUIObject;
-import LokEngine.GUI.GUIObjects.GUIPanel;
+import LokEngine.GUI.GUIObjects.*;
+import LokEngine.Render.Camera;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.SceneEnvironment.SceneObject;
@@ -12,6 +12,7 @@ import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.GUI.ComponentsWindow.SpriteComponentWindow;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
+import org.lwjgl.util.vector.Vector2f;
 
 import static LokEngineSceneEditor.GUI.MainStyle.*;
 
@@ -29,9 +30,21 @@ public class SceneObjectsListPanel extends GUIObject {
         textGap = new Vector2i(0,15);
         panel = new GUIPanel(position,size,panelsColor,panelsBlur);
 
+        GUIButton buttonAdd = new GUIButton(new Vector2i(size.x - 20,0),new Vector2i(20,20),panelsColor,panelsColor,
+                new GUIText(new Vector2i(),"+",textColor,0,14),
+                new GUIPanel(new Vector2i(),new Vector2i()));
+
+        buttonAdd.setPressScript(guiButton -> {
+            SceneObject sceneObject = new SceneObject();
+            Camera camera = RuntimeFields.getFrameBuilder().window.getCamera();
+            sceneObject.position = new Vector2f(camera.position.x,camera.position.y);
+            ObjectHighlight.highlight(sceneObject, RuntimeFields.getScene().addObject(sceneObject));
+        });
+
         canvas = new GUICanvas(position,size);
 
         canvas.addObject(panel);
+        canvas.addObject(buttonAdd);
         canvas.addObject(freeTextDrawer);
     }
 
@@ -44,7 +57,7 @@ public class SceneObjectsListPanel extends GUIObject {
 
         for (int i = 0; i < objectsCount; i++){
             SceneObject sceneObject = scene.getObjectByID(i);
-            Vector2i textPos = new Vector2i(getPosition().x,textGap.y * i + getPosition().y);
+            Vector2i textPos = new Vector2i(getPosition().x,textGap.y * (i+1) + getPosition().y);
             boolean selected = Misc.mouseInField(textPos,new Vector2i(getSize().x,textGap.y));
 
             if (selected && RuntimeFields.getMouseStatus().getPressedStatus()){
