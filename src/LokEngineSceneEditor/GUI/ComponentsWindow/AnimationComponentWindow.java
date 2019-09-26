@@ -28,8 +28,6 @@ public class AnimationComponentWindow extends GUIObject {
 
     GUIListCanvas list;
 
-    boolean[] lastActives = new boolean[2];
-
     public AnimationComponentWindow(Vector2i position, Vector2i size) {
         super(position, size);
 

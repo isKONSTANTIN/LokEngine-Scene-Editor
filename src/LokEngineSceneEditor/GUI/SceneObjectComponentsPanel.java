@@ -2,6 +2,7 @@ package LokEngineSceneEditor.GUI;
 
 import LokEngine.Components.AnimationComponent;
 import LokEngine.Components.Component;
+import LokEngine.Components.RigidbodyComponent;
 import LokEngine.Components.SpriteComponent;
 import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
 import LokEngine.GUI.Canvases.GUICanvas;
@@ -13,6 +14,7 @@ import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.GUI.ComponentsWindow.AvailableComponentsListWindow;
+import LokEngineSceneEditor.Render.FrameParts.ShapesRenderFramePart;
 import LokEngineSceneEditor.SceneInteraction.CameraMovement;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
 import org.lwjgl.input.Mouse;
@@ -104,6 +106,9 @@ public class SceneObjectComponentsPanel extends GUIObject {
             }
 
             if (SceneObjectComponentsPanel.selectedComponent == null){
+                CameraMovement.accepted = true;
+            }else if (SceneObjectComponentsPanel.selectedComponent.getName() == "Rigidbody Component"){
+                RuntimeFields.getFrameBuilder().addPart(new ShapesRenderFramePart(((RigidbodyComponent)SceneObjectComponentsPanel.selectedComponent).polygons,ObjectHighlight.getHighlightedObject()));
                 CameraMovement.accepted = true;
             }
 

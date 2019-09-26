@@ -5,9 +5,12 @@ import LokEngine.Components.AdditionalObjects.Animation;
 import LokEngine.Components.AdditionalObjects.AtlasPositions;
 import LokEngine.Components.AnimationComponent;
 import LokEngine.Components.SpriteComponent;
+import LokEngine.Loaders.ShaderLoader;
 import LokEngine.Loaders.SpriteLoader;
 import LokEngine.Render.Camera;
+import LokEngine.Render.Shader;
 import LokEngine.SceneEnvironment.SceneObject;
+import LokEngine.Tools.MatrixCreator;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SaveWorker.FileWorker;
 import LokEngine.Tools.Utilities.Color;
@@ -29,10 +32,17 @@ import java.io.IOException;
 public class LokEngineSceneEditor extends Application {
 
     public static AvailableComponentsListWindow availableComponentsListWindow;
+    public static Shader GUISceneIntegrator;
+
     @Override
     public void Init(){
         DefaultFields.highlightSprite = SpriteLoader.loadSprite("#/resources/textures/frame.png");
-
+        try {
+            GUISceneIntegrator = ShaderLoader.loadShader("#/resources/shaders/GUISceneIntegVert.glsl","#/resources/shaders/GUISceneIntegFrag.glsl");
+            window.getCamera().setFieldOfView(1, GUISceneIntegrator);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         canvas.addObject(new SceneObjectsListPanel(new Vector2i(0,0),new Vector2i(150,window.getResolution().y)));
         canvas.addObject(new SceneObjectPropertiesPanel(new Vector2i(window.getResolution().x - 200,0),new Vector2i(200,window.getResolution().y)));
         canvas.addObject(
@@ -58,12 +68,13 @@ public class LokEngineSceneEditor extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public void Update(){
         ObjectHighlight.update();
+        Shader.use(GUISceneIntegrator);
+        MatrixCreator.PutMatrixInShader(GUISceneIntegrator, "View", MatrixCreator.CreateViewMatrix(window.getCamera()));
 
         if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && ObjectHighlight.getHighlightedObject() != null){
             ObjectHighlight.moveObjectFromCursor();

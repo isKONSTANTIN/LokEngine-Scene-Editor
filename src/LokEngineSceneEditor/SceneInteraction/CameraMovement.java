@@ -5,6 +5,8 @@ import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.input.Mouse;
 
+import static LokEngineSceneEditor.LokEngineSceneEditor.GUISceneIntegrator;
+
 public class CameraMovement {
 
     static Vector2i lastPos = new Vector2i();
@@ -27,6 +29,7 @@ public class CameraMovement {
                 view += -wheel / 1000f * view;
                 view = Math.max(view, 0.001f);
                 camera.setFieldOfView(view);
+                camera.setFieldOfView(view, GUISceneIntegrator);
             }
 
             lastStatus = RuntimeFields.getMouseStatus().getPressedStatus();
