@@ -42,10 +42,10 @@ public class SpriteComponentWindow extends GUIObject {
 
         list = new GUIListCanvas(new Vector2i(), size, new Vector2i(size.x,25));
         list.addObject(new GUIText(new Vector2i(), "Sprite path:"));
-        list.addObject(new GUITextField(new Vector2i(), new Vector2i(),new GUIText(new Vector2i(),"",textColor,0,14)));
+        list.addObject(new GUITextField(new Vector2i(),new Vector2i(),"",textColor,0,14));
         list.addObject(new GUISpace());
         list.addObject(new GUIText(new Vector2i(), "Sprite size:"));
-        list.addObject(new GUITextField(new Vector2i(), new Vector2i(),new GUIText(new Vector2i(),"",textColor,0,14)));
+        list.addObject(new GUITextField(new Vector2i(),new Vector2i(),"",textColor,0,14));
 
         subWindow.canvas.addObject(applyButton);
         subWindow.canvas.addObject(list);
@@ -62,19 +62,19 @@ public class SpriteComponentWindow extends GUIObject {
 
             if (!pathField.getActive() && lastActives[0]){
                 try {
-                    component.setSprite(pathField.getGUIText().getText());
+                    component.setSprite(pathField.getText());
                 }catch (Exception e){}
             }else if (!pathField.getActive()){
-                pathField.getGUIText().updateText(component.getSprite().texture.path);
+                pathField.updateText(component.getSprite().texture.path);
             }
             lastActives[0] = pathField.getActive();
 
             if (!sizeField.getActive() && lastActives[1]){
                 try {
-                    component.getSprite().size = Float.valueOf(sizeField.getGUIText().getText());
+                    component.getSprite().size = Float.valueOf(sizeField.getText());
                 }catch (Exception e){}
             }else if (!sizeField.getActive()){
-                sizeField.getGUIText().updateText(String.valueOf(component.getSprite().size));
+                sizeField.updateText(String.valueOf(component.getSprite().size));
             }
             lastActives[1] = sizeField.getActive();
 

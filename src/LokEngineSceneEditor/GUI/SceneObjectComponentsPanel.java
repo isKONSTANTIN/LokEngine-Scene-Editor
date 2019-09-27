@@ -107,12 +107,13 @@ public class SceneObjectComponentsPanel extends GUIObject {
 
             if (SceneObjectComponentsPanel.selectedComponent == null){
                 CameraMovement.accepted = true;
-            }else if (SceneObjectComponentsPanel.selectedComponent.getName() == "Rigidbody Component"){
+            }else if (SceneObjectComponentsPanel.selectedComponent.getName().equals("Rigidbody Component")){
                 RuntimeFields.getFrameBuilder().addPart(new ShapesRenderFramePart(((RigidbodyComponent)SceneObjectComponentsPanel.selectedComponent).polygons,ObjectHighlight.getHighlightedObject()));
+
                 CameraMovement.accepted = true;
             }
 
-            canvas.update(partsBuilder,globalPos);
+            canvas.update(partsBuilder, globalPos);
         }
     }
 

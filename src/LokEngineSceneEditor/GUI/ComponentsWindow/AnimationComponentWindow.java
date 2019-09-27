@@ -55,7 +55,7 @@ public class AnimationComponentWindow extends GUIObject {
             if (SceneObjectComponentsPanel.selectedComponent != null) {
                 AnimationComponent component = (AnimationComponent) SceneObjectComponentsPanel.selectedComponent;
                 try {
-                    FileWorker fileWorker = new FileWorker(((GUITextField) list.getObject(1)).getGUIText().getText());
+                    FileWorker fileWorker = new FileWorker(((GUITextField) list.getObject(1)).getText());
                     fileWorker.openRead();
                     component.addAnimation((Animation) new Animation().load(fileWorker.read()), "Animation_1");
                     fileWorker.close();
@@ -78,7 +78,7 @@ public class AnimationComponentWindow extends GUIObject {
         list = new GUIListCanvas(new Vector2i(), size, new Vector2i(size.x, 25));
 
         list.addObject(new GUIText(new Vector2i(), "Animation save path:"));
-        list.addObject(new GUITextField(new Vector2i(), new Vector2i(), new GUIText(new Vector2i(), "", textColor, 0, 14)));
+        list.addObject(new GUITextField(new Vector2i(),new Vector2i(), "", textColor, 0, 14));
 
         subWindow.canvas.addObject(submitButton);
         subWindow.canvas.addObject(applyButton);

@@ -73,8 +73,6 @@ public class LokEngineSceneEditor extends Application {
     @Override
     public void Update(){
         ObjectHighlight.update();
-        Shader.use(GUISceneIntegrator);
-        MatrixCreator.PutMatrixInShader(GUISceneIntegrator, "View", MatrixCreator.CreateViewMatrix(window.getCamera()));
 
         if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && ObjectHighlight.getHighlightedObject() != null){
             ObjectHighlight.moveObjectFromCursor();
@@ -85,6 +83,10 @@ public class LokEngineSceneEditor extends Application {
         if (Keyboard.isKeyDown(Keyboard.KEY_DELETE) && ObjectHighlight.getHighlightedObject() != null){
             ObjectHighlight.deleteObjectFromScene();
         }
+
+        Shader.use(GUISceneIntegrator);
+        MatrixCreator.PutMatrixInShader(GUISceneIntegrator, "View", MatrixCreator.CreateViewMatrix(window.getCamera()));
+
 
         if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
             close();
