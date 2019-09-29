@@ -1,9 +1,10 @@
 package LokEngineSceneEditor.SceneInteraction;
 
 import LokEngine.Render.Camera;
+import LokEngine.Render.Window;
+import LokEngine.Tools.Input.AdditionalObjects.MouseScrollScript;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
-import org.lwjgl.input.Mouse;
 
 import static LokEngineSceneEditor.LokEngineSceneEditor.GUISceneIntegrator;
 
@@ -13,28 +14,31 @@ public class CameraMovement {
     static boolean lastStatus;
 
     static float view = 1;
-
+    static Window window;
     public static boolean accepted = true;
 
-    public static void update(Camera camera){
-        if (accepted){
-            if (RuntimeFields.getMouseStatus().getPressedStatus() && lastStatus){
-                camera.position.x -= (RuntimeFields.getMouseStatus().getMousePosition().x - lastPos.x) * 0.001f * view;
-                camera.position.y -= (RuntimeFields.getMouseStatus().getMousePosition().y - lastPos.y) * 0.001f * view;
-            }
-
-            int wheel = Mouse.getDWheel();
-
-            if (wheel != 0){
-                view += -wheel / 1000f * view;
+    public static void init(Window window){
+        CameraMovement.window = window;
+        window.getMouse().setMouseScrollScript((v, v1) -> {
+            if (accepted){
+                view += -(v + v1) / 20 * view;
                 view = Math.max(view, 0.001f);
-                camera.setFieldOfView(view);
-                camera.setFieldOfView(view, GUISceneIntegrator);
+                window.getCamera().setFieldOfView(view);
+                window.getCamera().setFieldOfView(view, GUISceneIntegrator);
+            }
+        });
+    }
+
+    public static void update(){
+        if (accepted){
+            if (window.getMouse().getPressedStatus() && lastStatus){
+                window.getCamera().position.x -= (window.getMouse().getMousePosition().x - lastPos.x) * 0.001f * view;
+                window.getCamera().position.y += (window.getMouse().getMousePosition().y - lastPos.y) * 0.001f * view;
             }
 
-            lastStatus = RuntimeFields.getMouseStatus().getPressedStatus();
+            lastStatus = window.getMouse().getPressedStatus();
         }
-        lastPos = RuntimeFields.getMouseStatus().getMousePosition();
+        lastPos = window.getMouse().getMousePosition();
     }
 
 }

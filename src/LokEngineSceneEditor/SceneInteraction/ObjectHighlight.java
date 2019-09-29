@@ -109,7 +109,7 @@ public class ObjectHighlight {
 
     public static void moveObjectFromCursor(){
         if (object != null && CameraMovement.accepted){
-            object.position = RuntimeFields.getFrameBuilder().window.getCamera().screenPointToScene(RuntimeFields.getMouseStatus().getMousePosition());
+            object.position = RuntimeFields.getFrameBuilder().window.getCamera().screenPointToScene(RuntimeFields.getFrameBuilder().window.getMouse().getMousePosition());
         }
     }
 

@@ -2,6 +2,7 @@ package LokEngineSceneEditor.GUI.ComponentsWindow;
 
 import LokEngine.Components.SpriteComponent;
 import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
+import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.GUI.Canvases.GUIListCanvas;
 import LokEngine.GUI.GUIObjects.*;
 import LokEngine.Render.Frame.PartsBuilder;
@@ -52,7 +53,8 @@ public class SpriteComponentWindow extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, Vector2i globalPos){
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+        super.update(partsBuilder,parentProperties);
         if (SceneObjectComponentsPanel.selectedComponent != null && SceneObjectComponentsPanel.selectedComponent.getName().equals("Sprite Component")){
 
             SpriteComponent component = (SpriteComponent)SceneObjectComponentsPanel.selectedComponent;
@@ -78,7 +80,7 @@ public class SpriteComponentWindow extends GUIObject {
             }
             lastActives[1] = sizeField.getActive();
 
-            subWindow.update(partsBuilder, globalPos);
+            subWindow.update(partsBuilder, parentProperties);
             CameraMovement.accepted = false;
         }
     }

@@ -5,19 +5,18 @@ import LokEngine.Components.Component;
 import LokEngine.Components.RigidbodyComponent;
 import LokEngine.Components.SpriteComponent;
 import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
+import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.GUI.GUIObjects.*;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.DefaultFields;
-import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.GUI.ComponentsWindow.AvailableComponentsListWindow;
 import LokEngineSceneEditor.Render.FrameParts.ShapesRenderFramePart;
 import LokEngineSceneEditor.SceneInteraction.CameraMovement;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
-import org.lwjgl.input.Mouse;
 
 import static LokEngineSceneEditor.GUI.MainStyle.*;
 import static LokEngineSceneEditor.GUI.SceneObjectsListPanel.freeTextDrawer;
@@ -66,27 +65,28 @@ public class SceneObjectComponentsPanel extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, Vector2i globalPos){
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+        super.update(partsBuilder,parentProperties);
         SceneObject sceneObject = ObjectHighlight.getHighlightedObject();
 
         if (sceneObject != null){
             int componentsSize = sceneObject.components.getSize();
 
             boolean thisIsThatObject = false;
-            boolean mousePressed = RuntimeFields.getMouseStatus().getPressedStatus();
+            boolean mousePressed = parentProperties.window.getMouse().getPressedStatus();
             int toRemove = -1;
 
             for (int i = 0; i < componentsSize; i++){
                 Component component = sceneObject.components.get(i);
 
                 Vector2i textPos = new Vector2i(getPosition().x - 10,textGap.y * i + getPosition().y + 30);
-                boolean selected = Misc.mouseInField(textPos, new Vector2i(getSize().x, textGap.y));
+                boolean selected = parentProperties.window.getMouse().inField(textPos, new Vector2i(getSize().x, textGap.y));
 
                 if (selected && mousePressed && !lastPress){ selectedComponent = component; }
                 if (selectedComponent != null && !thisIsThatObject){ thisIsThatObject = selectedComponent == component; }
 
                 Vector2i deleteTextPos = new Vector2i(getSize().x - 10,textGap.y * i + 29);
-                boolean deleteTextSelected = Misc.mouseInField(new Vector2i(deleteTextPos.x + getPosition().x,deleteTextPos.y + getPosition().y), new Vector2i(10, textGap.y));
+                boolean deleteTextSelected = parentProperties.window.getMouse().inField(new Vector2i(deleteTextPos.x + getPosition().x,deleteTextPos.y + getPosition().y), new Vector2i(10, textGap.y));
 
                 if (deleteTextSelected && mousePressed && !lastPress){
                     toRemove = i;
@@ -113,7 +113,7 @@ public class SceneObjectComponentsPanel extends GUIObject {
                 CameraMovement.accepted = true;
             }
 
-            canvas.update(partsBuilder, globalPos);
+            canvas.update(partsBuilder, parentProperties);
         }
     }
 

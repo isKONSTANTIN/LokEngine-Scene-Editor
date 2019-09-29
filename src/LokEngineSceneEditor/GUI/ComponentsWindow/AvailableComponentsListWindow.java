@@ -1,6 +1,7 @@
 package LokEngineSceneEditor.GUI.ComponentsWindow;
 
 import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
+import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.GUI.Canvases.GUIListCanvas;
 import LokEngine.GUI.GUIObjects.*;
 import LokEngine.Render.Frame.PartsBuilder;
@@ -52,8 +53,9 @@ public class AvailableComponentsListWindow extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, Vector2i globalPos){
-        subWindow.update(partsBuilder, globalPos);
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+        super.update(partsBuilder,parentProperties);
+        subWindow.update(partsBuilder, parentProperties);
         CameraMovement.accepted = false;
     }
 

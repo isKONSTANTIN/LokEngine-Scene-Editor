@@ -3,6 +3,7 @@ package LokEngineSceneEditor.GUI.ComponentsWindow;
 import LokEngine.Components.AdditionalObjects.Animation;
 import LokEngine.Components.AnimationComponent;
 import LokEngine.Components.SpriteComponent;
+import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.GUI.Canvases.GUIListCanvas;
 import LokEngine.GUI.GUIObjects.*;
 import LokEngine.Render.Frame.PartsBuilder;
@@ -86,14 +87,15 @@ public class AnimationComponentWindow extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, Vector2i globalPos){
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+        super.update(partsBuilder,parentProperties);
         if (SceneObjectComponentsPanel.selectedComponent != null && SceneObjectComponentsPanel.selectedComponent.getName().equals("Animation Component")){
 
             AnimationComponent component = (AnimationComponent)SceneObjectComponentsPanel.selectedComponent;
 
             component.currectFrame+=0.01f * RuntimeFields.getDeltaTime();
 
-            subWindow.update(partsBuilder, globalPos);
+            subWindow.update(partsBuilder, parentProperties);
             CameraMovement.accepted = false;
         }
     }

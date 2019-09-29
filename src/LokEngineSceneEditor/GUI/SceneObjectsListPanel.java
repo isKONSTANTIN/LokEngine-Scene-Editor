@@ -1,13 +1,13 @@
 package LokEngineSceneEditor.GUI;
 
 import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
+import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.GUI.GUIObjects.*;
 import LokEngine.Render.Camera;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.SceneEnvironment.SceneObject;
-import LokEngine.Tools.Misc;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.GUI.ComponentsWindow.SpriteComponentWindow;
@@ -49,8 +49,8 @@ public class SceneObjectsListPanel extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, Vector2i globalPos){
-        Vector2i myGlobalPos = new Vector2i(globalPos.x + getPosition().x, globalPos.y + getPosition().y);
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+        super.update(partsBuilder,parentProperties);
         Scene scene = RuntimeFields.getScene();
 
         int objectsCount = scene.getCountObjects();
@@ -58,16 +58,16 @@ public class SceneObjectsListPanel extends GUIObject {
         for (int i = 0; i < objectsCount; i++){
             SceneObject sceneObject = scene.getObjectByID(i);
             Vector2i textPos = new Vector2i(getPosition().x,textGap.y * (i+1) + getPosition().y);
-            boolean selected = Misc.mouseInField(textPos,new Vector2i(getSize().x,textGap.y));
+            boolean selected = parentProperties.window.getMouse().inField(textPos,new Vector2i(getSize().x,textGap.y));
 
-            if (selected && RuntimeFields.getMouseStatus().getPressedStatus()){
+            if (selected && parentProperties.window.getMouse().getPressedStatus()){
                 ObjectHighlight.highlight(sceneObject,i);
             }
 
             freeTextDrawer.draw(sceneObject.name + " [" + i + "]", textPos, selected || ObjectHighlight.getHighlightedObjectID() == i ? highlightedTextColor : textColor);
         }
 
-        canvas.update(partsBuilder, myGlobalPos);
+        canvas.update(partsBuilder, properties);
     }
 
 }

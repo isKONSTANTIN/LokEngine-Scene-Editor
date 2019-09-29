@@ -1,5 +1,6 @@
 package LokEngineSceneEditor.GUI;
 
+import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.GUI.Canvases.GUIListCanvas;
 import LokEngine.GUI.GUIObjects.*;
@@ -52,7 +53,8 @@ public class SceneObjectPropertiesPanel extends GUIObject {
     }
 
     @Override
-    public void update(PartsBuilder partsBuilder, Vector2i globalPos){
+    public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
+        super.update(partsBuilder,parentProperties);
         SceneObject sceneObject = ObjectHighlight.getHighlightedObject();
 
         if (sceneObject != null){
@@ -106,7 +108,7 @@ public class SceneObjectPropertiesPanel extends GUIObject {
             }
             lastActives[4] = nameField.getActive();
 
-            canvas.update(partsBuilder, globalPos);
+            canvas.update(partsBuilder, parentProperties);
         }
     }
 }

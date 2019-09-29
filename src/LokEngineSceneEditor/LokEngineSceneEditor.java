@@ -10,6 +10,7 @@ import LokEngine.Loaders.SpriteLoader;
 import LokEngine.Render.Camera;
 import LokEngine.Render.Shader;
 import LokEngine.SceneEnvironment.SceneObject;
+import LokEngine.Tools.Logger;
 import LokEngine.Tools.MatrixCreator;
 import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SaveWorker.FileWorker;
@@ -25,7 +26,8 @@ import LokEngineSceneEditor.GUI.SceneObjectsListPanel;
 import LokEngineSceneEditor.Misc.DefaultFields;
 import LokEngineSceneEditor.SceneInteraction.CameraMovement;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
-import org.lwjgl.input.Keyboard;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.io.IOException;
 
@@ -36,6 +38,9 @@ public class LokEngineSceneEditor extends Application {
 
     @Override
     public void Init(){
+
+        CameraMovement.init(window);
+
         DefaultFields.highlightSprite = SpriteLoader.loadSprite("#/resources/textures/frame.png");
         try {
             GUISceneIntegrator = ShaderLoader.loadShader("#/resources/shaders/GUISceneIntegVert.glsl","#/resources/shaders/GUISceneIntegFrag.glsl");
@@ -74,21 +79,20 @@ public class LokEngineSceneEditor extends Application {
     public void Update(){
         ObjectHighlight.update();
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && ObjectHighlight.getHighlightedObject() != null){
+        if (window.getKeyboard().isKeyDown(GLFW.GLFW_KEY_LEFT_SHIFT) && ObjectHighlight.getHighlightedObject() != null){
             ObjectHighlight.moveObjectFromCursor();
         }else{
-            CameraMovement.update(window.getCamera());
+            CameraMovement.update();
         }
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_DELETE) && ObjectHighlight.getHighlightedObject() != null){
+        if (window.getKeyboard().isKeyDown(GLFW.GLFW_KEY_DELETE) && ObjectHighlight.getHighlightedObject() != null){
             ObjectHighlight.deleteObjectFromScene();
         }
 
         Shader.use(GUISceneIntegrator);
         MatrixCreator.PutMatrixInShader(GUISceneIntegrator, "View", MatrixCreator.CreateViewMatrix(window.getCamera()));
 
-
-        if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
+        if (window.getKeyboard().isKeyDown(GLFW.GLFW_KEY_ESCAPE))
             close();
     }
 
