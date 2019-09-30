@@ -1,12 +1,16 @@
 package LokEngineSceneEditor.SceneInteraction;
 
+import LokEngine.Render.Camera;
 import LokEngine.Render.Enums.FramePartType;
+import LokEngine.Render.Frame.BuilderProperties;
 import LokEngine.Render.Frame.FramePart;
 import LokEngine.Render.Shader;
+import LokEngine.Render.Window;
+import LokEngine.SceneEnvironment.Scene;
 import LokEngine.SceneEnvironment.SceneObject;
+import LokEngine.Tools.ApplicationRuntime;
 import LokEngine.Tools.Logger;
 import LokEngine.Tools.MatrixCreator;
-import LokEngine.Tools.RuntimeFields;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -39,10 +43,11 @@ class HighlightFramePart extends FramePart {
         this(position, 0.2f);
     }
 
+
     @Override
-    public void partRender(){
-        if (!highlightSprite.shader.equals(Shader.currentShader)) {
-            Shader.use(highlightSprite.shader);
+    public void partRender(BuilderProperties builderProperties) {
+        if (!builderProperties.getActiveShader().equals(builderProperties.getObjectShader())) {
+            builderProperties.useShader(builderProperties.getObjectShader());
         }
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, highlightSprite.vertexBuffer);
@@ -56,7 +61,7 @@ class HighlightFramePart extends FramePart {
         glVertexAttribDivisor(0, 0);
 
         glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, highlightSprite.uvBuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, builderProperties.getUVBuffer());
         glVertexAttribPointer(
                 1,
                 2,
@@ -65,9 +70,9 @@ class HighlightFramePart extends FramePart {
                 0,
                 0);
         glVertexAttribDivisor(1, 0);
-        glUniform1f(glGetUniformLocation(highlightSprite.shader.program, "ObjectSize"), size);
+        glUniform1f(glGetUniformLocation(builderProperties.getActiveShader().program, "ObjectSize"), size);
 
-        MatrixCreator.PutMatrixInShader(highlightSprite.shader,"ObjectModelMatrix", MatrixCreator.CreateModelMatrix(rotation, new Vector3f(position.x,position.y,0)));
+        MatrixCreator.PutMatrixInShader(builderProperties.getActiveShader(),"ObjectModelMatrix", MatrixCreator.CreateModelMatrix(rotation, new Vector3f(position.x,position.y,0)));
 
         glBindTexture(GL_TEXTURE_2D, highlightSprite.texture.buffer);
 
@@ -85,11 +90,14 @@ public class ObjectHighlight {
 
     static SceneObject object;
     static int objectID = -1;
+    static Window window;
+    static ApplicationRuntime applicationRuntime;
+    static Scene scene;
 
     public static void highlight(SceneObject sceneObject, int id){
         object = sceneObject;
         objectID = id;
-        RuntimeFields.getFrameBuilder().window.getCamera().position = new Vector2f(object.position.x, object.position.y);
+        window.getCamera().position = new Vector2f(object.position.x, object.position.y);
     }
 
     public static SceneObject getHighlightedObject(){
@@ -101,7 +109,7 @@ public class ObjectHighlight {
     }
     public static void deleteObjectFromScene(){
         if (object != null){
-            RuntimeFields.getScene().removeObject(objectID);
+            scene.removeObject(objectID);
             objectID = -1;
             object = null;
         }
@@ -109,14 +117,20 @@ public class ObjectHighlight {
 
     public static void moveObjectFromCursor(){
         if (object != null && CameraMovement.accepted){
-            object.position = RuntimeFields.getFrameBuilder().window.getCamera().screenPointToScene(RuntimeFields.getFrameBuilder().window.getMouse().getMousePosition());
+            object.position = window.getCamera().screenPointToScene(window.getMouse().getMousePosition());
         }
     }
 
+    public static void init(Window window, ApplicationRuntime applicationRuntime, Scene scene){
+        ObjectHighlight.window = window;
+        ObjectHighlight.applicationRuntime = applicationRuntime;
+        ObjectHighlight.scene = scene;
+    }
+
     public static void update(){
-        float time = RuntimeFields.getEngineRunTime() / 10000000000f;
+        float time = applicationRuntime.getEngineRunTime() / 10000000000f;
         if (object != null)
-            RuntimeFields.getFrameBuilder().addPart(new HighlightFramePart(
+            window.getFrameBuilder().getScenePartsBuilder().addPart(new HighlightFramePart(
                 object.position,
                 Math.max(Math.abs((float)Math.sin(time * 10)), 0.5f),
                 (float)(Math.sin(time) * 360)

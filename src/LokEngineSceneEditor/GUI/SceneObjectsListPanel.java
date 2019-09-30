@@ -8,7 +8,6 @@ import LokEngine.Render.Camera;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.SceneEnvironment.SceneObject;
-import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.GUI.ComponentsWindow.SpriteComponentWindow;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
@@ -23,9 +22,10 @@ public class SceneObjectsListPanel extends GUIObject {
     GUICanvas canvas;
 
     Vector2i textGap;
-
-    public SceneObjectsListPanel(Vector2i position, Vector2i size) {
+    Scene scene;
+    public SceneObjectsListPanel(Vector2i position, Vector2i size, Scene scene, Camera camera) {
         super(position, size);
+        this.scene = scene;
         this.freeTextDrawer = new GUIFreeTextDrawer("",0,12,true);
         textGap = new Vector2i(0,15);
         panel = new GUIPanel(position,size,panelsColor,panelsBlur);
@@ -36,9 +36,8 @@ public class SceneObjectsListPanel extends GUIObject {
 
         buttonAdd.setPressScript(guiButton -> {
             SceneObject sceneObject = new SceneObject();
-            Camera camera = RuntimeFields.getFrameBuilder().window.getCamera();
             sceneObject.position = new Vector2f(camera.position.x,camera.position.y);
-            ObjectHighlight.highlight(sceneObject, RuntimeFields.getScene().addObject(sceneObject));
+            ObjectHighlight.highlight(sceneObject, scene.addObject(sceneObject));
         });
 
         canvas = new GUICanvas(position,size);
@@ -51,7 +50,6 @@ public class SceneObjectsListPanel extends GUIObject {
     @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
         super.update(partsBuilder,parentProperties);
-        Scene scene = RuntimeFields.getScene();
 
         int objectsCount = scene.getCountObjects();
 

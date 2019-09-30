@@ -9,7 +9,6 @@ import LokEngine.GUI.GUIObjects.*;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.Logger;
-import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.SaveWorker.FileWorker;
 import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.ColorRGB;
@@ -93,7 +92,7 @@ public class AnimationComponentWindow extends GUIObject {
 
             AnimationComponent component = (AnimationComponent)SceneObjectComponentsPanel.selectedComponent;
 
-            component.currectFrame+=0.01f * RuntimeFields.getDeltaTime();
+            component.currectFrame+=0.01f;
 
             subWindow.update(partsBuilder, parentProperties);
             CameraMovement.accepted = false;

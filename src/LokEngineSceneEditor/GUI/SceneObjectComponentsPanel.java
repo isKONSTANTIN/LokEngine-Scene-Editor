@@ -10,8 +10,6 @@ import LokEngine.GUI.Canvases.GUICanvas;
 import LokEngine.GUI.GUIObjects.*;
 import LokEngine.Render.Frame.PartsBuilder;
 import LokEngine.SceneEnvironment.SceneObject;
-import LokEngine.Tools.DefaultFields;
-import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.GUI.ComponentsWindow.AvailableComponentsListWindow;
 import LokEngineSceneEditor.Render.FrameParts.ShapesRenderFramePart;
@@ -61,7 +59,6 @@ public class SceneObjectComponentsPanel extends GUIObject {
 
         canvas.addObject(buttonAdd);
         canvas.addObject(freeTextDrawer);
-
     }
 
     @Override
@@ -92,7 +89,6 @@ public class SceneObjectComponentsPanel extends GUIObject {
                     toRemove = i;
                 }
 
-
                 freeTextDrawer.draw("-",deleteTextPos, deleteTextSelected ? textColor : highlightedTextColor);
                 freeTextDrawer.draw(component.getName(), new Vector2i(0,textGap.y * i + 30), selected || selectedComponent == component ? highlightedTextColor : textColor);
             }
@@ -108,7 +104,7 @@ public class SceneObjectComponentsPanel extends GUIObject {
             if (SceneObjectComponentsPanel.selectedComponent == null){
                 CameraMovement.accepted = true;
             }else if (SceneObjectComponentsPanel.selectedComponent.getName().equals("Rigidbody Component")){
-                RuntimeFields.getFrameBuilder().addPart(new ShapesRenderFramePart(((RigidbodyComponent)SceneObjectComponentsPanel.selectedComponent).polygons,ObjectHighlight.getHighlightedObject()));
+                partsBuilder.addPart(new ShapesRenderFramePart(((RigidbodyComponent)SceneObjectComponentsPanel.selectedComponent).polygons,ObjectHighlight.getHighlightedObject()));
 
                 CameraMovement.accepted = true;
             }
