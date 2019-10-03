@@ -53,6 +53,8 @@ public class SceneObjectsListPanel extends GUIObject {
 
         int objectsCount = scene.getCountObjects();
 
+        freeTextDrawer.draw("Объектов: " + objectsCount,new Vector2i(0,0), highlightedTextColor);
+
         for (int i = 0; i < objectsCount; i++){
             SceneObject sceneObject = scene.getObjectByID(i);
             Vector2i textPos = new Vector2i(getPosition().x,textGap.y * (i+1) + getPosition().y);
