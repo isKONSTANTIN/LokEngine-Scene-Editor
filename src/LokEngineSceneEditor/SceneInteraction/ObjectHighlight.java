@@ -5,7 +5,7 @@ import LokEngine.Render.Enums.FramePartType;
 import LokEngine.Render.Frame.BuilderProperties;
 import LokEngine.Render.Frame.FramePart;
 import LokEngine.Render.Shader;
-import LokEngine.Render.Window;
+import LokEngine.Render.Window.Window;
 import LokEngine.SceneEnvironment.Scene;
 import LokEngine.SceneEnvironment.SceneObject;
 import LokEngine.Tools.ApplicationRuntime;
@@ -85,7 +85,6 @@ class HighlightFramePart extends FramePart {
     }
 }
 
-
 public class ObjectHighlight {
 
     static SceneObject object;
@@ -132,7 +131,7 @@ public class ObjectHighlight {
         if (object != null)
             window.getFrameBuilder().getScenePartsBuilder().addPart(new HighlightFramePart(
                 object.position,
-                Math.max(Math.abs((float)Math.sin(time * 10)), 0.5f),
+                (float)(Math.sin(time * 10) + 1.5f) / 1.5f,
                 (float)(Math.sin(time) * 360)
             ));
     }

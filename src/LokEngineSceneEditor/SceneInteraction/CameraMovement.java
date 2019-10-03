@@ -1,9 +1,8 @@
 package LokEngineSceneEditor.SceneInteraction;
 
 import LokEngine.Render.Camera;
-import LokEngine.Render.Window;
+import LokEngine.Render.Window.Window;
 import LokEngine.Tools.Input.AdditionalObjects.MouseScrollScript;
-import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 
 import static LokEngineSceneEditor.LokEngineSceneEditor.GUISceneIntegrator;
@@ -31,6 +30,7 @@ public class CameraMovement {
 
     public static void update(){
         if (accepted){
+
             if (window.getMouse().getPressedStatus() && lastStatus){
                 window.getCamera().position.x -= (window.getMouse().getMousePosition().x - lastPos.x) * 0.001f * view;
                 window.getCamera().position.y += (window.getMouse().getMousePosition().y - lastPos.y) * 0.001f * view;

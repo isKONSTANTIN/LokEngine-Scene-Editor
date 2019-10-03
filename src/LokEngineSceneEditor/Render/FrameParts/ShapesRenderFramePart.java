@@ -6,12 +6,11 @@ import LokEngine.Components.AdditionalObjects.Rigidbody.Shapes.CircleShape;
 import LokEngine.Components.AdditionalObjects.Rigidbody.Shapes.Shape;
 import LokEngine.Loaders.BufferLoader;
 import LokEngine.Render.Enums.FramePartType;
+import LokEngine.Render.Frame.BuilderProperties;
 import LokEngine.Render.Frame.FramePart;
 import LokEngine.Render.Shader;
 import LokEngine.SceneEnvironment.SceneObject;
-import LokEngine.Tools.DefaultFields;
 import LokEngine.Tools.MatrixCreator;
-import LokEngine.Tools.RuntimeFields;
 import LokEngine.Tools.Utilities.Vector2i;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
@@ -39,7 +38,7 @@ public class ShapesRenderFramePart extends FramePart {
     }
 
     @Override
-    public void partRender() {
+    public void partRender(BuilderProperties builderProperties) {
         int buffer = -1;
         int count = 0;
         float size = 2;
@@ -98,8 +97,8 @@ public class ShapesRenderFramePart extends FramePart {
         }
 
         if (buffer != -1){
-            if (!GUISceneIntegrator.equals(Shader.currentShader)) {
-                Shader.use(GUISceneIntegrator);
+            if (builderProperties.getActiveShader() == null || !GUISceneIntegrator.equals(builderProperties.getActiveShader())) {
+                builderProperties.useShader(GUISceneIntegrator);
             }
 
             glEnableVertexAttribArray(0);
@@ -113,9 +112,9 @@ public class ShapesRenderFramePart extends FramePart {
                     0);
             glVertexAttribDivisor(0, 0);
 
-            glUniform1f(glGetUniformLocation(Shader.currentShader.program, "ObjectSize"), size);
-            glUniform4f(glGetUniformLocation(Shader.currentShader.program, "ObjectColor"), 0,1,0,1);
-            MatrixCreator.PutMatrixInShader(Shader.currentShader, "ObjectModelMatrix", MatrixCreator.CreateModelMatrix(sceneObject.rollRotation, new Vector3f(sceneObject.position.x, sceneObject.position.y, sceneObject.renderPriority)));
+            glUniform1f(glGetUniformLocation(builderProperties.getActiveShader().program, "ObjectSize"), size);
+            glUniform4f(glGetUniformLocation(builderProperties.getActiveShader().program, "ObjectColor"), 0,1,0,1);
+            MatrixCreator.PutMatrixInShader(builderProperties.getActiveShader(), "ObjectModelMatrix", MatrixCreator.CreateModelMatrix(sceneObject.rollRotation, new Vector3f(sceneObject.position.x, sceneObject.position.y, sceneObject.renderPriority)));
 
             glDrawArrays(GL_LINE_LOOP, 0, count);
 
