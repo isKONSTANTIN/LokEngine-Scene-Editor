@@ -20,6 +20,9 @@ public class MainTestApplication extends Application {
     GUIGraph deltaGraph;
     Timer timer;
 
+    float fps;
+    float delta;
+
     public Thread threadWin;
     @Override
     public void Update(){
@@ -29,9 +32,17 @@ public class MainTestApplication extends Application {
         window.getCamera().position.y += window.getKeyboard().isKeyDown(GLFW.GLFW_KEY_W) ? applicationRuntime.getDeltaTime() * 0.01f : 0;
         window.getCamera().position.y -= window.getKeyboard().isKeyDown(GLFW.GLFW_KEY_S) ? applicationRuntime.getDeltaTime() * 0.01f : 0;
 
+        fps += applicationRuntime.getFps();
+        fps /= 2;
+
+        delta += applicationRuntime.getDeltaTime();
+        delta /= 2;
+
         if (timer.checkTime()){
-            fpsGraph.addPoint(applicationRuntime.getFps());
-            deltaGraph.addPoint(applicationRuntime.getDeltaTime());
+            fpsGraph.addPoint(fps);
+            deltaGraph.addPoint(delta);
+            fps = 0;
+            delta = 0;
             timer.resetTimer();
         }
         if (window.getKeyboard().isKeyDown(GLFW.GLFW_KEY_ESCAPE))

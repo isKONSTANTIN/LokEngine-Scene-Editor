@@ -42,7 +42,7 @@ public class AvailableComponentsListWindow extends GUIObject {
 
         subWindow.canvas.addObject(new GUIPanel(new Vector2i(),subWindow.canvas.getSize(), panelsColor, panelsBlur));
 
-        listCanvas = new GUIListCanvas(new Vector2i(),subWindow.canvas.getSize(),new Vector2i(size.x,25));
+        listCanvas = new GUIListCanvas(new Vector2i(),subWindow.canvas.getSize(),new Vector2i(size.x,25), 5);
 
         spriteComponent = new GUIButton(new Vector2i(),new Vector2i(),panelsColor,"Sprite Component");
         animationComponent = new GUIButton(new Vector2i(),new Vector2i(),panelsColor,"Animation Component");
