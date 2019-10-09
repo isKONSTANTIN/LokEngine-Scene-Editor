@@ -18,6 +18,8 @@ public class AvailableComponentsListWindow extends GUIObject {
 
     GUIButton spriteComponent;
     GUIButton animationComponent;
+    GUIButton rigidbodyBoxComponent;
+    GUIButton rigidbodyCircleComponent;
 
     public void setGUIButtonScript(GUIButtonScript userScript){
 
@@ -30,6 +32,8 @@ public class AvailableComponentsListWindow extends GUIObject {
 
         spriteComponent.setUnpressScript(script);
         animationComponent.setUnpressScript(script);
+        rigidbodyBoxComponent.setUnpressScript(script);
+        rigidbodyCircleComponent.setUnpressScript(script);
     }
 
     public AvailableComponentsListWindow(Vector2i position, Vector2i size) {
@@ -46,9 +50,13 @@ public class AvailableComponentsListWindow extends GUIObject {
 
         spriteComponent = new GUIButton(new Vector2i(),new Vector2i(),panelsColor,"Sprite Component");
         animationComponent = new GUIButton(new Vector2i(),new Vector2i(),panelsColor,"Animation Component");
+        rigidbodyBoxComponent = new GUIButton(new Vector2i(),new Vector2i(),panelsColor,"Rigidbody Component [box]");
+        rigidbodyCircleComponent = new GUIButton(new Vector2i(),new Vector2i(),panelsColor,"Rigidbody Component [circle]");
 
         listCanvas.addObject(spriteComponent);
         listCanvas.addObject(animationComponent);
+        listCanvas.addObject(rigidbodyBoxComponent);
+        listCanvas.addObject(rigidbodyCircleComponent);
 
         subWindow.canvas.addObject(listCanvas);
     }
