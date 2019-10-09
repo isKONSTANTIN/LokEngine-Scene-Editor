@@ -2,6 +2,7 @@ package LokEngineSceneEditor.GUI;
 
 import LokEngine.Components.AnimationComponent;
 import LokEngine.Components.Component;
+import LokEngine.Components.ComponentsTools.ShapeCreator;
 import LokEngine.Components.RigidbodyComponent;
 import LokEngine.Components.SpriteComponent;
 import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
@@ -15,6 +16,7 @@ import LokEngineSceneEditor.GUI.ComponentsWindow.AvailableComponentsListWindow;
 import LokEngineSceneEditor.Render.FrameParts.ShapesRenderFramePart;
 import LokEngineSceneEditor.SceneInteraction.CameraMovement;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
+import org.lwjgl.util.vector.Vector2f;
 
 import static LokEngineSceneEditor.GUI.MainStyle.*;
 import static LokEngineSceneEditor.GUI.SceneObjectsListPanel.freeTextDrawer;
@@ -51,6 +53,14 @@ public class SceneObjectComponentsPanel extends GUIObject {
                 }else if (guiButton1.text.getText().equals("Animation Component")){
                     if (object != null){
                         object.components.add(new AnimationComponent());
+                    }
+                }else if (guiButton1.text.getText().equals("Rigidbody Component [box]")){
+                    if (object != null){
+                        object.components.add(new RigidbodyComponent(ShapeCreator.CreateBoxShape(new Vector2f(100,100))));
+                    }
+                }else if (guiButton1.text.getText().equals("Rigidbody Component [circle]")){
+                    if (object != null){
+                        object.components.add(new RigidbodyComponent(ShapeCreator.CreateCircleShape(100)));
                     }
                 }
 
@@ -102,10 +112,6 @@ public class SceneObjectComponentsPanel extends GUIObject {
             }
 
             if (SceneObjectComponentsPanel.selectedComponent == null){
-                CameraMovement.accepted = true;
-            }else if (SceneObjectComponentsPanel.selectedComponent.getName().equals("Rigidbody Component")){
-                partsBuilder.addPart(new ShapesRenderFramePart(((RigidbodyComponent)SceneObjectComponentsPanel.selectedComponent).polygons,ObjectHighlight.getHighlightedObject()));
-
                 CameraMovement.accepted = true;
             }
 

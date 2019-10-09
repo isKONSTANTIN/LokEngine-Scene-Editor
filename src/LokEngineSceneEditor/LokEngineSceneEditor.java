@@ -13,6 +13,7 @@ import LokEngine.Tools.Utilities.Color;
 import LokEngine.Tools.Utilities.Vector2i;
 import LokEngineSceneEditor.GUI.ComponentsWindow.AnimationComponentWindow;
 import LokEngineSceneEditor.GUI.ComponentsWindow.AvailableComponentsListWindow;
+import LokEngineSceneEditor.GUI.ComponentsWindow.RigidbodyComponentWindow;
 import LokEngineSceneEditor.GUI.ComponentsWindow.SpriteComponentWindow;
 import LokEngineSceneEditor.GUI.SceneObjectComponentsPanel;
 import LokEngineSceneEditor.GUI.SceneObjectPropertiesPanel;
@@ -50,6 +51,8 @@ public class LokEngineSceneEditor extends Application {
         );
         window.getCanvas().addObject(new SpriteComponentWindow(new Vector2i(window.getResolution().x / 2 - 150, window.getResolution().y / 2 - 150), new Vector2i(300, 300)));
         window.getCanvas().addObject(new AnimationComponentWindow(new Vector2i(window.getResolution().x / 2 - 150, window.getResolution().y / 2 - 150), new Vector2i(300, 300)));
+        window.getCanvas().addObject(new RigidbodyComponentWindow(new Vector2i(window.getResolution().x / 2 - 150, window.getResolution().y / 2 - 150), new Vector2i(300, 300)));
+
 
         availableComponentsListWindow = new AvailableComponentsListWindow(new Vector2i(window.getResolution().x / 2 - 150, window.getResolution().y / 2 - 150), new Vector2i(300, 300));
         availableComponentsListWindow.hidden = true;
