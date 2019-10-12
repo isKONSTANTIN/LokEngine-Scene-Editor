@@ -30,12 +30,12 @@ public class RigidbodyComponentWindow extends GUIObject {
 
         subWindow.canvas.addObject(new GUIPanel(new Vector2i(), subWindow.canvas.getSize(), panelsColor, panelsBlur));
 
-        GUIButton applyButton = new GUIButton(new Vector2i(0,subWindow.canvas.getSize().y - 35),new Vector2i(size.x,35),panelsColor,panelsColor,
+        GUIButton applyButton = new GUIButton(new Vector2i(0,subWindow.canvas.getSize().y - 35),new Vector2i(size.x,35),pressedButtonColor, buttonColor,
                 new GUIText(new Vector2i(),"Apply",textColor,0,14),
                 new GUIPanel(new Vector2i(),new Vector2i())
         );
 
-        applyButton.setPressScript(guiButton -> {
+        applyButton.setUnpressScript(guiButton -> {
             SceneObjectComponentsPanel.selectedComponent = null;
         });
 

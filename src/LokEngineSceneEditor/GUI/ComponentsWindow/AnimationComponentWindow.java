@@ -38,20 +38,20 @@ public class AnimationComponentWindow extends GUIObject {
 
         subWindow.canvas.addObject(new GUIPanel(new Vector2i(), subWindow.canvas.getSize(), panelsColor, panelsBlur));
 
-        GUIButton applyButton = new GUIButton(new Vector2i(0, size.y - 50), new Vector2i(size.x / 2 - 5, 35), panelsColor, panelsColor,
+        GUIButton applyButton = new GUIButton(new Vector2i(0, size.y - 50), new Vector2i(size.x / 2 - 5, 35), pressedButtonColor, buttonColor,
                 new GUIText(new Vector2i(), "Apply", textColor, 0, 14),
                 new GUIPanel(new Vector2i(), new Vector2i())
         );
 
-        applyButton.setPressScript(guiButton -> {
+        applyButton.setUnpressScript(guiButton -> {
             SceneObjectComponentsPanel.selectedComponent = null;
         });
 
-        GUIButton submitButton = new GUIButton(new Vector2i(size.x / 2 + 5, size.y - 50), new Vector2i(size.x / 2 - 5, 35), panelsColor, panelsColor,
+        GUIButton submitButton = new GUIButton(new Vector2i(size.x / 2 + 5, size.y - 50), new Vector2i(size.x / 2 - 5, 35), pressedButtonColor, buttonColor,
                 new GUIText(new Vector2i(), "Load", textColor, 0, 14),
                 new GUIPanel(new Vector2i(), new Vector2i()));
 
-        submitButton.setPressScript(guiButton -> {
+        submitButton.setUnpressScript(guiButton -> {
             if (SceneObjectComponentsPanel.selectedComponent != null) {
                 AnimationComponent component = (AnimationComponent) SceneObjectComponentsPanel.selectedComponent;
                 try {

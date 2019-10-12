@@ -3,6 +3,7 @@ package LokEngineSceneEditor.GUI.ComponentsWindow;
 import LokEngine.Components.SpriteComponent;
 import LokEngine.GUI.AdditionalObjects.GUIButtonScript;
 import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
+import LokEngine.GUI.AdditionalObjects.GUITextFieldScript;
 import LokEngine.GUI.Canvases.GUIListCanvas;
 import LokEngine.GUI.GUIObjects.*;
 import LokEngine.Render.Frame.PartsBuilder;
@@ -20,8 +21,6 @@ public class SpriteComponentWindow extends GUIObject {
 
     GUIListCanvas list;
 
-    boolean[] lastActives = new boolean[2];
-
     public SpriteComponentWindow(Vector2i position, Vector2i size) {
         super(position, size);
 
@@ -32,12 +31,12 @@ public class SpriteComponentWindow extends GUIObject {
 
         subWindow.canvas.addObject(new GUIPanel(new Vector2i(),subWindow.canvas.getSize(), panelsColor, panelsBlur));
 
-        GUIButton applyButton = new GUIButton(new Vector2i(0,subWindow.canvas.getSize().y - 35),new Vector2i(size.x,35),panelsColor,panelsColor,
+        GUIButton applyButton = new GUIButton(new Vector2i(0,subWindow.canvas.getSize().y - 35),new Vector2i(size.x,35), pressedButtonColor, buttonColor,
                 new GUIText(new Vector2i(),"Apply",textColor,0,14),
                 new GUIPanel(new Vector2i(),new Vector2i())
         );
 
-        applyButton.setPressScript(guiButton -> {
+        applyButton.setUnpressScript(guiButton -> {
             SceneObjectComponentsPanel.selectedComponent = null;
         });
 
@@ -48,6 +47,45 @@ public class SpriteComponentWindow extends GUIObject {
         list.addObject(new GUIText(new Vector2i(), "Sprite size:"));
         list.addObject(new GUITextField(new Vector2i(),new Vector2i(),"",textColor,0,14));
 
+        GUITextField pathField = (GUITextField)list.getObject(1);
+        GUITextField sizeField = (GUITextField)list.getObject(4);
+
+        pathField.setStatusChangedScript(guiTextField -> {
+            if (SceneObjectComponentsPanel.selectedComponent != null && SceneObjectComponentsPanel.selectedComponent.getName().equals("Sprite Component")) {
+                SpriteComponent component = (SpriteComponent) SceneObjectComponentsPanel.selectedComponent;
+                try {
+                    component.setSprite(guiTextField.getText());
+                } catch (Exception e) {}
+            }
+        });
+
+        pathField.setInactiveScript(guiTextField -> {
+            if (SceneObjectComponentsPanel.selectedComponent != null && SceneObjectComponentsPanel.selectedComponent.getName().equals("Sprite Component")) {
+                SpriteComponent component = (SpriteComponent) SceneObjectComponentsPanel.selectedComponent;
+                if (!guiTextField.getActive()) {
+                    guiTextField.updateText(component.getSprite().texture.path);
+                }
+            }
+        });
+
+        sizeField.setStatusChangedScript(guiTextField -> {
+            if (SceneObjectComponentsPanel.selectedComponent != null && SceneObjectComponentsPanel.selectedComponent.getName().equals("Sprite Component")) {
+                SpriteComponent component = (SpriteComponent) SceneObjectComponentsPanel.selectedComponent;
+                try {
+                    component.getSprite().size = Float.valueOf(guiTextField.getText());
+                } catch (Exception e) {}
+            }
+        });
+
+        sizeField.setInactiveScript(guiTextField -> {
+            if (SceneObjectComponentsPanel.selectedComponent != null && SceneObjectComponentsPanel.selectedComponent.getName().equals("Sprite Component")) {
+                SpriteComponent component = (SpriteComponent) SceneObjectComponentsPanel.selectedComponent;
+                if (!guiTextField.getActive()) {
+                    guiTextField.updateText(String.valueOf(component.getSprite().size));
+                }
+            }
+        });
+
         subWindow.canvas.addObject(applyButton);
         subWindow.canvas.addObject(list);
     }
@@ -56,30 +94,6 @@ public class SpriteComponentWindow extends GUIObject {
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties){
         super.update(partsBuilder,parentProperties);
         if (SceneObjectComponentsPanel.selectedComponent != null && SceneObjectComponentsPanel.selectedComponent.getName().equals("Sprite Component")){
-
-            SpriteComponent component = (SpriteComponent)SceneObjectComponentsPanel.selectedComponent;
-
-            GUITextField pathField = (GUITextField)list.getObject(1);
-            GUITextField sizeField = (GUITextField)list.getObject(4);
-
-            if (!pathField.getActive() && lastActives[0]){
-                try {
-                    component.setSprite(pathField.getText());
-                }catch (Exception e){}
-            }else if (!pathField.getActive()){
-                pathField.updateText(component.getSprite().texture.path);
-            }
-            lastActives[0] = pathField.getActive();
-
-            if (!sizeField.getActive() && lastActives[1]){
-                try {
-                    component.getSprite().size = Float.valueOf(sizeField.getText());
-                }catch (Exception e){}
-            }else if (!sizeField.getActive()){
-                sizeField.updateText(String.valueOf(component.getSprite().size));
-            }
-            lastActives[1] = sizeField.getActive();
-
             subWindow.update(partsBuilder, parentProperties);
             CameraMovement.accepted = false;
         }
