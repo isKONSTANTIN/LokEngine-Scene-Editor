@@ -55,9 +55,9 @@ public class RigidbodyComponentWindow extends GUIObject {
             if (SceneObjectComponentsPanel.selectedComponent != null){
                 RigidbodyComponent rigidbodyComponent = (RigidbodyComponent)SceneObjectComponentsPanel.selectedComponent;
                 CameraMovement.accepted = false;
-                if (rigidbodyComponent.polygons.shape.m_type == ShapeType.CIRCLE){
+                if (rigidbodyComponent.polygons.getClass().getName().equals(CircleShape.class.getName())){
                     textDrawer.draw("Circle\n  Radius: " + ((CircleShape)rigidbodyComponent.polygons).radius,new Vector2i(0,0));
-                }else if (rigidbodyComponent.polygons.shape.m_type == ShapeType.POLYGON) {
+                }else if (rigidbodyComponent.polygons.getClass().getName().equals(BoxShape.class.getName())) {
                     Vector2f size = ((BoxShape)rigidbodyComponent.polygons).collideSize;
                     textDrawer.draw("Box:\n  X: " + size.x + "\n  Y: " + size.y,new Vector2i(0,0));
                 }
