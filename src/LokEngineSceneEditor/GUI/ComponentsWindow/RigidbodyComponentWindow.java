@@ -1,5 +1,7 @@
 package LokEngineSceneEditor.GUI.ComponentsWindow;
 
+import LokEngine.Components.AdditionalObjects.Rigidbody.Shapes.BoxShape;
+import LokEngine.Components.AdditionalObjects.Rigidbody.Shapes.CircleShape;
 import LokEngine.Components.RigidbodyComponent;
 import LokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import LokEngine.GUI.Canvases.GUICanvas;
@@ -10,6 +12,8 @@ import LokEngineSceneEditor.GUI.SceneObjectComponentsPanel;
 import LokEngineSceneEditor.Render.FrameParts.ShapesRenderFramePart;
 import LokEngineSceneEditor.SceneInteraction.CameraMovement;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
+import org.jbox2d.collision.shapes.ShapeType;
+import org.lwjgl.util.vector.Vector2f;
 
 import static LokEngineSceneEditor.GUI.MainStyle.*;
 
@@ -17,8 +21,7 @@ public class RigidbodyComponentWindow extends GUIObject {
 
     GUISubWindow subWindow;
 
-    GUICanvas boxShapeCanvas;
-    GUICanvas circleShapeCanvas;
+    GUIFreeTextDrawer textDrawer;
 
     public RigidbodyComponentWindow(Vector2i position, Vector2i size) {
         super(position, size);
@@ -39,6 +42,9 @@ public class RigidbodyComponentWindow extends GUIObject {
             SceneObjectComponentsPanel.selectedComponent = null;
         });
 
+        textDrawer = new GUIFreeTextDrawer("",0,20,true);
+
+        subWindow.canvas.addObject(textDrawer);
         subWindow.canvas.addObject(applyButton);
     }
 
@@ -47,7 +53,14 @@ public class RigidbodyComponentWindow extends GUIObject {
         if (SceneObjectComponentsPanel.selectedComponent != null && SceneObjectComponentsPanel.selectedComponent.getName().equals("Rigidbody Component")){
             subWindow.update(partsBuilder, parentProperties);
             if (SceneObjectComponentsPanel.selectedComponent != null){
+                RigidbodyComponent rigidbodyComponent = (RigidbodyComponent)SceneObjectComponentsPanel.selectedComponent;
                 CameraMovement.accepted = false;
+                if (rigidbodyComponent.polygons.shape.m_type == ShapeType.CIRCLE){
+                    textDrawer.draw("Circle\n  Radius: " + ((CircleShape)rigidbodyComponent.polygons).radius,new Vector2i(0,0));
+                }else if (rigidbodyComponent.polygons.shape.m_type == ShapeType.POLYGON) {
+                    Vector2f size = ((BoxShape)rigidbodyComponent.polygons).collideSize;
+                    textDrawer.draw("Box:\n  X: " + size.x + "\n  Y: " + size.y,new Vector2i(0,0));
+                }
                 parentProperties.window.getFrameBuilder().getScenePartsBuilder().addPart(new ShapesRenderFramePart(((RigidbodyComponent)SceneObjectComponentsPanel.selectedComponent).polygons, ObjectHighlight.getHighlightedObject()));
             }
        }
