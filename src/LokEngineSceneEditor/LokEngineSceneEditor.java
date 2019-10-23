@@ -23,6 +23,8 @@ import LokEngineSceneEditor.RuntimeTest.MainTestApplication;
 import LokEngineSceneEditor.SceneInteraction.CameraMovement;
 import LokEngineSceneEditor.SceneInteraction.ObjectHighlight;
 import org.lwjgl.glfw.GLFW;
+import sun.awt.X11.XKeyboardFocusManagerPeer;
+
 import java.io.IOException;
 
 public class LokEngineSceneEditor extends Application {
@@ -30,6 +32,10 @@ public class LokEngineSceneEditor extends Application {
     public static AvailableComponentsListWindow availableComponentsListWindow;
     public static Shader GUISceneIntegrator;
 
+    boolean lastPressedLeftShiftButton;
+    boolean lastPressedDeleteButton;
+    boolean lastPressedCopyButtons;
+    boolean lastPressedF1Button;
     MainTestApplication testApplication;
 
     @Override
@@ -77,21 +83,36 @@ public class LokEngineSceneEditor extends Application {
     public void Update() {
         ObjectHighlight.update();
 
-        if (window.getKeyboard().isKeyDown(GLFW.GLFW_KEY_LEFT_SHIFT) && ObjectHighlight.getHighlightedObject() != null) {
+        LokEngine.Tools.Input.Keyboard keyboard = window.getKeyboard();
+        boolean leftShiftButton = keyboard.isKeyDown(GLFW.GLFW_KEY_LEFT_SHIFT);
+        boolean deleteButton = keyboard.isKeyDown(GLFW.GLFW_KEY_DELETE);
+        boolean CButton = keyboard.isKeyDown(GLFW.GLFW_KEY_C);
+        boolean controlButton = keyboard.isKeyDown(GLFW.GLFW_KEY_LEFT_CONTROL);
+        boolean F1Button = keyboard.isKeyDown(GLFW.GLFW_KEY_F1);
+
+        if (leftShiftButton && ObjectHighlight.getHighlightedObject() != null) {
             ObjectHighlight.moveObjectFromCursor();
         } else {
             CameraMovement.update();
         }
 
-        if (window.getKeyboard().isKeyDown(GLFW.GLFW_KEY_DELETE) && ObjectHighlight.getHighlightedObject() != null) {
+        if (!lastPressedDeleteButton && deleteButton && ObjectHighlight.getHighlightedObject() != null) {
             ObjectHighlight.deleteObjectFromScene();
         }
+        lastPressedDeleteButton = deleteButton;
 
-        if (window.getKeyboard().isKeyDown(GLFW.GLFW_KEY_F1)) {
+        if (!lastPressedCopyButtons && CButton && controlButton) {
+            if (ObjectHighlight.getHighlightedObject() != null)
+                ObjectHighlight.copyObject();
+        }
+        lastPressedCopyButtons = CButton && controlButton;
+
+        if (!lastPressedF1Button && F1Button) {
             if (testApplication == null || !testApplication.threadWin.isAlive()){
                 testApplication = new MainTestApplication(scene.save());
             }
         }
+        lastPressedF1Button = F1Button;
 
         window.getFrameBuilder().getBuilderProperties().useShader(GUISceneIntegrator);
         MatrixCreator.PutMatrixInShader(GUISceneIntegrator, "View", MatrixCreator.CreateViewMatrix(window.getCamera()));

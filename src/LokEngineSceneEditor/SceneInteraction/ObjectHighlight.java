@@ -114,6 +114,11 @@ public class ObjectHighlight {
         }
     }
 
+    public static void copyObject(){
+        SceneObject newObject = (SceneObject)new SceneObject().load(object.save());
+        highlight(newObject, object.scene.addObject(newObject));
+    }
+
     public static void moveObjectFromCursor(){
         if (object != null && CameraMovement.accepted){
             object.position = window.getCamera().screenPointToScene(window.getMouse().getMousePosition());
