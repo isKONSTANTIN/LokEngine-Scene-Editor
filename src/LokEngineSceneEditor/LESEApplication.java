@@ -3,7 +3,9 @@ package LokEngineSceneEditor;
 import LokEngineSceneEditor.UI.Basic.Notification.NotificationTypes.NotificationError;
 import LokEngineSceneEditor.UI.Composite.SceneEditor;
 import ru.lokinCompany.lokEngine.Applications.ApplicationDefault;
+import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.FileWorker;
+import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
@@ -23,6 +25,7 @@ public class LESEApplication extends ApplicationDefault {
                 FileWorker fileWorker = new FileWorker(path);
                 fileWorker.openRead();
                 scene.load(fileWorker.read());
+
                 fileWorker.close();
             }
         } catch (Exception e) {
@@ -45,7 +48,7 @@ public class LESEApplication extends ApplicationDefault {
 
     @Override
     protected void initEvent(){
-        window.getFrameBuilder().backgroundColor = Colors.engineBackgroundColor();
+        window.getFrameBuilder().backgroundColor = new Color(0.15F, 0.15F, 0.15F, 1.0F);
         window.setCloseEvent((window1, objects) -> close());
 
         sceneEditor = new SceneEditor();
