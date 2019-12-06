@@ -1,14 +1,14 @@
-package LokEngineSceneEditor.UI.Basic;
+package LokEngineSceneEditor.UI.Composite;
 
 import LokEngineSceneEditor.LESEApplication;
+import LokEngineSceneEditor.UI.Basic.Notification.NotificationListCanvas;
+import LokEngineSceneEditor.UI.Basic.ObjectsListCanvas;
+import LokEngineSceneEditor.UI.Basic.SceneEditorMenu;
 import ru.lokinCompany.lokEngine.Applications.ApplicationDefault;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUILocationAlgorithm;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPosition;
 import ru.lokinCompany.lokEngine.GUI.Canvases.GUICanvas;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIObject;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
-import ru.lokinCompany.lokEngine.Render.Window.Window;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 
 public class SceneEditor extends GUICanvas {
@@ -16,7 +16,7 @@ public class SceneEditor extends GUICanvas {
     ApplicationDefault application;
     GUICanvas mainCanvas;
     ObjectsListCanvas objectsList;
-    public ErrorsListCanvas errorsListCanvas;
+    public NotificationListCanvas notificationListCanvas;
     SceneEditorMenu menu;
 
     public SceneEditor() {
@@ -32,11 +32,11 @@ public class SceneEditor extends GUICanvas {
 
         menu = new SceneEditorMenu(new Vector2i(),12, application.window);
 
-        errorsListCanvas = new ErrorsListCanvas(new Vector2i(), new Vector2i(200, application.window.getResolution().y));
-        errorsListCanvas.setSize(guiObject -> new Vector2i(200, application.window.getResolution().y));
+        notificationListCanvas = new NotificationListCanvas(new Vector2i(), new Vector2i(200, application.window.getResolution().y));
+        notificationListCanvas.setSize(guiObject -> new Vector2i(200, application.window.getResolution().y));
 
         mainCanvas.addObject(objectsList);
-        mainCanvas.addObject(errorsListCanvas, GUIPosition.TopRight);
+        mainCanvas.addObject(notificationListCanvas, GUIPosition.TopRight);
 
         this.addObject(menu);
     }
