@@ -33,7 +33,7 @@ public class ObjectsListCanvas extends GUICanvas {
         panel = new GUIPanel(new Vector2i(),new Vector2i(), new Color(0.25f,0.25f, 0.25f,0.6f));
         panel.setSize(guiObject -> this.getSize());
 
-        scrollCanvas = new GUIScrollCanvas(new Vector2i(0,10),new Vector2i(),null,new Vector2i());
+        scrollCanvas = new GUIScrollCanvas(new Vector2i(0,10),new Vector2i(),new Vector2i(),null);
         scrollCanvas.setSize(guiObject -> new Vector2i(this.getSize().x,this.getSize().y - guiObject.getPosition().y));
 
         textDrawer = new GUIFreeTextDrawer();
@@ -52,18 +52,20 @@ public class ObjectsListCanvas extends GUICanvas {
         int objectsCount = scene.getCountObjects();
 
         textObjectsCount.updateText("Объектов: " + objectsCount);
-
-        for (int i = 0; i < objectsCount; i++){
+        int windowY = parentProperties.window.getResolution().y;
+        for (int i = 0; i < objectsCount; i++) {
             SceneObject sceneObject = scene.getObjectByID(i);
-            Vector2i textPos = new Vector2i(0,textGap.y * (i+1));
-            boolean selected = parentProperties.window.getMouse().inField(new Vector2i(scrollCanvas.properties.globalPosition.x + textPos.x, scrollCanvas.properties.globalPosition.y + textPos.y), new Vector2i(getSize().x,textGap.y));
+            Vector2i textPos = new Vector2i(0, textGap.y * (i + 1));
+            Vector2i globalPos = new Vector2i(scrollCanvas.properties.globalPosition.x + textPos.x, scrollCanvas.properties.globalPosition.y + textPos.y);
+            if (globalPos.y > 0 && globalPos.y < windowY) {
+                boolean selected = parentProperties.window.getMouse().inField(globalPos, new Vector2i(getSize().x, textGap.y));
 
-            if (selected && parentProperties.window.getMouse().getPressedStatus()){
-                HighlightedObject.highlight(sceneObject,i);
+                if (selected && parentProperties.window.getMouse().getPressedStatus()) {
+                    HighlightedObject.highlight(sceneObject, i);
+                }
+
+                textDrawer.draw(sceneObject.name + " [" + i + "]", textPos, selected || HighlightedObject.getHighlightedObjectID() == i ? Colors.engineBrightMainColor() : Colors.engineMainColor());
             }
-
-            textDrawer.draw(sceneObject.name + " [" + i + "]", textPos, selected || HighlightedObject.getHighlightedObjectID() == i ? Colors.engineBrightMainColor() : Colors.engineMainColor());
         }
-
     }
 }
