@@ -1,6 +1,7 @@
 package LokEngineSceneEditor;
 
 import LokEngineSceneEditor.UI.Basic.Notification.NotificationTypes.NotificationError;
+import LokEngineSceneEditor.UI.Basic.Notification.NotificationTypes.NotificationSuccess;
 import LokEngineSceneEditor.UI.Composite.SceneEditor;
 import ru.lokinCompany.lokEngine.Applications.ApplicationDefault;
 import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
@@ -25,8 +26,9 @@ public class LESEApplication extends ApplicationDefault {
                 FileWorker fileWorker = new FileWorker(path);
                 fileWorker.openRead();
                 scene.load(fileWorker.read());
-
                 fileWorker.close();
+
+                sceneEditor.notificationListCanvas.addNotification(new NotificationSuccess("Загрузка успешна!\nОбъектов загружено: " + scene.getCountObjects()));
             }
         } catch (Exception e) {
             sceneEditor.notificationListCanvas.addNotification(new NotificationError("Загрузить сцену не удалось!"));
@@ -40,6 +42,8 @@ public class LESEApplication extends ApplicationDefault {
             fileWorker.openWrite();
             fileWorker.write(scene.save());
             fileWorker.close();
+
+            sceneEditor.notificationListCanvas.addNotification(new NotificationSuccess("Сохранение успешно!"));
         } catch (Exception e) {
             sceneEditor.notificationListCanvas.addNotification(new NotificationError("Сохранить сцену не удалось!"));
             e.printStackTrace();
