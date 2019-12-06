@@ -46,6 +46,7 @@ public class LESEApplication extends ApplicationDefault {
     @Override
     protected void initEvent(){
         window.getFrameBuilder().backgroundColor = Colors.engineBackgroundColor();
+        window.setCloseEvent((window1, objects) -> close());
 
         sceneEditor = new SceneEditor();
         window.getCanvas().addObject(sceneEditor);
