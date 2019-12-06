@@ -27,7 +27,7 @@ public class SceneEditor extends GUICanvas {
         mainCanvas.setSize(guiObject -> new Vector2i(this.application.window.getResolution().x,this.application.window.getResolution().y - 12));
         setSize(guiObject -> this.application.window.getResolution());
 
-        objectsList = new ObjectsListCanvas(new Vector2i(), new Vector2i(100,0), application.scene);
+        objectsList = new ObjectsListCanvas(new Vector2i(), new Vector2i(150,0), application.scene);
         objectsList.setSize(guiObject -> new Vector2i(guiObject.getSize().x, this.application.window.getResolution().y));
 
         menu = new SceneEditorMenu(new Vector2i(),12, application.window);
