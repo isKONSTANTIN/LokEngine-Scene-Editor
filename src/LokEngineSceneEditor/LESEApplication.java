@@ -17,6 +17,7 @@ public class LESEApplication extends ApplicationDefault {
     public static LESEApplication getInstance(){ return instance; }
 
     public void loadScene(String path){
+        scene.removeAll();
         try {
             if (FileWorker.fileExists(path)) {
                 FileWorker fileWorker = new FileWorker(path);
