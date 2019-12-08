@@ -1,7 +1,9 @@
 package LokEngineSceneEditor.UI.Composite;
 
 import LokEngineSceneEditor.LESEApplication;
+import LokEngineSceneEditor.SceneIntegration.HighlightedObject;
 import LokEngineSceneEditor.UI.Basic.Notification.NotificationListCanvas;
+import LokEngineSceneEditor.UI.Basic.ObjectProperties;
 import LokEngineSceneEditor.UI.Basic.ObjectsListCanvas;
 import LokEngineSceneEditor.UI.Basic.SceneEditorMenu;
 import ru.lokinCompany.lokEngine.Applications.ApplicationDefault;
@@ -16,6 +18,7 @@ public class SceneEditor extends GUICanvas {
     ApplicationDefault application;
     GUICanvas mainCanvas;
     ObjectsListCanvas objectsList;
+    ObjectProperties objectProperties;
     public NotificationListCanvas notificationListCanvas;
     SceneEditorMenu menu;
 
@@ -32,10 +35,14 @@ public class SceneEditor extends GUICanvas {
 
         menu = new SceneEditorMenu(new Vector2i(),12, application.window);
 
+        objectProperties = new ObjectProperties(new Vector2i(),new Vector2i(150,0));
+        objectProperties.setSize(guiObject -> new Vector2i(guiObject.getSize().x, this.application.window.getResolution().y));
+
         notificationListCanvas = new NotificationListCanvas(new Vector2i(), new Vector2i(200, application.window.getResolution().y));
         notificationListCanvas.setSize(guiObject -> new Vector2i(200, application.window.getResolution().y));
 
         mainCanvas.addObject(objectsList);
+        mainCanvas.addObject(objectProperties, GUIPosition.TopRight);
         mainCanvas.addObject(notificationListCanvas, GUIPosition.TopRight);
 
         this.addObject(menu);
@@ -44,6 +51,8 @@ public class SceneEditor extends GUICanvas {
     @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
+
+        objectProperties.hidden = HighlightedObject.getHighlightedObject() == null;
 
         mainCanvas.update(partsBuilder, properties);
     }
