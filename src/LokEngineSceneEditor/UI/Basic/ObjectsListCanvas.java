@@ -7,10 +7,7 @@ import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPosition;
 import ru.lokinCompany.lokEngine.GUI.Canvases.GUICanvas;
 import ru.lokinCompany.lokEngine.GUI.Canvases.GUIScrollCanvas;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIFreeTextDrawer;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIObject;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIPanel;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIText;
+import ru.lokinCompany.lokEngine.GUI.GUIObjects.*;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.SceneEnvironment.Scene;
 import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
@@ -22,6 +19,7 @@ public class ObjectsListCanvas extends GUICanvas {
     GUIScrollCanvas scrollCanvas;
     GUIFreeTextDrawer textDrawer;
     GUIText textObjectsCount;
+    GUIButton buttonAddObject;
     GUIPanel panel;
     Scene scene;
     Vector2i textGap = new Vector2i(0,15);
@@ -37,11 +35,15 @@ public class ObjectsListCanvas extends GUICanvas {
         scrollCanvas.setSize(guiObject -> new Vector2i(this.getSize().x,this.getSize().y - guiObject.getPosition().y));
 
         textDrawer = new GUIFreeTextDrawer();
-        textObjectsCount = new GUIText(new Vector2i(),"Объектов: 0", Colors.engineMainColor(),0,11);
+        textObjectsCount = new GUIText(new Vector2i(),"0 объектов", Colors.white(),0,11);
         scrollCanvas.addObject(textDrawer);
 
+        buttonAddObject = new GUIButton(new Vector2i(),new Vector2i(20,20),new Color(0.1f,0.1f,0.1f,0.7f),new GUIText(new Vector2i(),"+",Colors.white(),0,10));
+        buttonAddObject.setUnpressScript(guiButton -> scene.addObject(new SceneObject()));
+
         this.addObject(panel);
-        this.addObject(textObjectsCount, GUIPosition.TopCenter);
+        this.addObject(buttonAddObject);
+        this.addObject(textObjectsCount, GUIPosition.TopRight);
         this.addObject(scrollCanvas);
     }
 
@@ -51,7 +53,7 @@ public class ObjectsListCanvas extends GUICanvas {
 
         int objectsCount = scene.getCountObjects();
 
-        textObjectsCount.updateText("Объектов: " + objectsCount);
+        textObjectsCount.updateText(objectsCount + " объектов");
         int windowY = parentProperties.window.getResolution().y;
         for (int i = 0; i < objectsCount; i++) {
             SceneObject sceneObject = scene.getObjectByID(i);
