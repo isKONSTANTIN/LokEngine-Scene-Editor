@@ -1,10 +1,6 @@
-package LokEngineSceneEditor.UI.Basic;
+package lokenginesceneeditor.ui.basic;
 
-import LokEngineSceneEditor.LESEApplication;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIButtonScript;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUILocationAlgorithm;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPosition;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPositionAlgorithms;
+import lokenginesceneeditor.LESEApplication;
 import ru.lokinCompany.lokEngine.GUI.Canvases.GUIListCanvas;
 import ru.lokinCompany.lokEngine.GUI.GUIObjects.*;
 import ru.lokinCompany.lokEngine.Render.Window.Window;

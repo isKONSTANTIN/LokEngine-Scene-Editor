@@ -1,14 +1,12 @@
-package LokEngineSceneEditor.UI.Basic;
+package lokenginesceneeditor.ui.basic;
 
-import LokEngineSceneEditor.SceneIntegration.HighlightedObject;
-import LokEngineSceneEditor.UI.Colors;
+import lokenginesceneeditor.sceneintegration.HighlightedObject;
+import lokenginesceneeditor.ui.Colors;
+import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUILocationAlgorithm;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import ru.lokinCompany.lokEngine.GUI.Canvases.GUICanvas;
-import ru.lokinCompany.lokEngine.GUI.Canvases.GUIListCanvas;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIPanel;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUISpace;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIText;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUITextField;
+import ru.lokinCompany.lokEngine.GUI.Canvases.GUIFlexibleListCanvas;
+import ru.lokinCompany.lokEngine.GUI.GUIObjects.*;
 import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
 import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
@@ -17,8 +15,8 @@ import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
 public class ObjectProperties extends GUICanvas {
     GUIPanel panel;
 
-    GUIListCanvas textFields;
-    GUIListCanvas texts;
+    GUIFlexibleListCanvas textFields;
+    GUIFlexibleListCanvas texts;
 
     GUITextField nameField;
     SceneObject sceneObject;
@@ -31,16 +29,28 @@ public class ObjectProperties extends GUICanvas {
 
         nameField = new GUITextField(new Vector2i(), new Vector2i(size.x, 20),"","", Colors.white(),0,14,true, false);
 
-        texts = new GUIListCanvas(new Vector2i(0,30), new Vector2i(75,0), new Vector2i(75,14));
-        texts.setSize(guiObject -> new Vector2i(guiObject.getSize().x, this.getSize().y));
+        texts = new GUIFlexibleListCanvas(new Vector2i(0,30), new Vector2i(75,300));
+        textFields = new GUIFlexibleListCanvas(new Vector2i(18, 30), new Vector2i());
+        textFields.setSize(guiObject -> new Vector2i(this.size.x - 18,300));
 
-        textFields = new GUIListCanvas(new Vector2i(18, 30), new Vector2i(size.x - 18,size.y), new Vector2i(size.x - 18,14));
-        textFields.setSize(guiObject -> new Vector2i(guiObject.getSize().x, this.getSize().y));
+        GUILocationAlgorithm fieldSize = guiObject -> new Vector2i(textFields.getSize().x, 14);
+        Color fieldBackground = new Color(0,0,0,0);
 
-        GUITextField XField = new GUITextField(new Vector2i(),new Vector2i(),"",Colors.white(),0,14);
-        GUITextField YField = new GUITextField(new Vector2i(),new Vector2i(),"",Colors.white(),0,14);
-        GUITextField RField = new GUITextField(new Vector2i(),new Vector2i(),"",Colors.white(),0,14);
-        GUITextField RPField = new GUITextField(new Vector2i(),new Vector2i(),"",Colors.white(),0,14);
+        GUITextField XField = new GUITextField(new Vector2i(),new Vector2i(),"", Colors.white(),0,14);
+        XField.setSize(fieldSize);
+        XField.setBackgroundColor(fieldBackground);
+
+        GUITextField YField = new GUITextField(new Vector2i(),new Vector2i(),"", Colors.white(),0,14);
+        YField.setSize(fieldSize);
+        YField.setBackgroundColor(fieldBackground);
+
+        GUITextField RField = new GUITextField(new Vector2i(),new Vector2i(),"", Colors.white(),0,14);
+        RField.setSize(fieldSize);
+        RField.setBackgroundColor(fieldBackground);
+
+        GUITextField RPField = new GUITextField(new Vector2i(),new Vector2i(),"", Colors.white(),0,14);
+        RPField.setSize(fieldSize);
+        RPField.setBackgroundColor(fieldBackground);
 
         XField.setStatusChangedScript(guiTextField -> {
             if (sceneObject != null)
@@ -114,16 +124,16 @@ public class ObjectProperties extends GUICanvas {
 
         textFields.addObject(XField);
         textFields.addObject(YField);
-        textFields.addObject(new GUISpace());
+        textFields.addObject(new GUISpace(new Vector2i(), new Vector2i(0,4)));
         textFields.addObject(RField);
-        textFields.addObject(new GUISpace());
+        textFields.addObject(new GUISpace(new Vector2i(), new Vector2i(0,4)));
         textFields.addObject(RPField);
 
         texts.addObject(new GUIText(new Vector2i(),"X:", Colors.white(),0,14));
         texts.addObject(new GUIText(new Vector2i(),"Y:", Colors.white(),0,14));
-        texts.addObject(new GUISpace());
+        texts.addObject(new GUISpace(new Vector2i(), new Vector2i(0,4)));
         texts.addObject(new GUIText(new Vector2i(),"R:", Colors.white(),0,14));
-        texts.addObject(new GUISpace());
+        texts.addObject(new GUISpace(new Vector2i(), new Vector2i(0,4)));
         texts.addObject(new GUIText(new Vector2i(),"RP:", Colors.white(),0,10));
 
         this.addObject(panel);

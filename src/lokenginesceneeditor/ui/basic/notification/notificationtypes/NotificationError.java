@@ -1,7 +1,6 @@
-package LokEngineSceneEditor.UI.Basic.Notification.NotificationTypes;
+package lokenginesceneeditor.ui.basic.notification.notificationtypes;
 
-import LokEngineSceneEditor.UI.Colors;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
+import lokenginesceneeditor.ui.Colors;
 
 public class NotificationError extends NotificationObject {
     public NotificationError(String text) {

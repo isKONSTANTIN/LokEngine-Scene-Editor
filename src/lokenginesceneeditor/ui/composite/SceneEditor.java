@@ -1,11 +1,11 @@
-package LokEngineSceneEditor.UI.Composite;
+package lokenginesceneeditor.ui.composite;
 
-import LokEngineSceneEditor.LESEApplication;
-import LokEngineSceneEditor.SceneIntegration.HighlightedObject;
-import LokEngineSceneEditor.UI.Basic.Notification.NotificationListCanvas;
-import LokEngineSceneEditor.UI.Basic.ObjectProperties;
-import LokEngineSceneEditor.UI.Basic.ObjectsListCanvas;
-import LokEngineSceneEditor.UI.Basic.SceneEditorMenu;
+import lokenginesceneeditor.LESEApplication;
+import lokenginesceneeditor.sceneintegration.HighlightedObject;
+import lokenginesceneeditor.ui.basic.notification.NotificationListCanvas;
+import lokenginesceneeditor.ui.basic.ObjectProperties;
+import lokenginesceneeditor.ui.basic.ObjectsListCanvas;
+import lokenginesceneeditor.ui.basic.SceneEditorMenu;
 import ru.lokinCompany.lokEngine.Applications.ApplicationDefault;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPosition;

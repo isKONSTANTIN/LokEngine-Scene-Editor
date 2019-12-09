@@ -1,4 +1,4 @@
-package LokEngineSceneEditor.UI;
+package lokenginesceneeditor.ui;
 
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.ColorRGB;

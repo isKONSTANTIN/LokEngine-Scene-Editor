@@ -1,4 +1,4 @@
-package LokEngineSceneEditor.SceneIntegration;
+package lokenginesceneeditor.sceneintegration;
 
 import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
 

@@ -1,16 +1,12 @@
-package LokEngineSceneEditor;
+package lokenginesceneeditor;
 
-import LokEngineSceneEditor.UI.Basic.Notification.NotificationTypes.NotificationError;
-import LokEngineSceneEditor.UI.Basic.Notification.NotificationTypes.NotificationSuccess;
-import LokEngineSceneEditor.UI.Composite.SceneEditor;
+import lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationError;
+import lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationSuccess;
+import lokenginesceneeditor.ui.composite.SceneEditor;
 import ru.lokinCompany.lokEngine.Applications.ApplicationDefault;
-import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
 import ru.lokinCompany.lokEngine.Tools.SaveWorker.FileWorker;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
 import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
-
-import java.io.IOException;
 
 public class LESEApplication extends ApplicationDefault {
 

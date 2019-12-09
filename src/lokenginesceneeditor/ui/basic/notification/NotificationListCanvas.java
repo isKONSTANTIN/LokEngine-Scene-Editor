@@ -1,6 +1,6 @@
-package LokEngineSceneEditor.UI.Basic.Notification;
+package lokenginesceneeditor.ui.basic.notification;
 
-import LokEngineSceneEditor.UI.Basic.Notification.NotificationTypes.NotificationObject;
+import lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationObject;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import ru.lokinCompany.lokEngine.GUI.Canvases.GUIListCanvas;
 import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIObject;

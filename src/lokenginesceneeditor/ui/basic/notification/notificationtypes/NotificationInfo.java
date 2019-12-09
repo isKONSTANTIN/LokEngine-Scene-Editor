@@ -1,6 +1,6 @@
-package LokEngineSceneEditor.UI.Basic.Notification.NotificationTypes;
+package lokenginesceneeditor.ui.basic.notification.notificationtypes;
 
-import LokEngineSceneEditor.UI.Colors;
+import lokenginesceneeditor.ui.Colors;
 
 public class NotificationInfo extends NotificationObject {
     public NotificationInfo(String text) {

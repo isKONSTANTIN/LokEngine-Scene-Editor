@@ -1,8 +1,7 @@
-package LokEngineSceneEditor.UI.Basic;
+package lokenginesceneeditor.ui.basic;
 
-import LokEngineSceneEditor.SceneIntegration.HighlightedObject;
-import LokEngineSceneEditor.UI.Colors;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUILocationAlgorithm;
+import lokenginesceneeditor.sceneintegration.HighlightedObject;
+import lokenginesceneeditor.ui.Colors;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
 import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPosition;
 import ru.lokinCompany.lokEngine.GUI.Canvases.GUICanvas;
