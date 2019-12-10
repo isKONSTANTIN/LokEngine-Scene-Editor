@@ -1,12 +1,14 @@
 package lokenginesceneeditor.ui.basic;
 
 import lokenginesceneeditor.LESEApplication;
-import ru.lokinCompany.lokEngine.GUI.Canvases.GUIListCanvas;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.*;
-import ru.lokinCompany.lokEngine.Render.Window.Window;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Colors;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
+import lokenginesceneeditor.ui.Colors;
+import ru.lokincompany.lokengine.gui.canvases.GUIListCanvas;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIButton;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIMenu;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
+import ru.lokincompany.lokengine.render.window.Window;
+import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.utilities.color.Color;
 
 public class SceneEditorMenu extends GUIMenu {
 

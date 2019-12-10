@@ -2,16 +2,19 @@ package lokenginesceneeditor.ui.basic;
 
 import lokenginesceneeditor.sceneintegration.HighlightedObject;
 import lokenginesceneeditor.ui.Colors;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPosition;
-import ru.lokinCompany.lokEngine.GUI.Canvases.GUICanvas;
-import ru.lokinCompany.lokEngine.GUI.Canvases.GUIScrollCanvas;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.*;
-import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
-import ru.lokinCompany.lokEngine.SceneEnvironment.Scene;
-import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
+import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
+import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPosition;
+import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
+import ru.lokincompany.lokengine.gui.canvases.GUIScrollCanvas;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIButton;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIFreeTextDrawer;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIPanel;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
+import ru.lokincompany.lokengine.render.frame.PartsBuilder;
+import ru.lokincompany.lokengine.sceneenvironment.Scene;
+import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
+import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.utilities.color.Color;
 
 public class ObjectsListCanvas extends GUICanvas {
 

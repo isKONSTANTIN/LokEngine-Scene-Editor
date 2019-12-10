@@ -2,16 +2,16 @@ package lokenginesceneeditor.ui.composite;
 
 import lokenginesceneeditor.LESEApplication;
 import lokenginesceneeditor.sceneintegration.HighlightedObject;
-import lokenginesceneeditor.ui.basic.notification.NotificationListCanvas;
 import lokenginesceneeditor.ui.basic.ObjectProperties;
 import lokenginesceneeditor.ui.basic.ObjectsListCanvas;
 import lokenginesceneeditor.ui.basic.SceneEditorMenu;
-import ru.lokinCompany.lokEngine.Applications.ApplicationDefault;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIPositions.GUIPosition;
-import ru.lokinCompany.lokEngine.GUI.Canvases.GUICanvas;
-import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
+import lokenginesceneeditor.ui.basic.notification.NotificationListCanvas;
+import ru.lokincompany.lokengine.applications.applications.ApplicationDefault;
+import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
+import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPosition;
+import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
+import ru.lokincompany.lokengine.render.frame.PartsBuilder;
+import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 
 public class SceneEditor extends GUICanvas {
 

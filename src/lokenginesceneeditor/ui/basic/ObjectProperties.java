@@ -2,21 +2,26 @@ package lokenginesceneeditor.ui.basic;
 
 import lokenginesceneeditor.sceneintegration.HighlightedObject;
 import lokenginesceneeditor.ui.Colors;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUILocationAlgorithm;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
-import ru.lokinCompany.lokEngine.GUI.Canvases.GUICanvas;
-import ru.lokinCompany.lokEngine.GUI.Canvases.GUIFlexibleListCanvas;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.*;
-import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
-import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
+import lokenginesceneeditor.ui.basic.objectcomponents.ObjectComponents;
+import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
+import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
+import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
+import ru.lokincompany.lokengine.gui.canvases.GUIListCanvas;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIPanel;
+import ru.lokincompany.lokengine.gui.guiobjects.GUISpace;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
+import ru.lokincompany.lokengine.gui.guiobjects.GUITextField;
+import ru.lokincompany.lokengine.render.frame.PartsBuilder;
+import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
+import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.utilities.color.Color;
 
 public class ObjectProperties extends GUICanvas {
     GUIPanel panel;
 
-    GUIFlexibleListCanvas textFields;
-    GUIFlexibleListCanvas texts;
+    GUIListCanvas textFields;
+    GUIListCanvas texts;
+    ObjectComponents componentsList;
 
     GUITextField nameField;
     SceneObject sceneObject;
@@ -29,9 +34,11 @@ public class ObjectProperties extends GUICanvas {
 
         nameField = new GUITextField(new Vector2i(), new Vector2i(size.x, 20),"","", Colors.white(),0,14,true, false);
 
-        texts = new GUIFlexibleListCanvas(new Vector2i(0,30), new Vector2i(75,300));
-        textFields = new GUIFlexibleListCanvas(new Vector2i(18, 30), new Vector2i());
-        textFields.setSize(guiObject -> new Vector2i(this.size.x - 18,300));
+        texts = new GUIListCanvas(new Vector2i(0,30), new Vector2i(75,250), new Vector2i(75,14));
+        textFields = new GUIListCanvas(new Vector2i(18, 30), new Vector2i(75,250), new Vector2i(75,14));
+
+        componentsList = new ObjectComponents(new Vector2i(0, 30 + 300), new Vector2i());
+        componentsList.setSize(guiObject -> new Vector2i(this.getSize().x, this.getSize().y - componentsList.getPosition().y));
 
         GUILocationAlgorithm fieldSize = guiObject -> new Vector2i(textFields.getSize().x, 14);
         Color fieldBackground = new Color(0,0,0,0);
@@ -140,6 +147,7 @@ public class ObjectProperties extends GUICanvas {
         this.addObject(nameField);
         this.addObject(texts);
         this.addObject(textFields);
+        this.addObject(componentsList);
     }
 
     @Override

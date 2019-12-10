@@ -1,6 +1,6 @@
 package lokenginesceneeditor.sceneintegration;
 
-import ru.lokinCompany.lokEngine.SceneEnvironment.SceneObject;
+import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
 
 public class HighlightedObject {
 
@@ -12,6 +12,19 @@ public class HighlightedObject {
         objectID = id;
     }
 
+    public static void update(){
+        if (object == null) return;
+
+        if (object.scene.getObjectByID(objectID) == null){
+            object = null;
+            return;
+        }
+
+        if (!object.scene.getObjectByID(objectID).equals(object))
+            object = null;
+
+    }
+
     public static SceneObject getHighlightedObject(){
         return object;
     }
@@ -19,6 +32,7 @@ public class HighlightedObject {
     public static int getHighlightedObjectID() {
         return objectID;
     }
+
     public static void deleteObject(){
         if (object != null){
             object.scene.removeObject(objectID);

@@ -1,16 +1,19 @@
 package lokenginesceneeditor;
 
+import lokenginesceneeditor.sceneintegration.HighlightedObject;
 import lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationError;
 import lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationSuccess;
 import lokenginesceneeditor.ui.composite.SceneEditor;
-import ru.lokinCompany.lokEngine.Applications.ApplicationDefault;
-import ru.lokinCompany.lokEngine.Tools.SaveWorker.FileWorker;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
+import ru.lokincompany.lokengine.applications.applications.ApplicationDefault;
+import ru.lokincompany.lokengine.components.SpriteComponent;
+import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
+import ru.lokincompany.lokengine.tools.saveworker.FileWorker;
+import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.utilities.color.Color;
 
 public class LESEApplication extends ApplicationDefault {
 
-    SceneEditor sceneEditor;
+    public SceneEditor sceneEditor;
     private static LESEApplication instance;
 
     public static LESEApplication getInstance(){ return instance; }
@@ -44,6 +47,11 @@ public class LESEApplication extends ApplicationDefault {
             sceneEditor.notificationListCanvas.addNotification(new NotificationError("Сохранить сцену не удалось!"));
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void updateEvent() {
+        HighlightedObject.update();
     }
 
     @Override

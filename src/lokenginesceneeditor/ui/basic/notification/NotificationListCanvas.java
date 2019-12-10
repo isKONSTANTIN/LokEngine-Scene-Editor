@@ -1,11 +1,11 @@
 package lokenginesceneeditor.ui.basic.notification;
 
 import lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationObject;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
-import ru.lokinCompany.lokEngine.GUI.Canvases.GUIListCanvas;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIObject;
-import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
+import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
+import ru.lokincompany.lokengine.gui.canvases.GUIListCanvas;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIObject;
+import ru.lokincompany.lokengine.render.frame.PartsBuilder;
+import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 
 public class NotificationListCanvas extends GUIListCanvas {
 

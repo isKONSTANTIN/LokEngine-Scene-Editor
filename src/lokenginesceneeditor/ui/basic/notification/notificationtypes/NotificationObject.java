@@ -1,13 +1,13 @@
 package lokenginesceneeditor.ui.basic.notification.notificationtypes;
 
 import lokenginesceneeditor.ui.Colors;
-import ru.lokinCompany.lokEngine.GUI.AdditionalObjects.GUIObjectProperties;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIObject;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIPanel;
-import ru.lokinCompany.lokEngine.GUI.GUIObjects.GUIText;
-import ru.lokinCompany.lokEngine.Render.Frame.PartsBuilder;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Color.Color;
-import ru.lokinCompany.lokEngine.Tools.Utilities.Vector2i;
+import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIObject;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIPanel;
+import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
+import ru.lokincompany.lokengine.render.frame.PartsBuilder;
+import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.utilities.color.Color;
 
 public class NotificationObject extends GUIObject {
     GUIText text;
