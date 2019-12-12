@@ -34,10 +34,10 @@ public class ObjectProperties extends GUICanvas {
 
         nameField = new GUITextField(new Vector2i(), new Vector2i(size.x, 20),"","", Colors.white(),0,14,true, false);
 
-        texts = new GUIListCanvas(new Vector2i(0,30), new Vector2i(75,250), new Vector2i(75,14));
-        textFields = new GUIListCanvas(new Vector2i(18, 30), new Vector2i(75,250), new Vector2i(75,14));
+        texts = new GUIListCanvas(new Vector2i(0,30), new Vector2i(75,100), new Vector2i(75,14));
+        textFields = new GUIListCanvas(new Vector2i(18, 30), new Vector2i(75,100), new Vector2i(75,14));
 
-        componentsList = new ObjectComponents(new Vector2i(0, 30 + 300), new Vector2i());
+        componentsList = new ObjectComponents(new Vector2i(0, texts.getPosition().y + texts.getSize().y), new Vector2i());
         componentsList.setSize(guiObject -> new Vector2i(this.getSize().x, this.getSize().y - componentsList.getPosition().y));
 
         GUILocationAlgorithm fieldSize = guiObject -> new Vector2i(textFields.getSize().x, 14);
