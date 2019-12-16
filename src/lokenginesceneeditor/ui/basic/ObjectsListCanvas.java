@@ -59,7 +59,7 @@ public class ObjectsListCanvas extends GUICanvas {
         int windowY = parentProperties.window.getResolution().y;
         for (int i = 0; i < objectsCount; i++) {
             SceneObject sceneObject = scene.getObjectByID(i);
-            Vector2i textPos = new Vector2i(0, textGap.y * (i + 1));
+            Vector2i textPos = new Vector2i(2, textGap.y * (i + 1));
             Vector2i globalPos = new Vector2i(scrollCanvas.properties.globalPosition.x + textPos.x, scrollCanvas.properties.globalPosition.y + textPos.y);
             if (globalPos.y > 0 && globalPos.y < windowY) {
                 boolean selected = parentProperties.window.getMouse().inField(globalPos, new Vector2i(getSize().x, textGap.y));

@@ -5,12 +5,10 @@ import lokenginesceneeditor.ui.Colors;
 import lokenginesceneeditor.ui.basic.objectcomponents.ObjectComponents;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
+import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPosition;
 import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
 import ru.lokincompany.lokengine.gui.canvases.GUIListCanvas;
-import ru.lokincompany.lokengine.gui.guiobjects.GUIPanel;
-import ru.lokincompany.lokengine.gui.guiobjects.GUISpace;
-import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
-import ru.lokincompany.lokengine.gui.guiobjects.GUITextField;
+import ru.lokincompany.lokengine.gui.guiobjects.*;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
@@ -18,6 +16,7 @@ import ru.lokincompany.lokengine.tools.utilities.color.Color;
 
 public class ObjectProperties extends GUICanvas {
     GUIPanel panel;
+    GUIButton addButton;
 
     GUIListCanvas textFields;
     GUIListCanvas texts;
@@ -37,7 +36,10 @@ public class ObjectProperties extends GUICanvas {
         texts = new GUIListCanvas(new Vector2i(0,30), new Vector2i(75,100), new Vector2i(75,14));
         textFields = new GUIListCanvas(new Vector2i(18, 30), new Vector2i(75,100), new Vector2i(75,14));
 
-        componentsList = new ObjectComponents(new Vector2i(0, texts.getPosition().y + texts.getSize().y), new Vector2i());
+        addButton = new GUIButton(new Vector2i(0, texts.getPosition().y + texts.getSize().y), new Vector2i(), Colors.engineBackgroundColor(), new GUIText(new Vector2i(),"Добавить компонент", Colors.white(), 0, 10));
+        addButton.setSize(guiObject -> new Vector2i(this.getSize().x, 14));
+
+        componentsList = new ObjectComponents(new Vector2i(0, addButton.getPosition().y + addButton.getSize().y + 1), new Vector2i());
         componentsList.setSize(guiObject -> new Vector2i(this.getSize().x, this.getSize().y - componentsList.getPosition().y));
 
         GUILocationAlgorithm fieldSize = guiObject -> new Vector2i(textFields.getSize().x, 14);
@@ -147,6 +149,7 @@ public class ObjectProperties extends GUICanvas {
         this.addObject(nameField);
         this.addObject(texts);
         this.addObject(textFields);
+        this.addObject(addButton);
         this.addObject(componentsList);
     }
 
