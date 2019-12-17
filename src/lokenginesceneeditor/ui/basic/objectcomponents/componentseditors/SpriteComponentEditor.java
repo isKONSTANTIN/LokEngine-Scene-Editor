@@ -25,10 +25,10 @@ public class SpriteComponentEditor extends ComponentEditor {
         list.setSize(guiObject -> new Vector2i(getSize().x, guiObject.getSize().y));
 
         list.addObject(new GUIText(new Vector2i(), "Sprite path:", Colors.engineMainColor(), 0, 10));
-        list.addObject(new GUITextField(new Vector2i(), new Vector2i(),"", Colors.white(),0,14));
+        list.addObject(new GUITextField(new Vector2i(), new Vector2i(),"", Colors.white(),0,10));
         list.addObject(new GUISpace(new Vector2i(), new Vector2i(0,5)));
         list.addObject(new GUIText(new Vector2i(), "Sprite size:", Colors.engineMainColor(), 0, 10));
-        list.addObject(new GUITextField(new Vector2i(),new Vector2i(),"", Colors.white(),0,14));
+        list.addObject(new GUITextField(new Vector2i(),new Vector2i(),"", Colors.white(),0,10));
 
         GUITextField pathField = (GUITextField)list.getObject(1);
         GUITextField sizeField = (GUITextField)list.getObject(4);

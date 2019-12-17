@@ -5,10 +5,12 @@ import lokenginesceneeditor.sceneintegration.HighlightedObject;
 import lokenginesceneeditor.ui.basic.ObjectProperties;
 import lokenginesceneeditor.ui.basic.ObjectsListCanvas;
 import lokenginesceneeditor.ui.basic.SceneEditorMenu;
+import lokenginesceneeditor.ui.basic.SelectComponentWindow;
 import lokenginesceneeditor.ui.basic.notification.NotificationListCanvas;
 import ru.lokincompany.lokengine.applications.applications.ApplicationDefault;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPosition;
+import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPositionAlgorithms;
 import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
@@ -19,8 +21,10 @@ public class SceneEditor extends GUICanvas {
     GUICanvas mainCanvas;
     ObjectsListCanvas objectsList;
     ObjectProperties objectProperties;
-    public NotificationListCanvas notificationListCanvas;
     SceneEditorMenu menu;
+
+    public NotificationListCanvas notificationListCanvas;
+    public SelectComponentWindow selectComponentWindow;
 
     public SceneEditor() {
         super(new Vector2i(), new Vector2i());
@@ -41,7 +45,12 @@ public class SceneEditor extends GUICanvas {
         notificationListCanvas = new NotificationListCanvas(new Vector2i(), new Vector2i(200, application.window.getResolution().y));
         notificationListCanvas.setSize(guiObject -> new Vector2i(200, application.window.getResolution().y));
 
+        selectComponentWindow = new SelectComponentWindow(new Vector2i());
+        selectComponentWindow.setPosition(GUIPositionAlgorithms.getAlgorithm(application.window.getCanvas(), GUIPosition.Center).calculate(selectComponentWindow));
+        selectComponentWindow.hidden = true;
+
         mainCanvas.addObject(objectsList);
+        mainCanvas.addObject(selectComponentWindow);
         mainCanvas.addObject(objectProperties, GUIPosition.TopRight);
         mainCanvas.addObject(notificationListCanvas, GUIPosition.TopRight);
 

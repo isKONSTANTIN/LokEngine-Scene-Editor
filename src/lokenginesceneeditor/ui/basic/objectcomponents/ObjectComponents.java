@@ -41,7 +41,7 @@ public class ObjectComponents extends GUIScrollCanvas {
         this.addObject(content);
     }
 
-    private void updateContent(ComponentsList components){
+    public void updateContent(ComponentsList components){
         content.removeAll();
         componentsList.clear();
         for (int i = 0; i < components.getSize(); i++){
@@ -60,11 +60,15 @@ public class ObjectComponents extends GUIScrollCanvas {
         }
     }
 
+    public void updateContent(){
+        updateContent(lastComponents);
+    }
+
     @Override
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         ComponentsList components = HighlightedObject.getHighlightedObject().components;
 
-        if (lastComponents != components){
+        if (lastComponents != components || components.getSize() > componentsList.size()){
             updateContent(components);
             lastComponents = components;
         }else {
@@ -78,7 +82,7 @@ public class ObjectComponents extends GUIScrollCanvas {
                 }
 
                 if (!coincidence){
-                    updateContent(components);
+                    updateContent();
                     break;
                 }
             }

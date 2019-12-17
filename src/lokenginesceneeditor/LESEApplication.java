@@ -25,6 +25,11 @@ public class LESEApplication extends ApplicationDefault {
                 FileWorker fileWorker = new FileWorker(path);
                 fileWorker.openRead();
                 scene.load(fileWorker.read());
+
+                SceneObject object = new SceneObject();
+                object.components.add(new SpriteComponent(""));
+                scene.addObject(object);
+
                 fileWorker.close();
 
                 sceneEditor.notificationListCanvas.addNotification(new NotificationSuccess("Загрузка успешна!\nОбъектов загружено: " + scene.getCountObjects()));

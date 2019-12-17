@@ -1,8 +1,12 @@
 package lokenginesceneeditor.ui.basic;
 
+import lokenginesceneeditor.LESEApplication;
+import lokenginesceneeditor.misc.ComponentAddScript;
 import lokenginesceneeditor.sceneintegration.HighlightedObject;
 import lokenginesceneeditor.ui.Colors;
 import lokenginesceneeditor.ui.basic.objectcomponents.ObjectComponents;
+import ru.lokincompany.lokengine.components.SpriteComponent;
+import ru.lokincompany.lokengine.gui.additionalobjects.GUIButtonScript;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPosition;
@@ -38,6 +42,15 @@ public class ObjectProperties extends GUICanvas {
 
         addButton = new GUIButton(new Vector2i(0, texts.getPosition().y + texts.getSize().y), new Vector2i(), Colors.engineBackgroundColor(), new GUIText(new Vector2i(),"Добавить компонент", Colors.white(), 0, 10));
         addButton.setSize(guiObject -> new Vector2i(this.getSize().x, 14));
+        addButton.setUnpressScript(guiButton -> LESEApplication.getInstance().sceneEditor.selectComponentWindow.sendRequest(
+                componentName -> {
+                    switch (componentName){
+                        case "Sprite component":
+                            sceneObject.components.add(new SpriteComponent(""));
+                            break;
+                    }
+                }
+        ));
 
         componentsList = new ObjectComponents(new Vector2i(0, addButton.getPosition().y + addButton.getSize().y + 1), new Vector2i());
         componentsList.setSize(guiObject -> new Vector2i(this.getSize().x, this.getSize().y - componentsList.getPosition().y));
