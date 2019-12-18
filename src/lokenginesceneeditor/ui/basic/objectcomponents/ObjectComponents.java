@@ -41,20 +41,19 @@ public class ObjectComponents extends GUIScrollCanvas {
         this.addObject(content);
     }
 
-    public void updateContent(ComponentsList components){
+    private void updateContent(ComponentsList components){
         content.removeAll();
         componentsList.clear();
         for (int i = 0; i < components.getSize(); i++){
             Component component = components.get(i);
+            String componentName = component.getClass().getName();
 
-            switch (component.getName()) {
-                case "Sprite Component":
-                    SpriteComponentEditor spriteComponentEditor = new SpriteComponentEditor((SpriteComponent) component);
-                    spriteComponentEditor.setSize(componentEditorsSize);
+            if (componentName.equals(SpriteComponent.class.getName())){
+                SpriteComponentEditor spriteComponentEditor = new SpriteComponentEditor((SpriteComponent) component);
+                spriteComponentEditor.setSize(componentEditorsSize);
 
-                    componentsList.add("Sprite Component");
-                    content.addObject(spriteComponentEditor);
-                    break;
+                componentsList.add(SpriteComponent.class.getName());
+                content.addObject(spriteComponentEditor);
             }
 
         }
@@ -73,7 +72,7 @@ public class ObjectComponents extends GUIScrollCanvas {
             lastComponents = components;
         }else {
             for (int i = 0; i < components.getSize(); i++ ){
-                String componentName = components.get(i).getName();
+                String componentName = components.get(i).getClass().getName();
                 boolean coincidence = false;
 
                 for (String componentNameInList : componentsList){
