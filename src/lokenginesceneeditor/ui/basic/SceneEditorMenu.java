@@ -14,14 +14,23 @@ public class SceneEditorMenu extends GUIMenu {
 
     GUIListCanvas filePoint;
 
-    private void setupFilePoint(){
-        filePoint = new GUIListCanvas(new Vector2i(), new Vector2i(300,40),new Vector2i(300,20));
+    public SceneEditorMenu(Vector2i position, int titleSize, Window window) {
+        super(position, new Vector2i(), titleSize, Colors.engineMainColor(), Colors.white());
+        this.setSize(guiObject -> new Vector2i(window.getResolution().x, titleSize));
+
+        setupFilePoint();
+
+        window.getCanvas().addObject(filePoint);
+    }
+
+    private void setupFilePoint() {
+        filePoint = new GUIListCanvas(new Vector2i(), new Vector2i(300, 40), new Vector2i(300, 20));
         filePoint.ignoreCanvasUpdateOrder = true;
         Color buttonsColor = Colors.engineBackgroundColor();
         buttonsColor.alpha -= 0.3f;
 
         GUIButton openButton = new GUIButton(new Vector2i(), new Vector2i(), buttonsColor,
-                new GUIText(new Vector2i(), "Открыть сцену (./Scene.save)", Colors.white(),0,12), false
+                new GUIText(new Vector2i(), "Открыть сцену (./Scene.save)", Colors.white(), 0, 12), false
         );
         openButton.setUnpressScript(guiButton -> {
             LESEApplication.getInstance().loadScene("./Scene.save");
@@ -29,7 +38,7 @@ public class SceneEditorMenu extends GUIMenu {
         });
 
         GUIButton saveButton = new GUIButton(new Vector2i(), new Vector2i(), buttonsColor,
-                new GUIText(new Vector2i(), "Сохранить сцену (./Scene.save)", Colors.white(),0,12), false
+                new GUIText(new Vector2i(), "Сохранить сцену (./Scene.save)", Colors.white(), 0, 12), false
         );
         saveButton.setUnpressScript(guiButton -> {
             LESEApplication.getInstance().saveScene("./Scene.save");
@@ -40,14 +49,5 @@ public class SceneEditorMenu extends GUIMenu {
         filePoint.addObject(saveButton);
 
         this.addPoint("Файл", filePoint);
-    }
-
-    public SceneEditorMenu(Vector2i position, int titleSize, Window window) {
-        super(position, new Vector2i(), titleSize, Colors.engineMainColor(), Colors.white());
-        this.setSize(guiObject -> new Vector2i(window.getResolution().x, titleSize));
-
-        setupFilePoint();
-
-        window.getCanvas().addObject(filePoint);
     }
 }

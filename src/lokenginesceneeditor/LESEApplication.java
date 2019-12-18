@@ -5,31 +5,31 @@ import lokenginesceneeditor.ui.basic.notification.notificationtypes.Notification
 import lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationSuccess;
 import lokenginesceneeditor.ui.composite.SceneEditor;
 import ru.lokincompany.lokengine.applications.applications.ApplicationDefault;
-import ru.lokincompany.lokengine.components.SpriteComponent;
-import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
 import ru.lokincompany.lokengine.tools.saveworker.FileWorker;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 import ru.lokincompany.lokengine.tools.utilities.color.Color;
 
 public class LESEApplication extends ApplicationDefault {
 
-    public SceneEditor sceneEditor;
     private static LESEApplication instance;
+    public SceneEditor sceneEditor;
 
-    public static LESEApplication getInstance(){ return instance; }
+    LESEApplication() {
+        start(false, true, true, new Vector2i(1280, 720), "LokEngine Scene Editor");
+        instance = this;
+    }
 
-    public void loadScene(String path){
+    public static LESEApplication getInstance() {
+        return instance;
+    }
+
+    public void loadScene(String path) {
         scene.removeAll();
         try {
             if (FileWorker.fileExists(path)) {
                 FileWorker fileWorker = new FileWorker(path);
                 fileWorker.openRead();
                 scene.load(fileWorker.read());
-
-                SceneObject object = new SceneObject();
-                object.components.add(new SpriteComponent(""));
-                scene.addObject(object);
-
                 fileWorker.close();
 
                 sceneEditor.notificationListCanvas.addNotification(new NotificationSuccess("Загрузка успешна!\nОбъектов загружено: " + scene.getCountObjects()));
@@ -40,7 +40,7 @@ public class LESEApplication extends ApplicationDefault {
         }
     }
 
-    public void saveScene(String path){
+    public void saveScene(String path) {
         try {
             FileWorker fileWorker = new FileWorker(path);
             fileWorker.openWrite();
@@ -60,16 +60,11 @@ public class LESEApplication extends ApplicationDefault {
     }
 
     @Override
-    protected void initEvent(){
+    protected void initEvent() {
         window.getFrameBuilder().backgroundColor = new Color(0.15F, 0.15F, 0.15F, 1.0F);
         window.setCloseEvent((window1, objects) -> close());
 
         sceneEditor = new SceneEditor();
         window.getCanvas().addObject(sceneEditor);
-    }
-
-    LESEApplication(){
-        start(false,true,true, new Vector2i(1280,720), "LokEngine Scene Editor");
-        instance = this;
     }
 }

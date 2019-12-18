@@ -18,8 +18,8 @@ public class NotificationObject extends GUIObject {
     public NotificationObject(String text, Color color, int showTime) {
         super(new Vector2i(), new Vector2i());
 
-        this.text = new GUIText(new Vector2i(), text, Colors.white(),0,11);
-        this.panel = new GUIPanel(new Vector2i(),new Vector2i(), color);
+        this.text = new GUIText(new Vector2i(), text, Colors.white(), 0, 11);
+        this.panel = new GUIPanel(new Vector2i(), new Vector2i(), color);
 
         this.panel.setPosition(guiObject -> getPosition());
         this.panel.setSize(guiObject -> getSize());
@@ -39,7 +39,7 @@ public class NotificationObject extends GUIObject {
         super.setSize(size);
     }
 
-    public void show(){
+    public void show() {
         addTime = System.currentTimeMillis();
     }
 
@@ -47,7 +47,7 @@ public class NotificationObject extends GUIObject {
     public void update(PartsBuilder partsBuilder, GUIObjectProperties parentProperties) {
         super.update(partsBuilder, parentProperties);
 
-        if (System.currentTimeMillis() - addTime < showTime * 1000){
+        if (System.currentTimeMillis() - addTime < showTime * 1000) {
             panel.update(partsBuilder, properties);
             text.update(partsBuilder, properties);
         }

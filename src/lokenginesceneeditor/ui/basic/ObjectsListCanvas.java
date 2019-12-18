@@ -24,23 +24,23 @@ public class ObjectsListCanvas extends GUICanvas {
     GUIButton buttonAddObject;
     GUIPanel panel;
     Scene scene;
-    Vector2i textGap = new Vector2i(0,15);
+    Vector2i textGap = new Vector2i(0, 15);
 
     public ObjectsListCanvas(Vector2i position, Vector2i size, Scene scene) {
         super(position, size);
         this.scene = scene;
 
-        panel = new GUIPanel(new Vector2i(),new Vector2i(), new Color(0.25f,0.25f, 0.25f,0.6f));
+        panel = new GUIPanel(new Vector2i(), new Vector2i(), new Color(0.25f, 0.25f, 0.25f, 0.6f));
         panel.setSize(guiObject -> this.getSize());
 
-        scrollCanvas = new GUIScrollCanvas(new Vector2i(0,10),new Vector2i(),new Vector2i(),null);
-        scrollCanvas.setSize(guiObject -> new Vector2i(this.getSize().x,this.getSize().y - guiObject.getPosition().y));
+        scrollCanvas = new GUIScrollCanvas(new Vector2i(0, 10), new Vector2i(), new Vector2i(), null);
+        scrollCanvas.setSize(guiObject -> new Vector2i(this.getSize().x, this.getSize().y - guiObject.getPosition().y));
 
         textDrawer = new GUIFreeTextDrawer();
-        textObjectsCount = new GUIText(new Vector2i(),"0 объектов", Colors.white(),0,11);
+        textObjectsCount = new GUIText(new Vector2i(), "0 объектов", Colors.white(), 0, 11);
         scrollCanvas.addObject(textDrawer);
 
-        buttonAddObject = new GUIButton(new Vector2i(),new Vector2i(20,20),new Color(0.1f,0.1f,0.1f,0.7f),new GUIText(new Vector2i(),"+",Colors.white(),0,10));
+        buttonAddObject = new GUIButton(new Vector2i(), new Vector2i(20, 20), new Color(0.1f, 0.1f, 0.1f, 0.7f), new GUIText(new Vector2i(), "+", Colors.white(), 0, 10));
         buttonAddObject.setUnpressScript(guiButton -> scene.addObject(new SceneObject()));
 
         this.addObject(panel);

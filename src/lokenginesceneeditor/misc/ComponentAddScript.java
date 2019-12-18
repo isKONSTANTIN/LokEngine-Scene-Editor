@@ -7,7 +7,7 @@ public interface ComponentAddScript extends Scriptable {
     void execute(String componentName);
 
     @Override
-    default void execute(){
+    default void execute() {
         execute(null);
     }
 }

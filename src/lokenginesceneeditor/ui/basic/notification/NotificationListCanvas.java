@@ -10,18 +10,19 @@ import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 public class NotificationListCanvas extends GUIListCanvas {
 
     public NotificationListCanvas(Vector2i position, Vector2i size) {
-        super(position, size, new Vector2i(size.x,size.y / 10),5);
+        super(position, size, new Vector2i(size.x, size.y / 10), 5);
     }
 
-    public void addNotification(NotificationObject object){
+    public void addNotification(NotificationObject object) {
         addObject(object, true);
     }
 
-    public void showAll(){
-        for (GUIObject object : objects){
-            try{
-                ((NotificationObject)object).show();
-            }catch (ClassCastException ignored){}
+    public void showAll() {
+        for (GUIObject object : objects) {
+            try {
+                ((NotificationObject) object).show();
+            } catch (ClassCastException ignored) {
+            }
         }
     }
 
