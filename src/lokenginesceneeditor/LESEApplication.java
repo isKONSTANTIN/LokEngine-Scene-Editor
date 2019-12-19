@@ -61,6 +61,7 @@ public class LESEApplication extends ApplicationDefault {
 
     @Override
     protected void initEvent() {
+        applicationRuntime.setSpeedEngine(0);
         window.getFrameBuilder().backgroundColor = new Color(0.15F, 0.15F, 0.15F, 1.0F);
         window.setCloseEvent((window1, objects) -> close());
 

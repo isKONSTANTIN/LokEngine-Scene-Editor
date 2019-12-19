@@ -4,16 +4,23 @@ import lokenginesceneeditor.LESEApplication;
 import lokenginesceneeditor.sceneintegration.HighlightedObject;
 import lokenginesceneeditor.ui.Colors;
 import lokenginesceneeditor.ui.basic.objectcomponents.ObjectComponents;
-import ru.lokincompany.lokengine.components.SpriteComponent;
+import ru.lokincompany.lokengine.components.*;
+import ru.lokincompany.lokengine.components.componentstools.ShapeCreator;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
 import ru.lokincompany.lokengine.gui.canvases.GUIListCanvas;
 import ru.lokincompany.lokengine.gui.guiobjects.*;
+import ru.lokincompany.lokengine.loaders.SoundLoader;
+import ru.lokincompany.lokengine.loaders.SpriteLoader;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 import ru.lokincompany.lokengine.tools.utilities.color.Color;
+
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+import java.rmi.server.ExportException;
 
 public class ObjectProperties extends GUICanvas {
     GUIPanel panel;
@@ -44,6 +51,20 @@ public class ObjectProperties extends GUICanvas {
                     switch (componentName) {
                         case "Sprite component":
                             sceneObject.components.add(new SpriteComponent(""));
+                            break;
+                        case "Animation component":
+                            sceneObject.components.add(new AnimationComponent());
+                            break;
+                        case "Rigidbody component":
+                            sceneObject.components.add(new RigidbodyComponent(ShapeCreator.CreateCircleShape(100)));
+                            break;
+                        case "Sound component":
+                            try {
+                                sceneObject.components.add(new SoundComponent(SoundLoader.loadWAV("")));
+                            } catch (Exception e) {}
+                            break;
+                        case "Particle System component":
+                            sceneObject.components.add(new ParticleSystemComponent(SpriteLoader.loadSprite("")));
                             break;
                     }
                 }
