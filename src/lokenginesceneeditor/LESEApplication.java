@@ -1,5 +1,6 @@
 package lokenginesceneeditor;
 
+import lokenginesceneeditor.sceneintegration.KeyboardBinds;
 import lokenginesceneeditor.sceneintegration.HighlightedObject;
 import lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationError;
 import lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationSuccess;
@@ -25,6 +26,7 @@ public class LESEApplication extends ApplicationDefault {
 
     public void loadScene(String path) {
         scene.removeAll();
+        HighlightedObject.highlight(null,-1);
         try {
             if (FileWorker.fileExists(path)) {
                 FileWorker fileWorker = new FileWorker(path);
@@ -57,6 +59,7 @@ public class LESEApplication extends ApplicationDefault {
     @Override
     protected void updateEvent() {
         HighlightedObject.update();
+        KeyboardBinds.update();
     }
 
     @Override
