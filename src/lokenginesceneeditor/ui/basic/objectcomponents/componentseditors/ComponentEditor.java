@@ -19,7 +19,7 @@ public class ComponentEditor extends GUIAutoResizableCanvas {
         super(new Vector2i());
         this.autoX = false;
 
-        title = new GUIText(new Vector2i(), name, Colors.white(), 0, 11);
+        title = new GUIText(new Vector2i(), name, Colors.white(), 0, 10);
         panel = new GUIPanel(new Vector2i(), new Vector2i(), new Color(0.4f, 0.4f, 0.4f, 0.3f));
         canvas = new GUIAutoResizableCanvas(new Vector2i(0, title.getSize().y + 2));
 

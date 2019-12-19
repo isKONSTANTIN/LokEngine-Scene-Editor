@@ -2,10 +2,8 @@ package lokenginesceneeditor.ui.basic.objectcomponents;
 
 
 import lokenginesceneeditor.sceneintegration.HighlightedObject;
-import lokenginesceneeditor.ui.basic.objectcomponents.componentseditors.SpriteComponentEditor;
-import ru.lokincompany.lokengine.components.Component;
-import ru.lokincompany.lokengine.components.ComponentsList;
-import ru.lokincompany.lokengine.components.SpriteComponent;
+import lokenginesceneeditor.ui.basic.objectcomponents.componentseditors.*;
+import ru.lokincompany.lokengine.components.*;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.canvases.GUIFullFlexibleListCanvas;
@@ -46,6 +44,30 @@ public class ObjectComponents extends GUIScrollCanvas {
 
                 componentsList.add(SpriteComponent.class.getName());
                 content.addObject(spriteComponentEditor);
+            }else if (componentName.equals(AnimationComponent.class.getName())) {
+                AnimationComponentEditor animationComponentEditor = new AnimationComponentEditor();
+                animationComponentEditor.setSize(componentEditorsSize);
+
+                componentsList.add(AnimationComponent.class.getName());
+                content.addObject(animationComponentEditor);
+            }else if (componentName.equals(RigidbodyComponent.class.getName())) {
+                RigidbodyComponentEditor rigidbodyComponentEditor = new RigidbodyComponentEditor();
+                rigidbodyComponentEditor.setSize(componentEditorsSize);
+
+                componentsList.add(RigidbodyComponent.class.getName());
+                content.addObject(rigidbodyComponentEditor);
+            }else if (componentName.equals(SoundComponent.class.getName())) {
+                SoundComponentEditor soundComponentEditor = new SoundComponentEditor();
+                soundComponentEditor.setSize(componentEditorsSize);
+
+                componentsList.add(SoundComponent.class.getName());
+                content.addObject(soundComponentEditor);
+            }else if (componentName.equals(ParticleSystemComponent.class.getName())) {
+                ParticleSystemComponentEditor particleSystemComponentEditor = new ParticleSystemComponentEditor();
+                particleSystemComponentEditor.setSize(componentEditorsSize);
+
+                componentsList.add(ParticleSystemComponent.class.getName());
+                content.addObject(particleSystemComponentEditor);
             }
 
         }
