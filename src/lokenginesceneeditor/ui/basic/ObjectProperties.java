@@ -42,7 +42,7 @@ public class ObjectProperties extends GUICanvas {
         nameField = new GUITextField(new Vector2i(), new Vector2i(size.x, 20), "", "", Colors.white(), 0, 14, true, false);
 
         texts = new GUIListCanvas(new Vector2i(0, 30), new Vector2i(75, 100), new Vector2i(75, 14));
-        textFields = new GUIListCanvas(new Vector2i(18, 30), new Vector2i(75, 100), new Vector2i(75, 14));
+        textFields = new GUIListCanvas(new Vector2i(18, 30), new Vector2i(this.getSize().x - 18, 100), new Vector2i(this.getSize().x - 18, 14));
 
         addButton = new GUIButton(new Vector2i(0, texts.getPosition().y + texts.getSize().y), new Vector2i(0, 14), Colors.engineBackgroundColor(), new GUIText(new Vector2i(), "Добавить компонент", Colors.white(), 0, 10));
         addButton.setSize(guiObject -> new Vector2i(this.getSize().x, 14));

@@ -21,8 +21,8 @@ public class SceneEditor extends GUICanvas {
     public SelectComponentWindow selectComponentWindow;
     ApplicationDefault application;
     GUICanvas mainCanvas;
-    ObjectsListCanvas objectsList;
-    ObjectProperties objectProperties;
+    public ObjectsListCanvas objectsList;
+    public ObjectProperties objectProperties;
     SceneEditorMenu menu;
 
     public SceneEditor() {
