@@ -45,7 +45,7 @@ public class ObjectComponents extends GUIScrollCanvas {
                 componentsList.add(SpriteComponent.class.getName());
                 content.addObject(spriteComponentEditor);
             }else if (componentName.equals(AnimationComponent.class.getName())) {
-                AnimationComponentEditor animationComponentEditor = new AnimationComponentEditor();
+                AnimationComponentEditor animationComponentEditor = new AnimationComponentEditor((AnimationComponent) component);
                 animationComponentEditor.setSize(componentEditorsSize);
 
                 componentsList.add(AnimationComponent.class.getName());

@@ -8,6 +8,7 @@ import ru.lokincompany.lokengine.components.*;
 import ru.lokincompany.lokengine.components.componentstools.ShapeCreator;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
+import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPosition;
 import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
 import ru.lokincompany.lokengine.gui.canvases.GUIListCanvas;
 import ru.lokincompany.lokengine.gui.guiobjects.*;
@@ -39,10 +40,10 @@ public class ObjectProperties extends GUICanvas {
         panel = new GUIPanel(new Vector2i(), new Vector2i(), new Color(0.25f, 0.25f, 0.25f, 0.6f));
         panel.setSize(guiObject -> this.getSize());
 
-        nameField = new GUITextField(new Vector2i(), new Vector2i(size.x, 20), "", "", Colors.white(), 0, 14, true, false);
+        nameField = new GUITextField(new Vector2i(), new Vector2i(size.x - 6, 20), "", "", Colors.white(), 0, 14, true, false);
 
-        texts = new GUIListCanvas(new Vector2i(0, 30), new Vector2i(75, 100), new Vector2i(75, 14));
-        textFields = new GUIListCanvas(new Vector2i(18, 30), new Vector2i(this.getSize().x - 18, 100), new Vector2i(this.getSize().x - 18, 14));
+        texts = new GUIListCanvas(new Vector2i(3, 30), new Vector2i(75, 100), new Vector2i(75, 14));
+        textFields = new GUIListCanvas(new Vector2i(21, 30), new Vector2i(this.getSize().x - 18, 100), new Vector2i(this.getSize().x - 18, 14));
 
         addButton = new GUIButton(new Vector2i(0, texts.getPosition().y + texts.getSize().y), new Vector2i(0, 14), Colors.engineBackgroundColor(), new GUIText(new Vector2i(), "Добавить компонент", Colors.white(), 0, 10));
         addButton.setSize(guiObject -> new Vector2i(this.getSize().x, 14));
@@ -187,7 +188,7 @@ public class ObjectProperties extends GUICanvas {
         texts.addObject(new GUIText(new Vector2i(), "RP:", Colors.white(), 0, 10));
 
         this.addObject(panel);
-        this.addObject(nameField);
+        this.addObject(nameField, GUIPosition.TopCenter);
         this.addObject(texts);
         this.addObject(textFields);
         this.addObject(addButton);

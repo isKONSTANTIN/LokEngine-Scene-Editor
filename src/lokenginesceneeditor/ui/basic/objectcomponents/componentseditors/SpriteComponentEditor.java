@@ -19,21 +19,21 @@ public class SpriteComponentEditor extends ComponentEditor {
         super("Sprite component");
         this.component = component;
 
-        GUIFullFlexibleListCanvas list = new GUIFullFlexibleListCanvas(new Vector2i());
+        GUIFullFlexibleListCanvas list = new GUIFullFlexibleListCanvas(new Vector2i(3,0));
         list.autoX = false;
-        list.setSize(guiObject -> new Vector2i(getSize().x, guiObject.getSize().y));
+        list.setSize(guiObject -> new Vector2i(getSize().x - 3, guiObject.getSize().y));
 
-        list.addObject(new GUIText(new Vector2i(), "Sprite path:", Colors.engineMainColor(), 0, 10));
+        list.addObject(new GUIText(new Vector2i(), "Путь спрайта:", Colors.engineMainColor(), 0, 10));
         list.addObject(new GUITextField(new Vector2i(), new Vector2i(), "", Colors.white(), 0, 10));
         list.addObject(new GUISpace(new Vector2i(), new Vector2i(0, 5)));
-        list.addObject(new GUIText(new Vector2i(), "Sprite size:", Colors.engineMainColor(), 0, 10));
+        list.addObject(new GUIText(new Vector2i(), "Размер спрайта:", Colors.engineMainColor(), 0, 10));
         list.addObject(new GUITextField(new Vector2i(), new Vector2i(), "", Colors.white(), 0, 10));
 
         GUITextField pathField = (GUITextField) list.getObject(1);
         GUITextField sizeField = (GUITextField) list.getObject(4);
 
-        pathField.setSize(guiObject -> new Vector2i(getSize().x, 14));
-        sizeField.setSize(guiObject -> new Vector2i(getSize().x, 14));
+        pathField.setSize(guiObject -> new Vector2i(getSize().x - 6, 14));
+        sizeField.setSize(guiObject -> new Vector2i(getSize().x - 6, 14));
 
         pathField.setBackgroundColor(Colors.setAlpha(Colors.engineBackgroundColor(), 0.4f));
         sizeField.setBackgroundColor(Colors.setAlpha(Colors.engineBackgroundColor(), 0.4f));
