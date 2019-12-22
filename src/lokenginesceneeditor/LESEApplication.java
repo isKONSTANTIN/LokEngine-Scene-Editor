@@ -4,11 +4,14 @@ import lokenginesceneeditor.sceneintegration.KeyboardBinds;
 import lokenginesceneeditor.sceneintegration.HighlightedObject;
 import lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationError;
 import lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationSuccess;
+import lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationWarning;
 import lokenginesceneeditor.ui.composite.SceneEditor;
 import ru.lokincompany.lokengine.applications.applications.ApplicationDefault;
 import ru.lokincompany.lokengine.tools.saveworker.FileWorker;
 import ru.lokincompany.lokengine.tools.utilities.Vector2i;
 import ru.lokincompany.lokengine.tools.utilities.color.Color;
+
+import java.io.File;
 
 public class LESEApplication extends ApplicationDefault {
 
@@ -35,6 +38,8 @@ public class LESEApplication extends ApplicationDefault {
                 fileWorker.close();
 
                 sceneEditor.notificationListCanvas.addNotification(new NotificationSuccess("Загрузка успешна!\nОбъектов загружено: " + scene.getCountObjects()));
+            }else{
+                sceneEditor.notificationListCanvas.addNotification(new NotificationWarning("Файла сцены не существует по\nзаданному пути!"));
             }
         } catch (Exception e) {
             sceneEditor.notificationListCanvas.addNotification(new NotificationError("Загрузить сцену не удалось!"));
