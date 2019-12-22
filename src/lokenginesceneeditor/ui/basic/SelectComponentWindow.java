@@ -63,6 +63,8 @@ public class SelectComponentWindow extends GUISubWindow {
         listCanvas.addObject(particleSystemButton);
 
         GUIButton cancelButton = new GUIButton(new Vector2i(), new Vector2i(this.getSize().x, 25), Colors.engineBackgroundColor(), new GUIText(new Vector2i(), "Назад", Colors.white(), 0, 15), true);
+        cancelButton.setUnpressScript(guiButton -> this.hidden = true);
+
         this.ignoreCanvasUpdateOrder = true;
 
         this.canvas.addObject(panel);
