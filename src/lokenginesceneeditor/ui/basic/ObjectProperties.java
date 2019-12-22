@@ -40,7 +40,7 @@ public class ObjectProperties extends GUICanvas {
         panel = new GUIPanel(new Vector2i(), new Vector2i(), new Color(0.25f, 0.25f, 0.25f, 0.6f));
         panel.setSize(guiObject -> this.getSize());
 
-        nameField = new GUITextField(new Vector2i(), new Vector2i(size.x - 6, 20), "", "", Colors.white(), 0, 14, true, false);
+        nameField = new GUITextField(new Vector2i(), new Vector2i(size.x - 6, 20), "", Colors.white(), 0, 14, true);
 
         texts = new GUIListCanvas(new Vector2i(3, 30), new Vector2i(75, 100), new Vector2i(75, 14));
         textFields = new GUIListCanvas(new Vector2i(21, 30), new Vector2i(this.getSize().x - 18, 100), new Vector2i(this.getSize().x - 18, 14));
