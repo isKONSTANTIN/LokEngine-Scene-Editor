@@ -61,7 +61,7 @@ public class ObjectProperties extends GUICanvas {
                             break;
                         case "Sound component":
                             try {
-                                sceneObject.components.add(new SoundComponent(SoundLoader.loadWAV("")));
+                                sceneObject.components.add(new SoundComponent());
                             } catch (Exception e) {}
                             break;
                         case "Particle System component":
