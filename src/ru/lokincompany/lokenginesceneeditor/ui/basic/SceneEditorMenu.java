@@ -5,8 +5,8 @@ import ru.lokincompany.lokengine.gui.guiobjects.GUIButton;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIMenu;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
 import ru.lokincompany.lokengine.render.window.Window;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
+import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.LESEApplication;
 import ru.lokincompany.lokenginesceneeditor.ui.Colors;
 

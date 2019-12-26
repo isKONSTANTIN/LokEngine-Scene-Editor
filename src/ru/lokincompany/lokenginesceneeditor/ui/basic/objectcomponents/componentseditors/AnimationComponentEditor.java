@@ -1,10 +1,10 @@
 package ru.lokincompany.lokenginesceneeditor.ui.basic.objectcomponents.componentseditors;
 
-import ru.lokincompany.lokengine.components.AnimationComponent;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIFreeTextDrawer;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.sceneenvironment.components.AnimationComponent;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.ui.Colors;
 
 public class AnimationComponentEditor extends ComponentEditor {

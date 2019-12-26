@@ -1,9 +1,9 @@
 package ru.lokincompany.lokenginesceneeditor.ui;
 
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
-import ru.lokincompany.lokengine.tools.utilities.color.ColorRGB;
+import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.color.ColorRGB;
 
-public class Colors extends ru.lokincompany.lokengine.tools.utilities.color.Colors {
+public class Colors extends ru.lokincompany.lokengine.tools.color.Colors {
 
     public static Color error() {
         return new ColorRGB(225, 45, 45);

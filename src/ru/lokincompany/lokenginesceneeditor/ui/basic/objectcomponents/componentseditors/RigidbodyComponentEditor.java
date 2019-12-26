@@ -1,11 +1,11 @@
 package ru.lokincompany.lokenginesceneeditor.ui.basic.objectcomponents.componentseditors;
 
-import ru.lokincompany.lokengine.components.RigidbodyComponent;
-import ru.lokincompany.lokengine.components.additionalobjects.rigidbody.Rigidbody;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIFreeTextDrawer;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.sceneenvironment.components.RigidbodyComponent;
+import ru.lokincompany.lokengine.sceneenvironment.components.additionalobjects.rigidbody.Rigidbody;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class RigidbodyComponentEditor extends ComponentEditor {
 

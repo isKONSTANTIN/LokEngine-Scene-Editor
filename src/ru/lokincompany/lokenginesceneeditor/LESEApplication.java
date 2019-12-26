@@ -1,9 +1,9 @@
 package ru.lokincompany.lokenginesceneeditor;
 
-import ru.lokincompany.lokengine.applications.applications.ApplicationDefault;
+import ru.lokincompany.lokengine.applications.ApplicationDefault;
+import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.saveworker.FileWorker;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.sceneintegration.HighlightedObject;
 import ru.lokincompany.lokenginesceneeditor.sceneintegration.KeyboardBinds;
 import ru.lokincompany.lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationError;

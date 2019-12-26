@@ -7,7 +7,7 @@ import ru.lokincompany.lokengine.gui.guiobjects.GUIButton;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIPanel;
 import ru.lokincompany.lokengine.gui.guiobjects.GUISubWindow;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.misc.ComponentAddScript;
 import ru.lokincompany.lokenginesceneeditor.ui.Colors;
 

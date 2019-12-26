@@ -1,12 +1,12 @@
 package ru.lokincompany.lokenginesceneeditor.ui.composite;
 
-import ru.lokincompany.lokengine.applications.applications.ApplicationDefault;
+import ru.lokincompany.lokengine.applications.ApplicationDefault;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPosition;
 import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPositionAlgorithms;
 import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.LESEApplication;
 import ru.lokincompany.lokenginesceneeditor.sceneintegration.HighlightedObject;
 import ru.lokincompany.lokenginesceneeditor.ui.basic.ObjectProperties;

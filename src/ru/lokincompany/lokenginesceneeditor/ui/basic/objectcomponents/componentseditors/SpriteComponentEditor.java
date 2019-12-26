@@ -1,13 +1,13 @@
 package ru.lokincompany.lokenginesceneeditor.ui.basic.objectcomponents.componentseditors;
 
-import ru.lokincompany.lokengine.components.SpriteComponent;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.canvases.GUIFullFlexibleListCanvas;
 import ru.lokincompany.lokengine.gui.guiobjects.GUISpace;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
 import ru.lokincompany.lokengine.gui.guiobjects.GUITextField;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.sceneenvironment.components.SpriteComponent;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.LESEApplication;
 import ru.lokincompany.lokenginesceneeditor.ui.Colors;
 import ru.lokincompany.lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationWarning;

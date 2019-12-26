@@ -1,7 +1,5 @@
 package ru.lokincompany.lokenginesceneeditor.ui.basic;
 
-import ru.lokincompany.lokengine.components.*;
-import ru.lokincompany.lokengine.components.componentstools.ShapeCreator;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.additionalobjects.guipositions.GUIPosition;
@@ -11,8 +9,10 @@ import ru.lokincompany.lokengine.gui.guiobjects.*;
 import ru.lokincompany.lokengine.loaders.SpriteLoader;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
-import ru.lokincompany.lokengine.tools.utilities.color.Color;
+import ru.lokincompany.lokengine.sceneenvironment.components.*;
+import ru.lokincompany.lokengine.sceneenvironment.components.componentstools.ShapeCreator;
+import ru.lokincompany.lokengine.tools.color.Color;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.LESEApplication;
 import ru.lokincompany.lokenginesceneeditor.sceneintegration.HighlightedObject;
 import ru.lokincompany.lokenginesceneeditor.ui.Colors;

@@ -4,7 +4,7 @@ import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.canvases.GUIListCanvas;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIObject;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.tools.utilities.Vector2i;
+import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationObject;
 
 public class NotificationListCanvas extends GUIListCanvas {
