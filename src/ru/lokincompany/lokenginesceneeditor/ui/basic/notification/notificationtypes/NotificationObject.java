@@ -49,6 +49,7 @@ public class NotificationObject extends GUIObject {
 
         if (System.currentTimeMillis() - addTime < showTime * 1000) {
             panel.update(partsBuilder, properties);
+            text.setMaxSize(panel.getSize());
             text.update(partsBuilder, properties);
         }
     }

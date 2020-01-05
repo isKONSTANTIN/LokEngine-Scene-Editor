@@ -37,7 +37,7 @@ public class LESEApplication extends ApplicationDefault {
 
                 sceneEditor.notificationListCanvas.addNotification(new NotificationSuccess("Загрузка успешна!\nОбъектов загружено: " + scene.getCountObjects()));
             } else {
-                sceneEditor.notificationListCanvas.addNotification(new NotificationWarning("Файла сцены не существует по\nзаданному пути!"));
+                sceneEditor.notificationListCanvas.addNotification(new NotificationWarning("Файла сцены не существует по заданному пути!"));
             }
         } catch (Exception e) {
             sceneEditor.notificationListCanvas.addNotification(new NotificationError("Загрузить сцену не удалось!"));
