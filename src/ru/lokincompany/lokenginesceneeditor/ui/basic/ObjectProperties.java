@@ -8,9 +8,9 @@ import ru.lokincompany.lokengine.gui.canvases.GUIListCanvas;
 import ru.lokincompany.lokengine.gui.guiobjects.*;
 import ru.lokincompany.lokengine.loaders.SpriteLoader;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
-import ru.lokincompany.lokengine.sceneenvironment.components.*;
-import ru.lokincompany.lokengine.sceneenvironment.components.componentstools.ShapeCreator;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.SceneObject;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.*;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.componentstools.ShapeCreator;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.LESEApplication;
@@ -73,19 +73,19 @@ public class ObjectProperties extends GUICanvas {
         GUILocationAlgorithm fieldSize = guiObject -> new Vector2i(textFields.getSize().x, 14);
         Color fieldBackground = new Color(0, 0, 0, 0);
 
-        GUITextField XField = new GUITextField(new Vector2i(), new Vector2i(), "", Colors.white(), 0, 14);
+        GUITextField XField = new GUITextField("", Colors.white(), 0, 14);
         XField.setSize(fieldSize);
         XField.setBackgroundColor(fieldBackground);
 
-        GUITextField YField = new GUITextField(new Vector2i(), new Vector2i(), "", Colors.white(), 0, 14);
+        GUITextField YField = new GUITextField("", Colors.white(), 0, 14);
         YField.setSize(fieldSize);
         YField.setBackgroundColor(fieldBackground);
 
-        GUITextField RField = new GUITextField(new Vector2i(), new Vector2i(), "", Colors.white(), 0, 14);
+        GUITextField RField = new GUITextField("", Colors.white(), 0, 14);
         RField.setSize(fieldSize);
         RField.setBackgroundColor(fieldBackground);
 
-        GUITextField RPField = new GUITextField(new Vector2i(), new Vector2i(), "", Colors.white(), 0, 14);
+        GUITextField RPField = new GUITextField("", Colors.white(), 0, 14);
         RPField.setSize(fieldSize);
         RPField.setBackgroundColor(fieldBackground);
 

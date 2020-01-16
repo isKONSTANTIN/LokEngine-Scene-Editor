@@ -1,6 +1,6 @@
 package ru.lokincompany.lokenginesceneeditor.sceneintegration;
 
-import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.SceneObject;
 
 public class HighlightedObject {
 

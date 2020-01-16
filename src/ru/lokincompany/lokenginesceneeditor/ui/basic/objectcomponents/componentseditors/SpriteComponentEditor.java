@@ -6,7 +6,7 @@ import ru.lokincompany.lokengine.gui.guiobjects.GUISpace;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
 import ru.lokincompany.lokengine.gui.guiobjects.GUITextField;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.sceneenvironment.components.SpriteComponent;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.SpriteComponent;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.LESEApplication;
 import ru.lokincompany.lokenginesceneeditor.ui.Colors;

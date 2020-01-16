@@ -1,5 +1,7 @@
 package ru.lokincompany.lokenginesceneeditor;
 
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.system.Checks;
 import ru.lokincompany.lokengine.applications.ApplicationDefault;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.saveworker.FileWorker;
@@ -17,7 +19,7 @@ public class LESEApplication extends ApplicationDefault {
     public SceneEditor sceneEditor;
 
     LESEApplication() {
-        start(false, true, true, new Vector2i(1280, 720), "LokEngine Scene Editor");
+        start(false, true, false, new Vector2i(1280, 720), "LokEngine Scene Editor");
         instance = this;
     }
 

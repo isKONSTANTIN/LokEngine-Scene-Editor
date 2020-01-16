@@ -2,7 +2,7 @@ package ru.lokincompany.lokenginesceneeditor.sceneintegration;
 
 import org.lwjgl.util.vector.Vector2f;
 import ru.lokincompany.lokengine.render.Camera;
-import ru.lokincompany.lokengine.sceneenvironment.SceneObject;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.SceneObject;
 import ru.lokincompany.lokengine.tools.input.Keyboard;
 import ru.lokincompany.lokengine.tools.input.Mouse;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;

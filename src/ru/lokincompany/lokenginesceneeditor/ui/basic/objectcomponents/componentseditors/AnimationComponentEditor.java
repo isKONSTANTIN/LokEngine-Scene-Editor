@@ -3,7 +3,7 @@ package ru.lokincompany.lokenginesceneeditor.ui.basic.objectcomponents.component
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIFreeTextDrawer;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
-import ru.lokincompany.lokengine.sceneenvironment.components.AnimationComponent;
+import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.AnimationComponent;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.ui.Colors;
 
