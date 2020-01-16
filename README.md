@@ -1,9 +1,9 @@
  # LESE (LokEngine Scene Editor)
-![](https://img.shields.io/github/license/lokin135/LokEngine-Scene-Editor?color=green&style=flat-square)
-![](https://img.shields.io/github/issues/lokin135/LokEngine-Scene-Editor?color=green&style=flat-square)
+![](https://img.shields.io/github/license/Lokin-Company/LokEngine-Scene-Editor?color=green&style=flat-square)
+![](https://img.shields.io/github/issues/Lokin-Company/LokEngine-Scene-Editor?color=green&style=flat-square)
 ![](https://img.shields.io/static/v1?label=community&message=ru&color=green&style=flat-square)
-![](https://img.shields.io/github/commit-activity/m/lokin135/LokEngine-Scene-Editor?style=flat-square)
-![](https://img.shields.io/github/commits-since/lokin135/LokEngine-Scene-Editor/latest?style=flat-square)
+![](https://img.shields.io/github/commit-activity/m/Lokin-Company/LokEngine-Scene-Editor?style=flat-square)
+![](https://img.shields.io/github/commits-since/Lokin-Company/LokEngine-Scene-Editor/latest?style=flat-square)
 
 ![](https://img.shields.io/badge/-Window-blue)
 ![](https://img.shields.io/badge/-Linux-blue)
