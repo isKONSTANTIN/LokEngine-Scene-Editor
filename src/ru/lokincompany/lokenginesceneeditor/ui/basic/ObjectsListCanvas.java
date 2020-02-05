@@ -11,6 +11,8 @@ import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.Scene;
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.SceneObject;
+import ru.lokincompany.lokengine.tools.FontPrefs;
+import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.sceneintegration.HighlightedObject;
@@ -36,11 +38,11 @@ public class ObjectsListCanvas extends GUICanvas {
         scrollCanvas = new GUIScrollCanvas(new Vector2i(0, 10), new Vector2i(), new Vector2i(), null);
         scrollCanvas.setSize(guiObject -> new Vector2i(this.getSize().x, this.getSize().y - guiObject.getPosition().y));
 
-        textDrawer = new GUIFreeTextDrawer();
-        textObjectsCount = new GUIText(new Vector2i(), "0 объектов", Colors.white(), 0, 11);
+        textDrawer = new GUIFreeTextDrawer(new FontPrefs().setSize(12));
+        textObjectsCount = new GUIText(new Vector2i(), "0 объектов", new FontPrefs());
         scrollCanvas.addObject(textDrawer);
 
-        buttonAddObject = new GUIButton(new Vector2i(), new Vector2i(20, 20), new Color(0.1f, 0.1f, 0.1f, 0.7f), new GUIText(new Vector2i(), "+", Colors.white(), 0, 10));
+        buttonAddObject = new GUIButton(new Vector2i(), new Vector2i(20, 20), new Color(0.1f, 0.1f, 0.1f, 0.7f), new GUIText("+"));
         buttonAddObject.setUnpressScript(guiButton -> scene.addObject(new SceneObject()));
 
         this.addObject(panel);

@@ -36,7 +36,7 @@ public class SceneEditor extends GUICanvas {
         objectsList = new ObjectsListCanvas(new Vector2i(), new Vector2i(150, 0), application.scene);
         objectsList.setSize(guiObject -> new Vector2i(guiObject.getSize().x, this.application.window.getResolution().y));
 
-        menu = new SceneEditorMenu(new Vector2i(), 12, application.window);
+        menu = new SceneEditorMenu(new Vector2i(), 12, application.canvas);
 
         objectProperties = new ObjectProperties(new Vector2i(), new Vector2i(150, 0));
         objectProperties.setSize(guiObject -> new Vector2i(guiObject.getSize().x, this.application.window.getResolution().y));
@@ -45,7 +45,7 @@ public class SceneEditor extends GUICanvas {
         notificationListCanvas.setSize(guiObject -> new Vector2i(200, application.window.getResolution().y));
 
         selectComponentWindow = new SelectComponentWindow(new Vector2i());
-        selectComponentWindow.setPosition(GUIPositionAlgorithms.getAlgorithm(application.window.getCanvas(), GUIPosition.Center).calculate(selectComponentWindow));
+        selectComponentWindow.setPosition(GUIPositionAlgorithms.getAlgorithm(application.canvas, GUIPosition.Center).calculate(selectComponentWindow));
         selectComponentWindow.hidden = true;
 
         mainCanvas.addObject(objectsList);

@@ -5,6 +5,7 @@ import ru.lokincompany.lokengine.gui.canvases.GUIAutoResizableCanvas;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIPanel;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
+import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.ui.Colors;
@@ -19,7 +20,7 @@ public class ComponentEditor extends GUIAutoResizableCanvas {
         super(new Vector2i());
         this.autoX = false;
 
-        title = new GUIText(new Vector2i(), name, Colors.white(), 0, 10);
+        title = new GUIText(name, new FontPrefs().setSize(10));
         panel = new GUIPanel(new Vector2i(), new Vector2i(), new Color(0.4f, 0.4f, 0.4f, 0.3f));
         canvas = new GUIAutoResizableCanvas(new Vector2i(0, title.getSize().y + 2));
 

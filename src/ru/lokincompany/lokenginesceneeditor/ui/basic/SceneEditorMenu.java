@@ -1,5 +1,6 @@
 package ru.lokincompany.lokenginesceneeditor.ui.basic;
 
+import ru.lokincompany.lokengine.gui.canvases.GUICanvas;
 import ru.lokincompany.lokengine.gui.canvases.GUIListCanvas;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIButton;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIMenu;
@@ -14,13 +15,13 @@ public class SceneEditorMenu extends GUIMenu {
 
     GUIListCanvas filePoint;
 
-    public SceneEditorMenu(Vector2i position, int titleSize, Window window) {
+    public SceneEditorMenu(Vector2i position, int titleSize, GUICanvas source) {
         super(position, new Vector2i(), titleSize, Colors.engineMainColor(), Colors.white());
-        this.setSize(guiObject -> new Vector2i(window.getResolution().x, titleSize));
+        this.setSize(guiObject -> new Vector2i(source.getSize().x, titleSize));
 
         setupFilePoint();
 
-        window.getCanvas().addObject(filePoint);
+        source.addObject(filePoint);
     }
 
     private void setupFilePoint() {
@@ -30,7 +31,7 @@ public class SceneEditorMenu extends GUIMenu {
         buttonsColor.alpha -= 0.3f;
 
         GUIButton openButton = new GUIButton(new Vector2i(), new Vector2i(), buttonsColor,
-                new GUIText(new Vector2i(), "Открыть сцену (./Scene.save)", Colors.white(), 0, 12), false
+                new GUIText(new Vector2i(), "Открыть сцену (./Scene.save)"), false
         );
         openButton.setUnpressScript(guiButton -> {
             LESEApplication.getInstance().loadScene("./Scene.save");
@@ -38,7 +39,7 @@ public class SceneEditorMenu extends GUIMenu {
         });
 
         GUIButton saveButton = new GUIButton(new Vector2i(), new Vector2i(), buttonsColor,
-                new GUIText(new Vector2i(), "Сохранить сцену (./Scene.save)", Colors.white(), 0, 12), false
+                new GUIText(new Vector2i(), "Сохранить сцену (./Scene.save)"), false
         );
         saveButton.setUnpressScript(guiButton -> {
             LESEApplication.getInstance().saveScene("./Scene.save");

@@ -7,6 +7,7 @@ import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
 import ru.lokincompany.lokengine.gui.guiobjects.GUITextField;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.SpriteComponent;
+import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.LESEApplication;
 import ru.lokincompany.lokenginesceneeditor.ui.Colors;
@@ -23,11 +24,14 @@ public class SpriteComponentEditor extends ComponentEditor {
         list.autoX = false;
         list.setSize(guiObject -> new Vector2i(getSize().x - 3, guiObject.getSize().y));
 
-        list.addObject(new GUIText(new Vector2i(), "Путь спрайта:", Colors.engineMainColor(), 0, 10));
-        list.addObject(new GUITextField(new Vector2i(), new Vector2i(), "", Colors.white(), 0, 10));
+        FontPrefs fontPrefs = new FontPrefs().setColor(Colors.engineMainColor()).setSize(10);
+        FontPrefs fieldFontPrefs = new FontPrefs().setSize(10);
+
+        list.addObject(new GUIText(new Vector2i(), "Путь спрайта:", fontPrefs));
+        list.addObject(new GUITextField("", fieldFontPrefs));
         list.addObject(new GUISpace(new Vector2i(), new Vector2i(0, 5)));
-        list.addObject(new GUIText(new Vector2i(), "Размер спрайта:", Colors.engineMainColor(), 0, 10));
-        list.addObject(new GUITextField(new Vector2i(), new Vector2i(), "", Colors.white(), 0, 10));
+        list.addObject(new GUIText(new Vector2i(), "Размер спрайта:", fontPrefs));
+        list.addObject(new GUITextField("", fieldFontPrefs));
 
         GUITextField pathField = (GUITextField) list.getObject(1);
         GUITextField sizeField = (GUITextField) list.getObject(4);

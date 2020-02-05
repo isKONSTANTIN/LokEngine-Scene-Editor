@@ -65,15 +65,20 @@ public class LESEApplication extends ApplicationDefault {
     protected void updateEvent() {
         HighlightedObject.update();
         KeyboardBinds.update();
+        try {
+            window.getCamera().position = HighlightedObject.getHighlightedObject().position;
+        }catch (Exception e){
+
+        }
     }
 
     @Override
     protected void initEvent() {
-        applicationRuntime.setSpeedEngine(0);
+        applicationRuntime.setSpeedEngine(1);
         window.getFrameBuilder().backgroundColor = new Color(0.15F, 0.15F, 0.15F, 1.0F);
         window.setCloseEvent((window1, objects) -> close());
 
         sceneEditor = new SceneEditor();
-        window.getCanvas().addObject(sceneEditor);
+        canvas.addObject(sceneEditor);
     }
 }
