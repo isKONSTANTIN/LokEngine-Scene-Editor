@@ -5,6 +5,7 @@ import ru.lokincompany.lokengine.gui.guiobjects.GUIObject;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIPanel;
 import ru.lokincompany.lokengine.gui.guiobjects.GUIText;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
+import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.ui.Colors;
@@ -18,7 +19,7 @@ public class NotificationObject extends GUIObject {
     public NotificationObject(String text, Color color, int showTime) {
         super(new Vector2i(), new Vector2i());
 
-        this.text = new GUIText(new Vector2i(), text, Colors.white(), 0, 11);
+        this.text = new GUIText(new Vector2i(), text, new FontPrefs().setSize(11));
         this.panel = new GUIPanel(new Vector2i(), new Vector2i(), color);
 
         this.panel.setPosition(guiObject -> getPosition());

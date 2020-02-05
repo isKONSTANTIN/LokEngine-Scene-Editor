@@ -17,7 +17,7 @@ public class RigidbodyComponentEditor extends ComponentEditor {
         super("Rigidbody component");
 
         this.component = component;
-        textDrawer = new GUIFreeTextDrawer(0, 10, true);
+        textDrawer = new GUIFreeTextDrawer();
         fontHeight = textDrawer.getFont().getFontHeight();
         textDrawer.setSize(guiObject -> new Vector2i(getSize().x, fontHeight * 4));
 

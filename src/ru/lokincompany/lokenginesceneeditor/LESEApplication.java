@@ -74,6 +74,6 @@ public class LESEApplication extends ApplicationDefault {
         window.setCloseEvent((window1, objects) -> close());
 
         sceneEditor = new SceneEditor();
-        window.getCanvas().addObject(sceneEditor);
+        canvas.addObject(sceneEditor);
     }
 }
