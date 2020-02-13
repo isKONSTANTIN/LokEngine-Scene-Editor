@@ -19,7 +19,7 @@ public class LESEApplication extends ApplicationDefault {
     public SceneEditor sceneEditor;
 
     LESEApplication() {
-        start(false, true, false, new Vector2i(1280, 720), "LokEngine Scene Editor");
+        start(false, true, true, new Vector2i(1280, 720), "LokEngine Scene Editor");
         instance = this;
     }
 

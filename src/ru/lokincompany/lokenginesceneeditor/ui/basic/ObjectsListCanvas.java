@@ -35,11 +35,12 @@ public class ObjectsListCanvas extends GUICanvas {
         panel = new GUIPanel(new Vector2i(), new Vector2i(), new Color(0.25f, 0.25f, 0.25f, 0.6f));
         panel.setSize(guiObject -> this.getSize());
 
-        scrollCanvas = new GUIScrollCanvas(new Vector2i(0, 10), new Vector2i(), new Vector2i(), null);
+        scrollCanvas = new GUIScrollCanvas(new Vector2i(0, 20), new Vector2i(), new Vector2i(), null);
         scrollCanvas.setSize(guiObject -> new Vector2i(this.getSize().x, this.getSize().y - guiObject.getPosition().y));
 
         textDrawer = new GUIFreeTextDrawer(new FontPrefs().setSize(12));
         textObjectsCount = new GUIText(new Vector2i(), "0 объектов", new FontPrefs());
+
         scrollCanvas.addObject(textDrawer);
 
         buttonAddObject = new GUIButton(new Vector2i(), new Vector2i(20, 20), new Color(0.1f, 0.1f, 0.1f, 0.7f), new GUIText("+"));
@@ -61,7 +62,7 @@ public class ObjectsListCanvas extends GUICanvas {
         int windowY = parentProperties.window.getResolution().y;
         for (int i = 0; i < objectsCount; i++) {
             SceneObject sceneObject = scene.getObjectByID(i);
-            Vector2i textPos = new Vector2i(2, textGap.y * (i + 1));
+            Vector2i textPos = new Vector2i(2, textGap.y * i);
             Vector2i globalPos = new Vector2i(scrollCanvas.properties.globalPosition.x + textPos.x, scrollCanvas.properties.globalPosition.y + textPos.y);
             if (globalPos.y > 0 && globalPos.y < windowY) {
                 boolean selected = parentProperties.window.getMouse().inField(globalPos, new Vector2i(getSize().x, textGap.y));
