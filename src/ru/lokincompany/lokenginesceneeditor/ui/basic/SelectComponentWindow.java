@@ -13,62 +13,44 @@ import ru.lokincompany.lokenginesceneeditor.misc.ComponentAddScript;
 import ru.lokincompany.lokenginesceneeditor.ui.Colors;
 
 public class SelectComponentWindow extends GUISubWindow {
-    GUIPanel panel;
     GUIListCanvas listCanvas;
     ComponentAddScript script;
     GUIButtonScript buttonsScript;
 
     public SelectComponentWindow(Vector2i position) {
-        super(position, new Vector2i(250, 200), true, new GUIText(new Vector2i(), "Выбрать компонент"), new GUIPanel(new Vector2i(), new Vector2i()));
+        setSize(new Vector2i(250, 200)).setPosition(position).getTitleText().setText("Выбрать компонент");
 
         buttonsScript = guiButton -> {
             this.hidden = true;
-            script.execute(guiButton.text.getText());
+            script.execute(guiButton.getText().getText());
         };
-
-        panel = new GUIPanel(new Vector2i(), new Vector2i());
-        panel.setSize(guiObject -> this.getSize());
 
         listCanvas = new GUIListCanvas(new Vector2i(), this.getSize(), new Vector2i(this.getSize().x, 20), 5);
 
         FontPrefs fontPrefs = new FontPrefs().setSize(15);
 
-        GUIButton spriteButton = new GUIButton(new Vector2i(), new Vector2i(), Colors.engineBackgroundColor(),
-                new GUIText(new Vector2i(), "Sprite component", fontPrefs), true
-        );
-        spriteButton.setUnpressScript(buttonsScript);
-        listCanvas.addObject(spriteButton);
+        listCanvas.addObject(new GUIButton()
+                .setText(new GUIText(fontPrefs).setText("Sprite component")).setUnpressScript(buttonsScript));
 
-        GUIButton animationButton = new GUIButton(new Vector2i(), new Vector2i(), Colors.engineBackgroundColor(),
-                new GUIText(new Vector2i(), "Animation component", fontPrefs), true
-        );
-        animationButton.setUnpressScript(buttonsScript);
-        listCanvas.addObject(animationButton);
+        listCanvas.addObject(new GUIButton()
+                .setText(new GUIText(fontPrefs).setText("Animation component")).setUnpressScript(buttonsScript));
 
-        GUIButton rigidbodyButton = new GUIButton(new Vector2i(), new Vector2i(), Colors.engineBackgroundColor(),
-                new GUIText(new Vector2i(), "Rigidbody component", fontPrefs), true
-        );
-        rigidbodyButton.setUnpressScript(buttonsScript);
-        listCanvas.addObject(rigidbodyButton);
+        listCanvas.addObject(new GUIButton()
+                .setText(new GUIText(fontPrefs).setText("Rigidbody component")).setUnpressScript(buttonsScript));
 
-        GUIButton soundButton = new GUIButton(new Vector2i(), new Vector2i(), Colors.engineBackgroundColor(),
-                new GUIText(new Vector2i(), "Sound component", fontPrefs), true
-        );
-        soundButton.setUnpressScript(buttonsScript);
-        listCanvas.addObject(soundButton);
+        listCanvas.addObject(new GUIButton()
+                .setText(new GUIText(fontPrefs).setText("Sound component")).setUnpressScript(buttonsScript));
 
-        GUIButton particleSystemButton = new GUIButton(new Vector2i(), new Vector2i(), Colors.engineBackgroundColor(),
-                new GUIText(new Vector2i(), "Particle System component", fontPrefs), true
-        );
-        particleSystemButton.setUnpressScript(buttonsScript);
-        listCanvas.addObject(particleSystemButton);
+        listCanvas.addObject(new GUIButton()
+                .setText(new GUIText(fontPrefs).setText("Particle System component")).setUnpressScript(buttonsScript));
 
-        GUIButton cancelButton = new GUIButton(new Vector2i(), new Vector2i(this.getSize().x, 25), Colors.engineBackgroundColor(), new GUIText(new Vector2i(), "Назад", fontPrefs), true);
-        cancelButton.setUnpressScript(guiButton -> this.hidden = true);
+        GUIButton cancelButton = new GUIButton()
+                .setText(new GUIText(fontPrefs).setText("Назад"))
+                .setUnpressScript(guiButton -> this.hidden = true)
+                .setSize(new Vector2i(this.getSize().x, 25));
 
         this.ignoreCanvasUpdateOrder = true;
 
-        this.canvas.addObject(panel);
         this.canvas.addObject(listCanvas);
         this.canvas.addObject(cancelButton, GUIPosition.BottomCenter);
     }

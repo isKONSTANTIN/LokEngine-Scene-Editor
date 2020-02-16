@@ -5,6 +5,7 @@ import ru.lokincompany.lokengine.gui.guiobjects.GUIFreeTextDrawer;
 import ru.lokincompany.lokengine.render.frame.PartsBuilder;
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.RigidbodyComponent;
 import ru.lokincompany.lokengine.sceneenvironment.defaultenvironment.components.additionalobjects.rigidbody.Rigidbody;
+import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 
 public class RigidbodyComponentEditor extends ComponentEditor {
@@ -17,7 +18,7 @@ public class RigidbodyComponentEditor extends ComponentEditor {
         super("Rigidbody component");
 
         this.component = component;
-        textDrawer = new GUIFreeTextDrawer();
+        textDrawer = new GUIFreeTextDrawer(new FontPrefs().setSize(10));
         fontHeight = textDrawer.getFont().getFontHeight();
         textDrawer.setSize(guiObject -> new Vector2i(getSize().x, fontHeight * 4));
 

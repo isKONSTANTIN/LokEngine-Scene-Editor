@@ -33,40 +33,42 @@ public class ObjectProperties extends GUICanvas {
     public ObjectProperties(Vector2i position, Vector2i size) {
         super(position, size);
 
-        panel = new GUIPanel(new Vector2i(), new Vector2i(), new Color(0.25f, 0.25f, 0.25f, 0.6f));
+        panel = new GUIPanel();
         panel.setSize(guiObject -> this.getSize());
 
-        nameField = new GUITextField(new Vector2i(), new Vector2i(size.x - 6, 20),"");
+        nameField = new GUITextField().setCentralizeText(true).setSize(new Vector2i(size.x, 20));
 
         texts = new GUIListCanvas(new Vector2i(3, 30), new Vector2i(75, 100), new Vector2i(75, 14));
         textFields = new GUIListCanvas(new Vector2i(21, 30), new Vector2i(this.getSize().x - 18, 100), new Vector2i(this.getSize().x - 18, 14));
 
-        addButton = new GUIButton(new Vector2i(0, texts.getPosition().y + texts.getSize().y), new Vector2i(0, 14), Colors.engineBackgroundColor(), new GUIText(new Vector2i(), "Добавить компонент", new FontPrefs().setSize(10)));
-        addButton.setSize(guiObject -> new Vector2i(this.getSize().x, 14));
-        addButton.setUnpressScript(guiButton -> LESEApplication.getInstance().sceneEditor.selectComponentWindow.sendRequest(
-                componentName -> {
-                    switch (componentName) {
-                        case "Sprite component":
-                            sceneObject.components.add(new SpriteComponent(""));
-                            break;
-                        case "Animation component":
-                            sceneObject.components.add(new AnimationComponent());
-                            break;
-                        case "Rigidbody component":
-                            sceneObject.components.add(new RigidbodyComponent(ShapeCreator.CreateCircleShape(100)));
-                            break;
-                        case "Sound component":
-                            try {
-                                sceneObject.components.add(new SoundComponent());
-                            } catch (Exception e) {
+        addButton = new GUIButton()
+                .setText(new GUIText(new FontPrefs().setSize(10)).setText("Добавить компонент"))
+                .setUnpressScript(guiButton -> LESEApplication.getInstance().sceneEditor.selectComponentWindow.sendRequest(
+                        componentName -> {
+                            switch (componentName) {
+                                case "Sprite component":
+                                    sceneObject.components.add(new SpriteComponent(""));
+                                    break;
+                                case "Animation component":
+                                    sceneObject.components.add(new AnimationComponent());
+                                    break;
+                                case "Rigidbody component":
+                                    sceneObject.components.add(new RigidbodyComponent(ShapeCreator.CreateCircleShape(100)));
+                                    break;
+                                case "Sound component":
+                                    try {
+                                        sceneObject.components.add(new SoundComponent());
+                                    } catch (Exception e) {
+                                    }
+                                    break;
+                                case "Particle System component":
+                                    sceneObject.components.add(new ParticleSystemComponent(new Sprite("")));
+                                    break;
                             }
-                            break;
-                        case "Particle System component":
-                            sceneObject.components.add(new ParticleSystemComponent(new Sprite("")));
-                            break;
-                    }
-                }
-        ));
+                        })
+                )
+                .setPosition(new Vector2i(0, texts.getPosition().y + texts.getSize().y))
+                .setSize(guiObject -> new Vector2i(this.getSize().x, 14));
 
         componentsList = new ObjectComponents(new Vector2i(0, addButton.getPosition().y + addButton.getSize().y), new Vector2i());
         componentsList.setSize(guiObject -> new Vector2i(this.getSize().x, this.getSize().y - componentsList.getPosition().y));
@@ -74,19 +76,19 @@ public class ObjectProperties extends GUICanvas {
         GUILocationAlgorithm fieldSize = guiObject -> new Vector2i(textFields.getSize().x, 14);
         Color fieldBackground = new Color(0, 0, 0, 0);
 
-        GUITextField XField = new GUITextField("");
+        GUITextField XField = new GUITextField();
         XField.setSize(fieldSize);
         XField.setBackgroundColor(fieldBackground);
 
-        GUITextField YField = new GUITextField("");
+        GUITextField YField = new GUITextField();
         YField.setSize(fieldSize);
         YField.setBackgroundColor(fieldBackground);
 
-        GUITextField RField = new GUITextField("");
+        GUITextField RField = new GUITextField();
         RField.setSize(fieldSize);
         RField.setBackgroundColor(fieldBackground);
 
-        GUITextField RPField = new GUITextField("");
+        GUITextField RPField = new GUITextField();
         RPField.setSize(fieldSize);
         RPField.setBackgroundColor(fieldBackground);
 
@@ -101,7 +103,7 @@ public class ObjectProperties extends GUICanvas {
         XField.setInactiveScript(guiTextField -> {
             if (sceneObject != null)
                 try {
-                    guiTextField.updateText(String.valueOf(sceneObject.position.x));
+                    guiTextField.setText(String.valueOf(sceneObject.position.x));
                 } catch (Exception e) {
                 }
         });
@@ -117,7 +119,7 @@ public class ObjectProperties extends GUICanvas {
         YField.setInactiveScript(guiTextField -> {
             if (sceneObject != null)
                 try {
-                    guiTextField.updateText(String.valueOf(sceneObject.position.y));
+                    guiTextField.setText(String.valueOf(sceneObject.position.y));
                 } catch (Exception e) {
                 }
         });
@@ -133,7 +135,7 @@ public class ObjectProperties extends GUICanvas {
         RField.setInactiveScript(guiTextField -> {
             if (sceneObject != null)
                 try {
-                    guiTextField.updateText(String.valueOf(sceneObject.rollRotation));
+                    guiTextField.setText(String.valueOf(sceneObject.rollRotation));
                 } catch (Exception e) {
                 }
         });
@@ -149,7 +151,7 @@ public class ObjectProperties extends GUICanvas {
         RPField.setInactiveScript(guiTextField -> {
             if (sceneObject != null)
                 try {
-                    guiTextField.updateText(String.valueOf(sceneObject.renderPriority));
+                    guiTextField.setText(String.valueOf(sceneObject.renderPriority));
                 } catch (Exception e) {
                 }
         });
@@ -165,7 +167,7 @@ public class ObjectProperties extends GUICanvas {
         nameField.setInactiveScript(guiTextField -> {
             if (sceneObject != null)
                 try {
-                    guiTextField.updateText(sceneObject.name);
+                    guiTextField.setText(sceneObject.name);
                 } catch (Exception e) {
                 }
         });
@@ -177,12 +179,12 @@ public class ObjectProperties extends GUICanvas {
         textFields.addObject(new GUISpace(new Vector2i(), new Vector2i(0, 4)));
         textFields.addObject(RPField);
 
-        texts.addObject(new GUIText(new Vector2i(), "X:"));
-        texts.addObject(new GUIText(new Vector2i(), "Y:"));
+        texts.addObject(new GUIText().setText("X:"));
+        texts.addObject(new GUIText().setText("Y:"));
         texts.addObject(new GUISpace(new Vector2i(), new Vector2i(0, 4)));
-        texts.addObject(new GUIText(new Vector2i(), "R:"));
+        texts.addObject(new GUIText().setText("R:"));
         texts.addObject(new GUISpace(new Vector2i(), new Vector2i(0, 4)));
-        texts.addObject(new GUIText(new Vector2i(), "RP:", new FontPrefs().setSize(10)));
+        texts.addObject(new GUIText(new FontPrefs().setSize(10)).setText("RP:"));
 
         this.addObject(panel);
         this.addObject(nameField, GUIPosition.TopCenter);

@@ -29,14 +29,14 @@ public class SceneEditor extends GUICanvas {
         super(new Vector2i(), new Vector2i());
         this.application = LESEApplication.getInstance();
 
-        mainCanvas = new GUICanvas(new Vector2i(0, 12), new Vector2i());
-        mainCanvas.setSize(guiObject -> new Vector2i(this.application.window.getResolution().x, this.application.window.getResolution().y - 12));
+        mainCanvas = new GUICanvas(new Vector2i(0, 15), new Vector2i());
+        mainCanvas.setSize(guiObject -> new Vector2i(this.application.window.getResolution().x, this.application.window.getResolution().y - 15));
         setSize(guiObject -> this.application.window.getResolution());
 
         objectsList = new ObjectsListCanvas(new Vector2i(), new Vector2i(150, 0), application.scene);
         objectsList.setSize(guiObject -> new Vector2i(guiObject.getSize().x, this.application.window.getResolution().y));
 
-        menu = new SceneEditorMenu(new Vector2i(), 12, application.canvas);
+        menu = new SceneEditorMenu(new Vector2i(), 14, application.canvas);
 
         objectProperties = new ObjectProperties(new Vector2i(), new Vector2i(150, 0));
         objectProperties.setSize(guiObject -> new Vector2i(guiObject.getSize().x, this.application.window.getResolution().y));

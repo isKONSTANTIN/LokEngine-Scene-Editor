@@ -32,19 +32,20 @@ public class ObjectsListCanvas extends GUICanvas {
         super(position, size);
         this.scene = scene;
 
-        panel = new GUIPanel(new Vector2i(), new Vector2i(), new Color(0.25f, 0.25f, 0.25f, 0.6f));
-        panel.setSize(guiObject -> this.getSize());
+        panel = new GUIPanel().setSize(guiObject -> this.getSize());
 
         scrollCanvas = new GUIScrollCanvas(new Vector2i(0, 20), new Vector2i(), new Vector2i(), null);
         scrollCanvas.setSize(guiObject -> new Vector2i(this.getSize().x, this.getSize().y - guiObject.getPosition().y));
 
         textDrawer = new GUIFreeTextDrawer(new FontPrefs().setSize(12));
-        textObjectsCount = new GUIText(new Vector2i(), "0 объектов", new FontPrefs());
+        textObjectsCount = new GUIText(new FontPrefs()).setText("0 объектов");
 
         scrollCanvas.addObject(textDrawer);
 
-        buttonAddObject = new GUIButton(new Vector2i(), new Vector2i(20, 20), new Color(0.1f, 0.1f, 0.1f, 0.7f), new GUIText("+"));
-        buttonAddObject.setUnpressScript(guiButton -> scene.addObject(new SceneObject()));
+        buttonAddObject = new GUIButton()
+                .setText(new GUIText().setText("+"))
+                .setUnpressScript(guiButton -> scene.addObject(new SceneObject()))
+                .setSize(new Vector2i(20, 20));
 
         this.addObject(panel);
         this.addObject(buttonAddObject);
@@ -58,7 +59,7 @@ public class ObjectsListCanvas extends GUICanvas {
 
         int objectsCount = scene.getCountObjects();
 
-        textObjectsCount.updateText(objectsCount + " объектов");
+        textObjectsCount.setText(objectsCount + " объектов");
         int windowY = parentProperties.window.getResolution().y;
         for (int i = 0; i < objectsCount; i++) {
             SceneObject sceneObject = scene.getObjectByID(i);

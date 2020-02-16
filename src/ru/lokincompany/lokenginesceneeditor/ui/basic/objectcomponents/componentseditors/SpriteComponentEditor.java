@@ -27,11 +27,11 @@ public class SpriteComponentEditor extends ComponentEditor {
         FontPrefs fontPrefs = new FontPrefs().setColor(Colors.engineMainColor()).setSize(10);
         FontPrefs fieldFontPrefs = new FontPrefs().setSize(10);
 
-        list.addObject(new GUIText(new Vector2i(), "Путь спрайта:", fontPrefs));
-        list.addObject(new GUITextField("", fieldFontPrefs));
+        list.addObject(new GUIText(fontPrefs).setText("Путь спрайта:"));
+        list.addObject(new GUITextField(fieldFontPrefs));
         list.addObject(new GUISpace(new Vector2i(), new Vector2i(0, 5)));
-        list.addObject(new GUIText(new Vector2i(), "Размер спрайта:", fontPrefs));
-        list.addObject(new GUITextField("", fieldFontPrefs));
+        list.addObject(new GUIText(fontPrefs).setText("Размер спрайта:"));
+        list.addObject(new GUITextField(fieldFontPrefs));
 
         GUITextField pathField = (GUITextField) list.getObject(1);
         GUITextField sizeField = (GUITextField) list.getObject(4);
@@ -53,7 +53,7 @@ public class SpriteComponentEditor extends ComponentEditor {
         });
 
         pathField.setInactiveScript(guiTextField -> {
-            guiTextField.updateText(component.getSprite().texture.path);
+            guiTextField.setText(component.getSprite().texture.path);
         });
 
         sizeField.setStatusChangedScript(guiTextField -> {
@@ -65,7 +65,7 @@ public class SpriteComponentEditor extends ComponentEditor {
         });
 
         sizeField.setInactiveScript(guiTextField -> {
-            guiTextField.updateText(String.valueOf(component.getSprite().size));
+            guiTextField.setText(String.valueOf(component.getSprite().size));
         });
 
         canvas.addObject(list);

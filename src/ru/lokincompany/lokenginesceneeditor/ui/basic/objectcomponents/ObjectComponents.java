@@ -1,6 +1,5 @@
 package ru.lokincompany.lokenginesceneeditor.ui.basic.objectcomponents;
 
-
 import ru.lokincompany.lokengine.gui.additionalobjects.GUILocationAlgorithm;
 import ru.lokincompany.lokengine.gui.additionalobjects.GUIObjectProperties;
 import ru.lokincompany.lokengine.gui.canvases.GUIFullFlexibleListCanvas;
