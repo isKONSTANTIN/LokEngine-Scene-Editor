@@ -8,6 +8,7 @@ import ru.lokincompany.lokengine.tools.saveworker.FileWorker;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
 import ru.lokincompany.lokenginesceneeditor.sceneintegration.HighlightedObject;
 import ru.lokincompany.lokenginesceneeditor.sceneintegration.KeyboardBinds;
+import ru.lokincompany.lokenginesceneeditor.scenetester.SceneTestApplication;
 import ru.lokincompany.lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationError;
 import ru.lokincompany.lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationSuccess;
 import ru.lokincompany.lokenginesceneeditor.ui.basic.notification.notificationtypes.NotificationWarning;
@@ -19,12 +20,17 @@ public class LESEApplication extends ApplicationDefault {
     public SceneEditor sceneEditor;
 
     LESEApplication() {
-        start(false, true, true, new Vector2i(1280, 720), "LokEngine Scene Editor");
+        start(false, true, true, 32, new Vector2i(1280, 720), "LokEngine Scene Editor");
         instance = this;
     }
 
+
     public static LESEApplication getInstance() {
         return instance;
+    }
+
+    public void runTest(){
+        new SceneTestApplication(scene.save());
     }
 
     public void loadScene(String path) {

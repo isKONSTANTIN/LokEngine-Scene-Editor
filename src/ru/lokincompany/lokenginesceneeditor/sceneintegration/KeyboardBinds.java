@@ -72,14 +72,14 @@ public class KeyboardBinds {
             return;
 
         float extraSpeed = keyboard.isKeyDown(GLFW_KEY_LEFT_SHIFT) ? 3 : 1;
-        float scroll = -(mouse.getMouseScroll().x + mouse.getMouseScroll().y) * camera.fieldOfView * extraSpeed;
+        float scroll = -(mouse.getMouseScroll().x + mouse.getMouseScroll().y) * camera.getFieldOfView() * extraSpeed;
 
         if (scroll != 0)
-            camera.setFieldOfView(camera.fieldOfView + scroll * application.applicationRuntime.getDeltaTime() / 9f);
+            camera.setFieldOfView(camera.getFieldOfView() + scroll * application.applicationRuntime.getDeltaTime() / 9f);
 
-        camera.position.x += keyboard.isKeyDown(GLFW_KEY_D) ? camera.fieldOfView * application.applicationRuntime.getDeltaTime() * extraSpeed / 90f : 0;
-        camera.position.x -= keyboard.isKeyDown(GLFW_KEY_A) ? camera.fieldOfView * application.applicationRuntime.getDeltaTime() * extraSpeed / 90f : 0;
-        camera.position.y += keyboard.isKeyDown(GLFW_KEY_W) ? camera.fieldOfView * application.applicationRuntime.getDeltaTime() * extraSpeed / 90f : 0;
-        camera.position.y -= keyboard.isKeyDown(GLFW_KEY_S) ? camera.fieldOfView * application.applicationRuntime.getDeltaTime() * extraSpeed / 90f : 0;
+        camera.position.x += keyboard.isKeyDown(GLFW_KEY_D) ? camera.getFieldOfView() * application.applicationRuntime.getDeltaTime() * extraSpeed / 90f : 0;
+        camera.position.x -= keyboard.isKeyDown(GLFW_KEY_A) ? camera.getFieldOfView() * application.applicationRuntime.getDeltaTime() * extraSpeed / 90f : 0;
+        camera.position.y += keyboard.isKeyDown(GLFW_KEY_W) ? camera.getFieldOfView() * application.applicationRuntime.getDeltaTime() * extraSpeed / 90f : 0;
+        camera.position.y -= keyboard.isKeyDown(GLFW_KEY_S) ? camera.getFieldOfView() * application.applicationRuntime.getDeltaTime() * extraSpeed / 90f : 0;
     }
 }
