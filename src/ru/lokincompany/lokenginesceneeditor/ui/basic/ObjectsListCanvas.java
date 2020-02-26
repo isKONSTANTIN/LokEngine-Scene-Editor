@@ -15,6 +15,7 @@ import ru.lokincompany.lokengine.tools.FontPrefs;
 import ru.lokincompany.lokengine.tools.Logger;
 import ru.lokincompany.lokengine.tools.color.Color;
 import ru.lokincompany.lokengine.tools.vectori.Vector2i;
+import ru.lokincompany.lokenginesceneeditor.LESEApplication;
 import ru.lokincompany.lokenginesceneeditor.sceneintegration.HighlightedObject;
 import ru.lokincompany.lokenginesceneeditor.ui.Colors;
 
@@ -44,7 +45,12 @@ public class ObjectsListCanvas extends GUICanvas {
 
         buttonAddObject = new GUIButton()
                 .setText(new GUIText().setText("+"))
-                .setUnpressScript(guiButton -> scene.addObject(new SceneObject()))
+                .setUnpressScript(guiButton -> {
+                        SceneObject object = new SceneObject();
+                        object.position.x = LESEApplication.getInstance().window.getCamera().position.x;
+                        object.position.y = LESEApplication.getInstance().window.getCamera().position.y;
+                        scene.addObject(object);
+                })
                 .setSize(new Vector2i(20, 20));
 
         this.addObject(panel);
